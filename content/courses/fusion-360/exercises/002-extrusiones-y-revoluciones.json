@@ -1,0 +1,62 @@
+{
+  "id": "fusion-360-002",
+  "slug": "extrusiones-y-revoluciones",
+  "order": 2,
+  "enabled": true,
+  "title": {
+    "es": "Extrusiones y revoluciones",
+    "en": "Extrusions and revolves"
+  },
+  "summary": {
+    "es": "Convierte bocetos en sólidos con extrusión, corte y revolución, controlando el histórico paramétrico.",
+    "en": "Turn sketches into solids using extrude, cut and revolve while controlling the parametric timeline."
+  },
+  "difficulty": "beginner",
+  "tags": ["extrusión", "revolución", "sólidos"],
+  "video": {
+    "provider": "youtube",
+    "url": "https://www.youtube.com/watch?v=TgcH1z92xj4",
+    "youtubeId": "TgcH1z92xj4",
+    "durationSeconds": 900
+  },
+  "chapters": [
+    { "id": "c1", "timeSeconds": 0, "label": { "es": "Repaso del boceto", "en": "Sketch recap" } },
+    { "id": "c2", "timeSeconds": 130, "label": { "es": "Extrusión básica", "en": "Basic extrude" } },
+    { "id": "c3", "timeSeconds": 420, "label": { "es": "Corte y unión", "en": "Cut and join" } },
+    { "id": "c4", "timeSeconds": 660, "label": { "es": "Revolución", "en": "Revolve" } }
+  ],
+  "authorNotes": {
+    "es": [
+      "Renombra cada operación del histórico: lo agradecerás en ejercicios largos.",
+      "Si una operación falla, revisa el boceto padre antes de rehacerla."
+    ],
+    "en": [
+      "Rename every timeline feature: long exercises get much easier.",
+      "If a feature fails, check the parent sketch before rebuilding it."
+    ]
+  },
+  "resources": [
+    {
+      "id": "r1",
+      "type": "pdf",
+      "title": { "es": "Plano acotado", "en": "Dimensioned drawing" },
+      "url": "/downloads/fusion-360/002-plano.pdf",
+      "download": true
+    },
+    {
+      "id": "r2",
+      "type": "step",
+      "title": { "es": "Modelo de referencia (STEP)", "en": "Reference model (STEP)" },
+      "url": "/downloads/fusion-360/002-modelo.step",
+      "download": true
+    }
+  ],
+  "model3d": { "enabled": false },
+  "actions": {
+    "youtubeUrl": "https://www.youtube.com/watch?v=ILyRQjNvNVc",
+    "shareEnabled": true,
+    "favoriteEnabled": true
+  },
+  "publishedAt": "2026-01-19",
+  "updatedAt": "2026-02-02"
+}

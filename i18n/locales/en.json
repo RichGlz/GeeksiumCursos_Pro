@@ -1,0 +1,108 @@
+{
+  "site": {
+    "name": "Geeksium Courses",
+    "tagline": "Learn design and engineering through hands-on exercises",
+    "description": "Hands-on 3D design and engineering courses: video, interactive chapters, downloadable files and progress tracking."
+  },
+  "nav": {
+    "home": "Home",
+    "courses": "Courses",
+    "about": "About",
+    "skipToContent": "Skip to main content",
+    "menu": "Menu",
+    "close": "Close"
+  },
+  "home": {
+    "heroTitle": "Master 3D design, one exercise at a time",
+    "heroSubtitle": "Chaptered videos, practice files and progress saved in your browser. No sign-up required.",
+    "cta": "Browse courses",
+    "featuredCourses": "Available courses",
+    "featuresTitle": "How it works",
+    "features": {
+      "videoTitle": "Chaptered video",
+      "videoText": "Jump straight to the part of the exercise you need to review.",
+      "filesTitle": "Practice files",
+      "filesText": "Download drawings, models and resources for every exercise.",
+      "progressTitle": "Your progress, yours",
+      "progressText": "Mark exercises complete and save favorites without an account."
+    }
+  },
+  "courses": {
+    "title": "Courses",
+    "subtitle": "Pick a course and move at your own pace.",
+    "empty": "No courses published yet.",
+    "exercises": "exercises",
+    "level": "Level",
+    "duration": "Duration",
+    "start": "Start course",
+    "continue": "Continue course",
+    "viewCourse": "View course"
+  },
+  "course": {
+    "exercisesTitle": "Exercises",
+    "requirements": "Requirements",
+    "objectives": "What you'll learn",
+    "software": "Software",
+    "instructor": "Instructor",
+    "progress": "Course progress",
+    "completedOf": "{done} of {total} completed",
+    "empty": "This course has no exercises yet."
+  },
+  "exercise": {
+    "previous": "Previous",
+    "next": "Next",
+    "backToCourse": "Back to course",
+    "chapters": "Chapters",
+    "description": "Description",
+    "steps": "Steps",
+    "tips": "Tips",
+    "downloads": "Downloads",
+    "download": "Download",
+    "model3d": "3D model",
+    "model3dHint": "Drag to rotate, scroll to zoom.",
+    "watchOnYoutube": "Watch on YouTube",
+    "markComplete": "Mark as complete",
+    "markIncomplete": "Mark as pending",
+    "completed": "Completed",
+    "addFavorite": "Add to favorites",
+    "removeFavorite": "Remove from favorites",
+    "share": "Share",
+    "shareCopied": "Link copied to clipboard",
+    "difficulty": "Difficulty",
+    "duration": "Duration",
+    "noVideo": "This exercise has no video."
+  },
+  "difficulty": {
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced"
+  },
+  "consent": {
+    "message": "We use anonymous analytics to improve the courses. You can decline and the site keeps working.",
+    "accept": "Accept",
+    "decline": "Decline",
+    "title": "Analytics"
+  },
+  "theme": {
+    "toggle": "Toggle theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "locale": {
+    "switch": "Switch language",
+    "es": "Spanish",
+    "en": "English"
+  },
+  "error": {
+    "404title": "Page not found",
+    "404message": "The content you are looking for does not exist or has moved.",
+    "genericTitle": "Something went wrong",
+    "genericMessage": "An unexpected error occurred. Please try again.",
+    "backHome": "Back to home"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "analyticsSettings": "Analytics preferences"
+  }
+}

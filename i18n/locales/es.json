@@ -1,0 +1,108 @@
+{
+  "site": {
+    "name": "Geeksium Cursos",
+    "tagline": "Aprende diseño e ingeniería con ejercicios prácticos",
+    "description": "Cursos prácticos de diseño 3D e ingeniería: vídeo, capítulos interactivos, archivos descargables y seguimiento de tu progreso."
+  },
+  "nav": {
+    "home": "Inicio",
+    "courses": "Cursos",
+    "about": "Acerca de",
+    "skipToContent": "Saltar al contenido principal",
+    "menu": "Menú",
+    "close": "Cerrar"
+  },
+  "home": {
+    "heroTitle": "Domina el diseño 3D ejercicio a ejercicio",
+    "heroSubtitle": "Vídeos con capítulos, archivos de práctica y progreso guardado en tu navegador. Sin registro.",
+    "cta": "Ver cursos",
+    "featuredCourses": "Cursos disponibles",
+    "featuresTitle": "Cómo funciona",
+    "features": {
+      "videoTitle": "Vídeo con capítulos",
+      "videoText": "Salta directo a la parte del ejercicio que necesitas repasar.",
+      "filesTitle": "Archivos de práctica",
+      "filesText": "Descarga planos, modelos y recursos de cada ejercicio.",
+      "progressTitle": "Tu progreso, tuyo",
+      "progressText": "Marca ejercicios completados y guarda favoritos sin crear cuenta."
+    }
+  },
+  "courses": {
+    "title": "Cursos",
+    "subtitle": "Elige un curso y avanza a tu ritmo.",
+    "empty": "Todavía no hay cursos publicados.",
+    "exercises": "ejercicios",
+    "level": "Nivel",
+    "duration": "Duración",
+    "start": "Comenzar curso",
+    "continue": "Continuar curso",
+    "viewCourse": "Ver curso"
+  },
+  "course": {
+    "exercisesTitle": "Ejercicios",
+    "requirements": "Requisitos",
+    "objectives": "Lo que aprenderás",
+    "software": "Software",
+    "instructor": "Instructor",
+    "progress": "Progreso del curso",
+    "completedOf": "{done} de {total} completados",
+    "empty": "Este curso aún no tiene ejercicios."
+  },
+  "exercise": {
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "backToCourse": "Volver al curso",
+    "chapters": "Capítulos",
+    "description": "Descripción",
+    "steps": "Pasos",
+    "tips": "Consejos",
+    "downloads": "Descargas",
+    "download": "Descargar",
+    "model3d": "Modelo 3D",
+    "model3dHint": "Arrastra para rotar, rueda del ratón para acercar.",
+    "watchOnYoutube": "Ver en YouTube",
+    "markComplete": "Marcar como completado",
+    "markIncomplete": "Marcar como pendiente",
+    "completed": "Completado",
+    "addFavorite": "Añadir a favoritos",
+    "removeFavorite": "Quitar de favoritos",
+    "share": "Compartir",
+    "shareCopied": "Enlace copiado al portapapeles",
+    "difficulty": "Dificultad",
+    "duration": "Duración",
+    "noVideo": "Este ejercicio no incluye vídeo."
+  },
+  "difficulty": {
+    "beginner": "Principiante",
+    "intermediate": "Intermedio",
+    "advanced": "Avanzado"
+  },
+  "consent": {
+    "message": "Usamos analítica anónima para mejorar los cursos. Puedes rechazarla y el sitio funcionará igual.",
+    "accept": "Aceptar",
+    "decline": "Rechazar",
+    "title": "Analítica"
+  },
+  "theme": {
+    "toggle": "Cambiar tema",
+    "light": "Claro",
+    "dark": "Oscuro",
+    "system": "Sistema"
+  },
+  "locale": {
+    "switch": "Cambiar idioma",
+    "es": "Español",
+    "en": "Inglés"
+  },
+  "error": {
+    "404title": "Página no encontrada",
+    "404message": "El contenido que buscas no existe o cambió de dirección.",
+    "genericTitle": "Algo salió mal",
+    "genericMessage": "Ocurrió un error inesperado. Intenta de nuevo.",
+    "backHome": "Volver al inicio"
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados.",
+    "analyticsSettings": "Preferencias de analítica"
+  }
+}

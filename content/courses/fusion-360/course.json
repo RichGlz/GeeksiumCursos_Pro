@@ -1,0 +1,29 @@
+{
+  "id": "course-fusion-360",
+  "slug": "fusion-360",
+  "enabled": true,
+  "title": {
+    "es": "Fusion 360 desde cero",
+    "en": "Fusion 360 from scratch"
+  },
+  "description": {
+    "es": "Aprende modelado paramétrico en Autodesk Fusion 360 resolviendo ejercicios reales, paso a paso y con archivos descargables.",
+    "en": "Learn parametric modeling in Autodesk Fusion 360 by solving real exercises, step by step, with downloadable files."
+  },
+  "difficulty": "beginner",
+  "cover": "/images/courses/fusion-360.svg",
+  "author": {
+    "name": "Rich  G.",
+    "url": "https://geeksium.com"
+  },
+  "seo": {
+    "title": {
+      "es": "Curso práctico de Fusion 360 | Geeksium Cursos",
+      "en": "Fusion 360 Practical course | Geeksium Courses"
+    },
+    "description": {
+      "es": "Curso práctico de Fusion 360: bocetos, extrusiones, ensamblajes y planos con ejercicios descargables.",
+      "en": "Hands-on Fusion 360 course: sketches, extrusions, assemblies and drawings with downloadable exercises."
+    }
+  }
+}

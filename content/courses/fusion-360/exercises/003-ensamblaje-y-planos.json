@@ -1,0 +1,66 @@
+{
+  "id": "fusion-360-003",
+  "slug": "ensamblaje-y-planos",
+  "order": 3,
+  "enabled": true,
+  "title": {
+    "es": "Ensamblaje y planos técnicos",
+    "en": "Assembly and technical drawings"
+  },
+  "summary": {
+    "es": "Une componentes con uniones móviles y genera un plano técnico listo para taller.",
+    "en": "Join components with motion joints and produce a shop-ready technical drawing."
+  },
+  "difficulty": "intermediate",
+  "tags": ["ensamblaje", "uniones", "planos"],
+  "video": {
+    "provider": "youtube",
+    "url": "https://www.youtube.com/watch?v=DDMB_lTSG5o",
+    "youtubeId": "DDMB_lTSG5o",
+    "durationSeconds": 1080
+  },
+  "chapters": [
+    { "id": "c1", "timeSeconds": 0, "label": { "es": "Componentes", "en": "Components" } },
+    { "id": "c2", "timeSeconds": 210, "label": { "es": "Uniones", "en": "Joints" } },
+    { "id": "c3", "timeSeconds": 540, "label": { "es": "Vista explosionada", "en": "Exploded view" } },
+    { "id": "c4", "timeSeconds": 820, "label": { "es": "Plano técnico", "en": "Technical drawing" } }
+  ],
+  "authorNotes": {
+    "es": [
+      "Crea componentes antes de modelar, no después.",
+      "Fija el componente base para que el ensamblaje no se mueva entero."
+    ],
+    "en": [
+      "Create components before modeling, not afterwards.",
+      "Ground the base component so the whole assembly doesn't drift."
+    ]
+  },
+  "resources": [
+    {
+      "id": "r1",
+      "type": "zip",
+      "title": { "es": "Componentes de partida", "en": "Starter components" },
+      "url": "/downloads/fusion-360/003-componentes.zip",
+      "download": true
+    },
+    {
+      "id": "r2",
+      "type": "link",
+      "title": { "es": "Guía oficial de uniones", "en": "Official joints guide" },
+      "url": "https://help.autodesk.com/view/fusion360/ENU/"
+    }
+  ],
+  "model3d": {
+    "enabled": true,
+    "url": "/models/demo-cube.glb",
+    "format": "glb",
+    "autoRotate": true
+  },
+  "actions": {
+    "youtubeUrl": "https://www.youtube.com/watch?v=BwVGqvpFtIY",
+    "shareEnabled": true,
+    "favoriteEnabled": true
+  },
+  "publishedAt": "2026-01-26",
+  "updatedAt": "2026-02-02"
+}

@@ -1,0 +1,69 @@
+{
+  "id": "fusion-360-001",
+  "slug": "interfaz-y-primer-boceto",
+  "order": 1,
+  "enabled": true,
+  "title": {
+    "es": "Interfaz y primer boceto",
+    "en": "Interface and your first sketch"
+  },
+  "summary": {
+    "es": "Recorrido por la interfaz de Fusion 360 y creación de tu primer boceto totalmente restringido.",
+    "en": "A tour of the Fusion 360 interface and how to create your first fully constrained sketch."
+  },
+  "difficulty": "beginner",
+  "tags": ["interfaz", "boceto", "restricciones"],
+  "video": {
+    "provider": "youtube",
+    "url": "https://www.youtube.com/watch?v=uQ86JRMi48s",
+    "youtubeId": "uQ86JRMi48s",
+    "durationSeconds": 720
+  },
+  "chapters": [
+    { "id": "c1", "timeSeconds": 0, "label": { "es": "Introducción", "en": "Introduction" } },
+    { "id": "c2", "timeSeconds": 95, "label": { "es": "Barra de herramientas", "en": "Toolbar" } },
+    { "id": "c3", "timeSeconds": 240, "label": { "es": "Crear el boceto", "en": "Creating the sketch" } },
+    { "id": "c4", "timeSeconds": 480, "label": { "es": "Restricciones y cotas", "en": "Constraints and dimensions" } }
+  ],
+  "authorNotes": {
+    "es": [
+      "Trabaja siempre con el boceto completamente restringido antes de extruir.",
+      "Usa la tecla D para acotar rápidamente."
+    ],
+    "en": [
+      "Always fully constrain the sketch before extruding.",
+      "Press D to dimension quickly."
+    ]
+  },
+  "resources": [
+    {
+      "id": "r1",
+      "type": "pdf",
+      "title": { "es": "Plano", "en": "Drawing" },
+      "url": "https://www.mediafire.com/file/5qv22x2wf4w80dh/Ejercicio1.pdf/file",
+      "download": true
+    },
+    {
+      "id": "r2",
+      "type": "png",
+      "title": { "es": "Imagen", "en": "Image" },
+      "url": "https://www.mediafire.com/view/iswsd6lypywk8qa/Ejercicio1.png/file",
+      "download": true
+    },
+    {
+      "id": "r3",
+      "type": "stl",
+      "title": { "es": "STL", "en": "STL" },
+      "url": "https://www.mediafire.com/view/iswsd6lypywk8qa/Ejercicio1.png/file",
+      "download": true
+    }
+  ],
+  "model3d": { "enabled": false },
+  "actions": {
+    "youtubeUrl": "https://www.youtube.com/watch?v=uQ86JRMi48s",
+    "shareEnabled": true,
+    "favoriteEnabled": true
+  },
+  "publishedAt": "2026-01-12",
+  "updatedAt": "2026-02-02"
+}
