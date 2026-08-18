@@ -24,6 +24,11 @@ const exerciseModules = import.meta.glob<Exercise>(
   { eager: true, import: 'default' },
 )
 
+const authorNotesModules = import.meta.glob<string>(
+  '../../content/courses/*/exercises/*.md',
+  { eager: true, query: '?raw', import: 'default' },
+)
+
 function courseSlugFromPath(path: string): string {
   return path.split('/content/courses/')[1]?.split('/')[0] ?? ''
 }
@@ -143,4 +148,15 @@ export function tListContent(list: LocalizedList | undefined, locale: string): s
   if (!list) return []
   const value = list[locale as LocaleCode]
   return Array.isArray(value) && value.length > 0 ? value : (list.es ?? [])
+}
+
+/** Carga Markdown vecino al JSON, sin permitir rutas fuera de la carpeta del ejercicio. */
+export function getAuthorNotesMarkdown(exercise: Exercise, locale: string): string | undefined {
+  const files = exercise.authorNotesFile
+  if (!files) return undefined
+  const requested = locale === 'en' ? (files.en || files.es) : files.es
+  if (!requested || requested !== requested.split(/[\\/]/).pop()) return undefined
+  const key = `../../content/courses/${exercise.courseSlug}/exercises/${requested}`
+  const markdown = authorNotesModules[key]
+  return typeof markdown === 'string' && markdown.trim() ? markdown : undefined
 }

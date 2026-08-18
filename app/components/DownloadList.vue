@@ -1,13 +1,33 @@
 <script setup lang="ts">
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faCube, faFile, faFileImage, faFilePdf, faFileZipper, faLink, faTable } from '@fortawesome/free-solid-svg-icons'
 import type { DownloadResource } from '~/types/content'
 
-defineProps<{ resources: DownloadResource[]; exerciseSlug: string }>()
+defineProps<{ resources: DownloadResource[]; courseId: string; exerciseId: string }>()
 
 const { t, locale } = useI18n()
 const analytics = useAnalytics()
 
-const onDownload = (resource: DownloadResource, exerciseSlug: string) => {
-  analytics.trackDownload(exerciseSlug, tContent(resource.title, locale.value), resource.type)
+const colors: Record<string, string> = {
+  pdf: '#dc2626', zip: '#7c3aed', stl: '#2563eb', glb: '#2563eb', gltf: '#2563eb',
+  step: '#0891b2', f3d: '#0891b2', xlsx: '#15803d', image: '#db2777', png: '#db2777',
+  jpg: '#db2777', jpeg: '#db2777', webp: '#db2777', link: '#4f46e5', file: '#475569',
+}
+const icons: Record<string, typeof faFile> = {
+  pdf: faFilePdf, zip: faFileZipper, stl: faCube, glb: faCube, gltf: faCube, step: faCube,
+  f3d: faCube, xlsx: faTable, image: faFileImage, png: faFileImage, jpg: faFileImage,
+  jpeg: faFileImage, webp: faFileImage, link: faLink,
+}
+const accent = (resource: DownloadResource) =>
+  /^#[0-9a-f]{3}(?:[0-9a-f]{3})?$/i.test(resource.color || '')
+    ? resource.color!
+    : (colors[resource.type] || colors.file)
+const icon = (resource: DownloadResource) => icons[resource.type] || faFile
+const resourceHost = (url: string) => {
+  try { return new URL(url, window.location.origin).hostname || undefined } catch { return undefined }
+}
+const onDownload = (resource: DownloadResource, courseId: string, exerciseId: string) => {
+  analytics.trackDownload(courseId, exerciseId, resource.id, resource.type, resourceHost(resource.url))
 }
 </script>
 
@@ -16,24 +36,26 @@ const onDownload = (resource: DownloadResource, exerciseSlug: string) => {
     <h2 class="mb-3 text-sm font-bold uppercase tracking-wide muted-text">
       {{ t('exercise.downloads') }}
     </h2>
-    <ul class="flex flex-col gap-2">
+    <ul class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-2">
       <li v-for="resource in resources" :key="resource.id">
         <a
           :href="resource.url"
           :download="resource.download ? '' : undefined"
           :target="resource.type === 'link' ? '_blank' : undefined"
           :rel="resource.type === 'link' ? 'noopener noreferrer' : undefined"
-          class="flex items-center gap-3 rounded-lg border border-ink-200 px-3 py-2 text-sm transition-colors hover:border-brand-400 hover:bg-ink-50 dark:border-ink-800 dark:hover:bg-ink-800/60"
-          @click="onDownload(resource, exerciseSlug)"
+          class="flex aspect-square min-h-40 flex-col overflow-hidden rounded-xl border border-ink-200 bg-white text-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-ink-800 dark:bg-ink-950"
+          :style="{ '--resource-accent': accent(resource) }"
+          @click="onDownload(resource, courseId, exerciseId)"
         >
-          <span
-            class="rounded-md bg-ink-100 px-2 py-1 font-mono text-[10px] font-bold uppercase text-ink-600 dark:bg-ink-800 dark:text-ink-300"
-            aria-hidden="true"
-          >
-            {{ resourceExtension(resource.type) }}
+          <NuxtImg v-if="resource.previewImage" :src="resource.previewImage" :alt="tContent(resource.title, locale)" width="320" height="180" class="aspect-video w-full object-cover" loading="lazy" />
+          <span v-else class="grid flex-1 place-items-center bg-ink-50 text-4xl dark:bg-ink-900" :style="{ color: accent(resource) }" aria-hidden="true">
+            <FontAwesomeIcon :icon="icon(resource)" />
           </span>
-          <span class="flex-1 text-ink-700 dark:text-ink-200">{{ tContent(resource.title, locale) }}</span>
-          <span class="text-xs font-semibold text-brand-600">{{ t('exercise.download') }}</span>
+          <span class="border-t-4 p-3" :style="{ borderColor: accent(resource) }">
+            <span class="block font-mono text-[10px] font-bold uppercase" :style="{ color: accent(resource) }">{{ resourceExtension(resource.type) }}</span>
+            <span class="mt-1 line-clamp-2 block font-semibold text-ink-800 dark:text-ink-100">{{ tContent(resource.title, locale) }}</span>
+            <span class="mt-2 block text-xs font-semibold text-brand-600">{{ t('exercise.download') }}</span>
+          </span>
         </a>
       </li>
     </ul>

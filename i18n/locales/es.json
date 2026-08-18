@@ -4,6 +4,7 @@
     "tagline": "Aprende diseño e ingeniería con ejercicios prácticos",
     "description": "Cursos prácticos de diseño 3D e ingeniería: vídeo, capítulos interactivos, archivos descargables y seguimiento de tu progreso."
   },
+  "common": { "close": "Cerrar" },
   "nav": {
     "home": "Inicio",
     "courses": "Cursos",
@@ -71,7 +72,21 @@
     "difficulty": "Dificultad",
     "duration": "Duración",
     "noVideo": "Este ejercicio no incluye vídeo."
+    ,"videoComingSoon": "Video próximamente",
+    "authorNotes": "Notas del autor",
+    "tags": "Etiquetas",
+    "pending": "Pendiente",
+    "fullscreen": "Pantalla completa",
+    "exitFullscreen": "Salir de pantalla completa",
+    "model3dError": "No se pudo cargar el modelo 3D"
   },
+  "support": {
+    "title": "¿Cómo puedo apoyar?",
+    "message": "Los anuncios ayudan a cubrir el mantenimiento de Geeksium. Si el contenido te resulta útil, permitirlos ayuda a mantener los cursos disponibles.",
+    "adBlocker": "Si utilizas un bloqueador de anuncios, puedes agregar este sitio a tu lista de permitidos."
+  },
+  "donation": { "title": "Invitar un chocolate", "usd1": "$1 USD", "usd2": "$2 USD" },
+  "ads": { "placeholder": "Espacio publicitario" },
   "difficulty": {
     "beginner": "Principiante",
     "intermediate": "Intermedio",
@@ -102,6 +117,7 @@
     "backHome": "Volver al inicio"
   },
   "footer": {
+    "courses": "Cursos",
     "rights": "Todos los derechos reservados.",
     "analyticsSettings": "Preferencias de analítica"
   }

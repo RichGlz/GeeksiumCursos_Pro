@@ -3,6 +3,14 @@ const { t } = useI18n()
 const localePath = useLocalePath()
 const open = ref(false)
 const route = useRoute()
+const shrunk = ref(false)
+
+const onScroll = () => { shrunk.value = window.scrollY > 24 }
+onMounted(() => {
+  onScroll()
+  window.addEventListener('scroll', onScroll, { passive: true })
+})
+onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
 
 watch(() => route.fullPath, () => {
   open.value = false
@@ -18,7 +26,7 @@ const links = computed(() => [
   <header
     class="sticky top-0 z-40 border-b border-ink-200 bg-white/90 backdrop-blur dark:border-ink-800 dark:bg-ink-950/90"
   >
-    <div class="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
+    <div class="mx-auto flex max-w-6xl items-center gap-3 px-4 transition-[padding] duration-200 motion-reduce:transition-none" :class="shrunk ? 'py-1.5' : 'py-3'">
       <NuxtLink
         :to="localePath('/')"
         class="flex items-center gap-2 text-lg font-bold tracking-tight text-ink-900 dark:text-white"

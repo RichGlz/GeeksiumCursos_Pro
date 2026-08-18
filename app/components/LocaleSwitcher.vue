@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import type { LocaleCode } from '~/types/content'
+
 const { t, locale, locales } = useI18n()
 const switchLocalePath = useSwitchLocalePath()
 const { trackLocaleChange } = useAnalytics()
 
 const available = computed(() =>
-  (locales.value as { code: string; name?: string }[]).map((item) => ({
-    code: item.code,
+  (locales.value as { code: LocaleCode; name?: string }[]).map((item) => ({
+    code: item.code as LocaleCode,
     name: item.name ?? item.code.toUpperCase(),
   })),
 )

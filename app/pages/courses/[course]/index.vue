@@ -40,8 +40,12 @@ useSeoMeta({
   twitterCard: 'summary_large_image',
 })
 
-useHead({ link: [{ rel: 'canonical', href: canonical.value }] })
 useSchemaOrgCourse(currentCourse.value, title.value, description.value, canonical.value)
+useSchemaOrgBreadcrumb([
+  { name: t('nav.home'), url: `${config.public.siteUrl}${localePath('/')}` },
+  { name: t('courses.title'), url: `${config.public.siteUrl}${localePath('/courses')}` },
+  { name: title.value, url: canonical.value },
+])
 
 const firstExercise = computed(() => currentCourse.value.exercises[0])
 </script>

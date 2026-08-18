@@ -83,7 +83,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="overflow-hidden rounded-2xl bg-black">
+  <div class="aspect-video overflow-hidden rounded-2xl bg-black">
     <video
       ref="videoEl"
       class="video-js vjs-big-play-centered vjs-geeksium"

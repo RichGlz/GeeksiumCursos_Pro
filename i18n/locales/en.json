@@ -4,6 +4,7 @@
     "tagline": "Learn design and engineering through hands-on exercises",
     "description": "Hands-on 3D design and engineering courses: video, interactive chapters, downloadable files and progress tracking."
   },
+  "common": { "close": "Close" },
   "nav": {
     "home": "Home",
     "courses": "Courses",
@@ -71,7 +72,21 @@
     "difficulty": "Difficulty",
     "duration": "Duration",
     "noVideo": "This exercise has no video."
+    ,"videoComingSoon": "Video coming soon",
+    "authorNotes": "Author notes",
+    "tags": "Tags",
+    "pending": "Pending",
+    "fullscreen": "Full screen",
+    "exitFullscreen": "Exit full screen",
+    "model3dError": "The 3D model could not be loaded"
   },
+  "support": {
+    "title": "How can I help?",
+    "message": "Ads help cover Geeksium's maintenance costs. If you find the content useful, allowing them helps keep the courses available.",
+    "adBlocker": "If you use an ad blocker, you can add this site to your allowlist."
+  },
+  "donation": { "title": "Buy a chocolate", "usd1": "$1 USD", "usd2": "$2 USD" },
+  "ads": { "placeholder": "Advertisement" },
   "difficulty": {
     "beginner": "Beginner",
     "intermediate": "Intermediate",
@@ -102,6 +117,7 @@
     "backHome": "Back to home"
   },
   "footer": {
+    "courses": "Courses",
     "rights": "All rights reserved.",
     "analyticsSettings": "Analytics preferences"
   }

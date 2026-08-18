@@ -46,6 +46,7 @@ export interface VideoChapter {
 export type VideoProvider = 'youtube' | 'file'
 
 export interface ExerciseVideo {
+  enabled?: boolean
   provider: VideoProvider
   url: string
   youtubeId?: string
@@ -62,6 +63,10 @@ export type ResourceType =
   | 'xlsx'
   | 'dwg'
   | 'image'
+  | 'png'
+  | 'jpg'
+  | 'jpeg'
+  | 'webp'
   | 'link'
   | 'file'
 
@@ -72,12 +77,13 @@ export interface DownloadResource {
   url: string
   download?: boolean
   previewImage?: string
+  color?: string
 }
 
 export interface Model3DConfig {
   enabled: boolean
   url?: string
-  format?: 'glb' | 'gltf'
+  format?: 'glb' | 'gltf' | 'stl'
   autoRotate?: boolean
 }
 
@@ -101,6 +107,10 @@ export interface Exercise {
   video?: ExerciseVideo
   chapters?: VideoChapter[]
   authorNotes?: LocalizedList
+  authorNotesFile?: {
+    es: string
+    en?: string
+  }
   resources?: DownloadResource[]
   model3d?: Model3DConfig
   actions?: ExerciseActions

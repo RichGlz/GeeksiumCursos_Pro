@@ -35,6 +35,9 @@
       "Press D to dimension quickly."
     ]
   },
+  "authorNotesFile": {
+    "es": "001-interfaz-y-primer-boceto-notas.es.md"
+  },
   "resources": [
     {
       "id": "r1",

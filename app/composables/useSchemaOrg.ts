@@ -40,11 +40,7 @@ export function useSchemaOrgCourse(
             name: course.author?.name ?? 'Geeksium',
             url: course.author?.url,
           },
-          hasCourseInstance: {
-            '@type': 'CourseInstance',
-            courseMode: 'online',
-            courseWorkload: `PT${Math.max(1, course.exercises.length)}H`,
-          },
+          hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'online' },
         }),
       },
     ],
@@ -58,7 +54,8 @@ export function useSchemaOrgExercise(
   description: string,
   url: string,
 ) {
-  if (!exercise.video) return
+  const youtubeId = resolveYoutubeId(exercise.video)
+  if (!exercise.video || exercise.video.enabled === false || !youtubeId) return
   useHead({
     script: [
       {
@@ -71,12 +68,28 @@ export function useSchemaOrgExercise(
           uploadDate: isoDate(exercise.publishedAt) || undefined,
           thumbnailUrl: exercise.video.poster ? [exercise.video.poster] : undefined,
           contentUrl: exercise.video.url,
-          embedUrl: exercise.video.youtubeId
-            ? `https://www.youtube.com/embed/${exercise.video.youtubeId}`
-            : undefined,
+          embedUrl: `https://www.youtube.com/embed/${youtubeId}`,
           url,
         }),
       },
     ],
+  })
+}
+
+export interface SchemaBreadcrumbItem { name: string; url: string }
+
+/** BreadcrumbList reusable para curso y ejercicio, con URLs absolutas/localizadas. */
+export function useSchemaOrgBreadcrumb(items: SchemaBreadcrumbItem[]) {
+  useHead({
+    script: [{
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: items.map((item, index) => ({
+          '@type': 'ListItem', position: index + 1, name: item.name, item: item.url,
+        })),
+      }),
+    }],
   })
 }

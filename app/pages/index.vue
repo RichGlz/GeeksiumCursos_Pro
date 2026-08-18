@@ -1,7 +1,6 @@
 <script setup lang="ts">
 const { t, locale } = useI18n()
 const localePath = useLocalePath()
-const config = useRuntimeConfig()
 const courses = useCourses()
 
 useSeoMeta({
@@ -11,10 +10,6 @@ useSeoMeta({
   ogDescription: () => t('site.description'),
   ogType: 'website',
   twitterCard: 'summary_large_image',
-})
-
-useHead({
-  link: [{ rel: 'canonical', href: `${config.public.siteUrl}${localePath('/')}` }],
 })
 
 const features = computed(() => [

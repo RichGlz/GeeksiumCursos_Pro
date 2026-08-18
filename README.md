@@ -68,8 +68,14 @@ llama a `gtag()` directamente, lo que permite añadir después un dashboard priv
 **Consent Mode** se inicializa en `denied` antes de cargar GA4 y se actualiza desde un banner
 discreto y no bloqueante (`components/ConsentBanner.vue`). No hay modal bloqueante ni age gate; si
 se rechaza la analítica, el sitio funciona con normalidad y `useAnalytics()` se convierte en un
-no-op. Sin `NUXT_PUBLIC_GA_MEASUREMENT_ID` tampoco se carga nada. Las page views manuales están
-desactivadas para evitar duplicados: se envía una sola vista por navegación.
+no-op. Sin `NUXT_PUBLIC_GA_MEASUREMENT_ID` tampoco se carga nada.
+
+Las vistas de página usan una única estrategia: la medición automática de GA4. En **Enhanced
+Measurement** debe permanecer habilitada la opción de cambios de página basados en eventos del
+historial del navegador. No existe `router.afterEach` que envíe `page_view` manualmente; no se debe
+añadir otro tracker SPA. La métrica administrativa de descargas de Geeksium es exclusivamente el
+evento manual `resource_download`, agrupado por `resource_id`; el evento automático
+`file_download` no se utiliza como contador del producto.
 
 ## Decisiones técnicas
 

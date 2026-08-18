@@ -1,7 +1,6 @@
 <script setup lang="ts">
 const { t } = useI18n()
 const localePath = useLocalePath()
-const config = useRuntimeConfig()
 const courses = useCourses()
 
 useSeoMeta({
@@ -13,9 +12,6 @@ useSeoMeta({
   twitterCard: 'summary_large_image',
 })
 
-useHead({
-  link: [{ rel: 'canonical', href: `${config.public.siteUrl}${localePath('/courses')}` }],
-})
 </script>
 
 <template>

@@ -76,15 +76,16 @@ export function useAnalytics() {
         chapter_title: chapterTitle,
         start_time: startTime,
       }),
-    trackYoutubeOpen: (exerciseSlug: string, url: string) =>
-      track('youtube_open', { exercise_slug: exerciseSlug, url }),
+    trackYoutubeOpen: (exerciseSlug: string) => track('youtube_open', { exercise_slug: exerciseSlug }),
 
     // Recursos e interacción
-    trackDownload: (exerciseSlug: string, resourceName: string, resourceType: string) =>
+    trackDownload: (courseId: string, exerciseId: string, resourceId: string, resourceType: string, resourceHost?: string) =>
       track('resource_download', {
-        exercise_slug: exerciseSlug,
-        resource_name: resourceName,
+        course_id: courseId,
+        exercise_id: exerciseId,
+        resource_id: resourceId,
         resource_type: resourceType,
+        resource_host: resourceHost,
       }),
     trackModel3dInteraction: (exerciseSlug: string, action: string) =>
       track('model_3d_interaction', { exercise_slug: exerciseSlug, action }),
@@ -99,5 +100,8 @@ export function useAnalytics() {
     trackConsentDecision: (granted: boolean) =>
       track('analytics_consent', { granted }),
     trackPwaInstall: () => track('pwa_install'),
+    trackSupportInfoOpen: () => track('support_info_open'),
+    trackDonationClick: (amount: 1 | 2) =>
+      track('donation_click', { provider: 'paypal', amount, currency: 'USD' }),
   }
 }
