@@ -48,8 +48,8 @@ export default defineNuxtConfig({
     public: {
       siteUrl,
       gaMeasurementId: process.env.NUXT_PUBLIC_GA_MEASUREMENT_ID || '',
-      paypalChocolate1Url: process.env.NUXT_PUBLIC_PAYPAL_CHOCOLATE_1_URL || '',
-      paypalChocolate2Url: process.env.NUXT_PUBLIC_PAYPAL_CHOCOLATE_2_URL || '',
+      stripeChocolate1Url: process.env.NUXT_PUBLIC_STRIPE_CHOCOLATE_1_URL || '',
+      stripeChocolate2Url: process.env.NUXT_PUBLIC_STRIPE_CHOCOLATE_2_URL || '',
     },
   },
 

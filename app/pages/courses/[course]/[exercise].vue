@@ -42,19 +42,19 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="mx-auto max-w-6xl px-4 py-10">
+  <div class="course-theme mx-auto max-w-6xl px-4 py-10" :style="courseThemeStyle(currentCourse)">
     <div class="grid gap-8 lg:grid-cols-[1fr_20rem]">
       <main class="min-w-0">
         <h1 class="text-2xl font-black tracking-tight text-ink-900 sm:text-3xl dark:text-white">{{ tContent(currentExercise.title, locale) }}</h1>
 
         <nav class="mt-4 text-sm muted-text" aria-label="breadcrumb">
-          <NuxtLink :to="localePath('/')" class="hover:text-brand-600">{{ t('nav.home') }}</NuxtLink><span aria-hidden="true"> / </span>
-          <NuxtLink :to="localePath('/courses')" class="hover:text-brand-600">{{ t('courses.title') }}</NuxtLink><span aria-hidden="true"> / </span>
-          <NuxtLink :to="localePath(`/courses/${currentCourse.slug}`)" class="hover:text-brand-600">{{ tContent(currentCourse.title, locale) }}</NuxtLink>
+          <NuxtLink :to="localePath('/')" class="course-link">{{ t('nav.home') }}</NuxtLink><span aria-hidden="true"> / </span>
+          <NuxtLink :to="localePath('/courses')" class="course-link">{{ t('courses.title') }}</NuxtLink><span aria-hidden="true"> / </span>
+          <NuxtLink :to="localePath(`/courses/${currentCourse.slug}`)" class="course-link">{{ tContent(currentCourse.title, locale) }}</NuxtLink>
         </nav>
 
         <ul v-if="currentExercise.tags?.length" class="mt-4 flex flex-wrap gap-2" :aria-label="t('exercise.tags')">
-          <li v-for="tag in currentExercise.tags" :key="tag" class="rounded-full border border-ink-200 bg-ink-50 px-2.5 py-1 text-xs font-medium text-ink-600 dark:border-ink-700 dark:bg-ink-900 dark:text-ink-300">{{ tag }}</li>
+          <li v-for="tag in currentExercise.tags" :key="tag" class="course-badge rounded-full border px-2.5 py-1 text-xs font-medium">{{ tag }}</li>
         </ul>
 
         <div class="mt-6">
@@ -77,11 +77,11 @@ onMounted(() => {
         <ChocolateDonation />
         <AdSlot />
         <VideoChapters v-if="videoEnabled && currentExercise.chapters?.length" :chapters="currentExercise.chapters" :exercise-slug="currentExercise.slug" @seek="onSeek" />
-        <a v-if="youtubeUrl" :href="youtubeUrl" target="_blank" rel="noopener noreferrer" class="surface-card px-4 py-3 text-center text-sm font-semibold text-brand-600 hover:bg-ink-50 dark:hover:bg-ink-800/60" @click="onYoutube">{{ t('exercise.watchOnYoutube') }}</a>
+        <a v-if="youtubeUrl" :href="youtubeUrl" target="_blank" rel="noopener noreferrer" class="course-link surface-card px-4 py-3 text-center text-sm font-semibold hover:bg-ink-50 dark:hover:bg-ink-800/60" @click="onYoutube">{{ t('exercise.watchOnYoutube') }}</a>
         <ClientOnly><Model3DViewer v-if="currentExercise.model3d?.enabled" :model="currentExercise.model3d" :exercise-slug="currentExercise.slug" /></ClientOnly>
         <AdSlot />
         <DownloadList v-if="currentExercise.resources?.length" :resources="currentExercise.resources" :course-id="currentCourse.id" :exercise-id="currentExercise.id" />
-        <NuxtLink :to="localePath(`/courses/${currentCourse.slug}`)" class="surface-card px-4 py-3 text-center text-sm font-semibold text-brand-600 hover:bg-ink-50 dark:hover:bg-ink-800/60">{{ t('exercise.backToCourse') }}</NuxtLink>
+        <NuxtLink :to="localePath(`/courses/${currentCourse.slug}`)" class="course-link surface-card px-4 py-3 text-center text-sm font-semibold hover:bg-ink-50 dark:hover:bg-ink-800/60">{{ t('exercise.backToCourse') }}</NuxtLink>
       </aside>
     </div>
   </div>

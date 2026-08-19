@@ -81,6 +81,25 @@
   font-weight: 700;
 }
 
+/* Tema acotado a páginas de curso; los tokens brand siguen siendo el fallback. */
+.course-theme {
+  --course-primary: var(--color-brand-600);
+  --course-secondary: var(--color-brand-400);
+}
+
+.course-link { color: var(--course-primary); }
+.course-link:hover { color: var(--course-secondary); }
+.course-button { background-color: var(--course-primary); }
+.course-button:hover { background-color: var(--course-secondary); }
+.course-progress { background-color: var(--course-primary); }
+.course-border:hover { border-color: var(--course-primary); }
+.course-selected { background-color: var(--course-primary); color: white; }
+.course-badge {
+  border-color: color-mix(in srgb, var(--course-primary) 42%, transparent);
+  background-color: color-mix(in srgb, var(--course-primary) 10%, transparent);
+  color: var(--course-primary);
+}
+
 .swal-support-secondary {
   margin-top: 0.75rem;
   color: #64748b;

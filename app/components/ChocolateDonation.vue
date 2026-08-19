@@ -3,10 +3,20 @@ const { t } = useI18n()
 const config = useRuntimeConfig()
 const analytics = useAnalytics()
 
+const validPaymentLink = (value: unknown): string | undefined => {
+  if (typeof value !== 'string' || !value.trim()) return undefined
+  try {
+    const url = new URL(value)
+    return url.protocol === 'https:' ? url.href : undefined
+  } catch {
+    return undefined
+  }
+}
+
 const options = computed(() => [
-  { amount: 1 as const, url: String(config.public.paypalChocolate1Url || '') },
-  { amount: 2 as const, url: String(config.public.paypalChocolate2Url || '') },
-].filter((option) => /^https?:\/\//i.test(option.url)))
+  { amount: 1 as const, url: validPaymentLink(config.public.stripeChocolate1Url) },
+  { amount: 2 as const, url: validPaymentLink(config.public.stripeChocolate2Url) },
+].filter((option): option is { amount: 1 | 2; url: string } => Boolean(option.url)))
 
 const openDonation = async () => {
   const { default: Swal } = await import('sweetalert2')

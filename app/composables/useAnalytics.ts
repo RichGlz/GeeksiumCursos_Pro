@@ -102,6 +102,6 @@ export function useAnalytics() {
     trackPwaInstall: () => track('pwa_install'),
     trackSupportInfoOpen: () => track('support_info_open'),
     trackDonationClick: (amount: 1 | 2) =>
-      track('donation_click', { provider: 'paypal', amount, currency: 'USD' }),
+      track('donation_click', { provider: 'stripe', amount, currency: 'USD' }),
   }
 }

@@ -12,7 +12,7 @@ const localePath = useLocalePath()
     <NuxtLink
       v-if="previous"
       :to="localePath(`/courses/${courseSlug}/${previous.slug}`)"
-      class="surface-card flex flex-col gap-1 p-4 transition-colors hover:border-brand-400"
+      class="course-border surface-card flex flex-col gap-1 p-4 transition-colors"
       rel="prev"
     >
       <span class="text-xs font-semibold uppercase tracking-wide muted-text">&larr; {{ t('exercise.previous') }}</span>
@@ -23,7 +23,7 @@ const localePath = useLocalePath()
     <NuxtLink
       v-if="next"
       :to="localePath(`/courses/${courseSlug}/${next.slug}`)"
-      class="surface-card flex flex-col gap-1 p-4 text-right transition-colors hover:border-brand-400 sm:col-start-2"
+      class="course-border surface-card flex flex-col gap-1 p-4 text-right transition-colors sm:col-start-2"
       rel="next"
     >
       <span class="text-xs font-semibold uppercase tracking-wide muted-text">{{ t('exercise.next') }} &rarr;</span>

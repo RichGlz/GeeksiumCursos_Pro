@@ -11,6 +11,10 @@
     "en": "Learn parametric modeling in Autodesk Fusion 360 by solving real exercises, step by step, with downloadable files."
   },
   "difficulty": "beginner",
+  "theme": {
+    "primary": "#d85b12",
+    "secondary": "#f28c28"
+  },
   "cover": "/images/courses/fusion-360.svg",
   "author": {
     "name": "Rich  G.",

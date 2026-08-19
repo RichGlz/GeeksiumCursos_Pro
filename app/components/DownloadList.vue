@@ -32,18 +32,18 @@ const onDownload = (resource: DownloadResource, courseId: string, exerciseId: st
 </script>
 
 <template>
-  <section v-if="resources.length" class="surface-card p-4">
+  <section v-if="resources.length" class="download-list surface-card min-w-0 p-4">
     <h2 class="mb-3 text-sm font-bold uppercase tracking-wide muted-text">
       {{ t('exercise.downloads') }}
     </h2>
-    <ul class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-2">
-      <li v-for="resource in resources" :key="resource.id">
+    <ul class="download-grid min-w-0">
+      <li v-for="resource in resources" :key="resource.id" class="min-w-0">
         <a
           :href="resource.url"
           :download="resource.download ? '' : undefined"
           :target="resource.type === 'link' ? '_blank' : undefined"
           :rel="resource.type === 'link' ? 'noopener noreferrer' : undefined"
-          class="flex aspect-square min-h-40 flex-col overflow-hidden rounded-xl border border-ink-200 bg-white text-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-ink-800 dark:bg-ink-950"
+          class="flex aspect-square min-h-0 w-full max-w-full flex-col overflow-hidden rounded-xl border border-ink-200 bg-white text-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-ink-800 dark:bg-ink-950"
           :style="{ '--resource-accent': accent(resource) }"
           @click="onDownload(resource, courseId, exerciseId)"
         >
@@ -61,3 +61,20 @@ const onDownload = (resource: DownloadResource, courseId: string, exerciseId: st
     </ul>
   </section>
 </template>
+
+<style scoped>
+.download-list {
+  container-name: download-list;
+  container-type: inline-size;
+}
+
+.download-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+@container download-list (max-width: 18rem) {
+  .download-grid { grid-template-columns: minmax(0, 1fr); }
+}
+</style>

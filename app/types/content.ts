@@ -35,6 +35,10 @@ export interface Course {
   cover?: string
   author?: CourseAuthor
   seo?: SeoMeta
+  theme?: {
+    primary: string
+    secondary: string
+  }
 }
 
 export interface VideoChapter {

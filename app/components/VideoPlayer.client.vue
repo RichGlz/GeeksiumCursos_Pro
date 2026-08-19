@@ -45,7 +45,12 @@ onMounted(() => {
     poster: props.poster ?? props.video.poster,
     techOrder: props.video.provider === 'youtube' ? ['youtube', 'html5'] : ['html5'],
     sources: [source],
-    youtube: { rel: 0, modestbranding: 1, playsinline: 1 },
+    youtube: {
+      rel: 0,
+      modestbranding: 1,
+      playsinline: 1,
+      cc_load_policy: 0,
+    },
   })
 
   player.on('play', () => {

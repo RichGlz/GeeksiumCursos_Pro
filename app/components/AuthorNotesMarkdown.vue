@@ -35,14 +35,14 @@ const rendered = computed(() => (props.markdown ? parser.render(props.markdown) 
 .author-notes__content :deep(a) { color: var(--color-brand-600); font-weight: 500; text-decoration: underline; text-underline-offset: 2px; }
 .author-notes__content :deep(img) { display: block; max-width: 100%; height: auto; margin: 1.25rem 0; border-radius: 0.75rem; }
 .author-notes__content :deep(blockquote) { margin: 1rem 0; padding-left: 1rem; border-left: 4px solid var(--color-brand-300); font-style: italic; }
-.author-notes__content :deep(code) { border-radius: 0.25rem; background: var(--color-ink-100); padding: 0.125rem 0.375rem; font-family: monospace; font-size: 0.875rem; }
+.author-notes__content :deep(code) { border-radius: 0.25rem; background: var(--color-ink-100); padding: 0.125rem 0.375rem; color: var(--color-ink-900); font-family: monospace; font-size: 0.875rem; }
 .author-notes__content :deep(pre) { margin: 1rem 0; overflow-x: auto; border-radius: 0.75rem; background: var(--color-ink-950); padding: 1rem; color: var(--color-ink-100); }
 .author-notes__content :deep(pre code) { background: transparent; padding: 0; color: inherit; }
 .author-notes__content :deep(hr) { margin: 2rem 0; border-color: var(--color-ink-200); }
 :global(.dark) .author-notes__content :deep(h2),
 :global(.dark) .author-notes__content :deep(h3),
 :global(.dark) .author-notes__content :deep(h4) { color: white; }
-:global(.dark) .author-notes__content :deep(code) { background: var(--color-ink-800); }
+:global(.dark) .author-notes__content :deep(code) { background: var(--color-ink-800); color: var(--color-ink-100); }
 :global(.dark) .author-notes__content :deep(pre code) { background: transparent; }
 :global(.dark) .author-notes__content :deep(hr) { border-color: var(--color-ink-700); }
 </style>

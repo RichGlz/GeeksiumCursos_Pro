@@ -51,9 +51,9 @@ const firstExercise = computed(() => currentCourse.value.exercises[0])
 </script>
 
 <template>
-  <div class="mx-auto max-w-6xl px-4 py-10">
+  <div class="course-theme mx-auto max-w-6xl px-4 py-10" :style="courseThemeStyle(currentCourse)">
     <nav class="mb-6 text-sm muted-text" aria-label="breadcrumb">
-      <NuxtLink :to="localePath('/courses')" class="hover:text-brand-600">{{ t('courses.title') }}</NuxtLink>
+      <NuxtLink :to="localePath('/courses')" class="course-link">{{ t('courses.title') }}</NuxtLink>
       <span aria-hidden="true"> / </span>
       <span class="text-ink-700 dark:text-ink-200">{{ tContent(currentCourse.title, locale) }}</span>
     </nav>
@@ -70,7 +70,7 @@ const firstExercise = computed(() => currentCourse.value.exercises[0])
         <NuxtLink
           v-if="firstExercise"
           :to="localePath(`/courses/${currentCourse.slug}/${firstExercise.slug}`)"
-          class="mt-6 inline-flex rounded-xl bg-brand-600 px-5 py-3 font-semibold text-white hover:bg-brand-700"
+          class="course-button mt-6 inline-flex rounded-xl px-5 py-3 font-semibold text-white"
         >
           {{ done > 0 ? t('courses.continue') : t('courses.start') }}
         </NuxtLink>

@@ -19,7 +19,7 @@ const value = computed(() => Math.min(100, Math.max(0, props.percent)))
       :aria-label="t('course.progress')"
     >
       <div
-        class="h-full rounded-full bg-brand-600 transition-[width] duration-500"
+        class="course-progress h-full rounded-full transition-[width] duration-500"
         :style="{ width: `${value}%` }"
       />
     </div>

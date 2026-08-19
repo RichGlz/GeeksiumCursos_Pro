@@ -63,6 +63,12 @@ function validateCourse(raw: Course, file: string, slugFromDir: string): Course 
   if (slug !== slugFromDir) {
     fail(file, `el "slug" (${slug}) no coincide con la carpeta (${slugFromDir}).`)
   }
+  if (raw.theme) {
+    const hexColor = /^#[0-9a-f]{6}$/i
+    if (!hexColor.test(raw.theme.primary) || !hexColor.test(raw.theme.secondary)) {
+      fail(file, '"theme.primary" y "theme.secondary" deben ser colores hexadecimales #RRGGBB.')
+    }
+  }
   return { ...raw, slug }
 }
 
@@ -135,6 +141,15 @@ export function getCourse(slug: string): CourseWithExercises | undefined {
 
 export function getExercise(courseSlug: string, exerciseSlug: string): Exercise | undefined {
   return getCourse(courseSlug)?.exercises.find((exercise) => exercise.slug === exerciseSlug)
+}
+
+/** Variables de tema limitadas al árbol visual de un curso. */
+export function courseThemeStyle(course: Course): Record<string, string> {
+  if (!course.theme) return {}
+  return {
+    '--course-primary': course.theme.primary,
+    '--course-secondary': course.theme.secondary,
+  }
 }
 
 /** Devuelve el texto en el idioma pedido, con español como respaldo. */

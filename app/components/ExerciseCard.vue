@@ -28,7 +28,7 @@ const duration = computed(() =>
         class="grid size-9 shrink-0 place-items-center rounded-full text-sm font-bold"
         :class="
           completed
-            ? 'bg-brand-600 text-white'
+            ? 'course-selected'
             : 'bg-ink-100 text-ink-600 dark:bg-ink-800 dark:text-ink-300'
         "
         aria-hidden="true"
@@ -45,7 +45,7 @@ const duration = computed(() =>
         <span class="mt-2 flex flex-wrap items-center gap-3 text-xs muted-text">
           <span v-if="exercise.difficulty">{{ t(`difficulty.${exercise.difficulty}`) }}</span>
           <span v-if="duration">{{ duration }}</span>
-          <span v-if="completed" class="font-semibold text-brand-600">{{ t('exercise.completed') }}</span>
+          <span v-if="completed" class="course-link font-semibold">{{ t('exercise.completed') }}</span>
         </span>
       </span>
     </NuxtLink>

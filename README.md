@@ -70,6 +70,19 @@ discreto y no bloqueante (`components/ConsentBanner.vue`). No hay modal bloquean
 se rechaza la analítica, el sitio funciona con normalidad y `useAnalytics()` se convierte en un
 no-op. Sin `NUXT_PUBLIC_GA_MEASUREMENT_ID` tampoco se carga nada.
 
+### Donaciones de chocolates
+
+Las opciones se configuran con Stripe Payment Links públicos HTTPS:
+
+```dotenv
+NUXT_PUBLIC_STRIPE_CHOCOLATE_1_URL=
+NUXT_PUBLIC_STRIPE_CHOCOLATE_2_URL=
+```
+
+Cada variable habilita su opción correspondiente. `ChocolateDonation.vue` descarta valores vacíos
+o que no sean URLs HTTPS válidas; si ambas variables están vacías o no son válidas, no renderiza ningún
+botón y no deja una acción muerta en la interfaz.
+
 Las vistas de página usan una única estrategia: la medición automática de GA4. En **Enhanced
 Measurement** debe permanecer habilitada la opción de cambios de página basados en eventos del
 historial del navegador. No existe `router.afterEach` que envíe `page_view` manualmente; no se debe
