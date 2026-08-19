@@ -70,6 +70,13 @@ export const useProgressStore = defineStore('progress', {
       this.persist()
     },
 
+    replaceLocalState(progress: ProgressState, favorites: FavoritesState) {
+      this.progress = migrateProgress(progress)
+      this.favorites = migrateFavorites(favorites)
+      this.hydrated = true
+      this.persist()
+    },
+
     resetCourse(exerciseIds: string[]) {
       const ids = new Set(exerciseIds)
       this.progress.completedExercises = this.progress.completedExercises.filter(

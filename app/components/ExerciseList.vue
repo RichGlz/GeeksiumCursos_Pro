@@ -9,10 +9,9 @@ const { t } = useI18n()
   <div>
     <ul v-if="exercises.length" class="flex flex-col gap-3">
       <ExerciseCard
-        v-for="(exercise, index) in exercises"
+        v-for="exercise in exercises"
         :key="exercise.id"
         :exercise="exercise"
-        :index="index"
       />
     </ul>
     <p v-else class="muted-text">{{ t('course.empty') }}</p>

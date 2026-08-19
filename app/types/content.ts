@@ -14,6 +14,19 @@ export interface LocalizedList {
 
 export type Difficulty = 'beginner' | 'intermediate' | 'advanced'
 
+export type CourseLevel =
+  | 'beginner-1'
+  | 'beginner-2'
+  | 'beginner-3'
+  | 'intermediate-1'
+  | 'intermediate-2'
+  | 'intermediate-3'
+  | 'advanced-1'
+  | 'advanced-2'
+  | 'advanced-3'
+
+export type ExerciseType = 'exercise' | 'challenge'
+
 export interface SeoMeta {
   title?: LocalizedText
   description?: LocalizedText
@@ -98,6 +111,14 @@ export interface ExerciseActions {
   donationUrl?: string
 }
 
+export interface ExerciseTool {
+  id: string
+  name: {
+    es: string
+    en: string
+  }
+}
+
 export interface Exercise {
   id: string
   slug: string
@@ -107,7 +128,10 @@ export interface Exercise {
   title: LocalizedText
   summary?: LocalizedText
   difficulty?: Difficulty
+  level?: CourseLevel
+  type?: ExerciseType
   tags?: string[]
+  tools?: ExerciseTool[]
   video?: ExerciseVideo
   chapters?: VideoChapter[]
   authorNotes?: LocalizedList

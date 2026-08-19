@@ -108,7 +108,7 @@ export default defineNuxtConfig({
       ],
     },
     workbox: {
-      // El shell y los assets propios se cachean. Nunca video de YouTube.
+      // Solo shell/assets propios. files.geeksium.com y archivos grandes externos no coinciden.
       globPatterns: ['**/*.{js,css,html,svg,png,ico,webp,woff2,json}'],
       navigateFallback: '/',
       cleanupOutdatedCaches: true,

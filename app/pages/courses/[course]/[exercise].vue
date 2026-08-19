@@ -57,6 +57,15 @@ onMounted(() => {
           <li v-for="tag in currentExercise.tags" :key="tag" class="course-badge rounded-full border px-2.5 py-1 text-xs font-medium">{{ tag }}</li>
         </ul>
 
+        <section v-if="currentExercise.tools?.length" class="mt-3" :aria-label="t('exercise.toolsUsed')">
+          <h2 class="text-xs font-semibold uppercase tracking-wide muted-text">{{ t('exercise.toolsUsed') }}</h2>
+          <ul class="mt-2 flex flex-wrap gap-1.5">
+            <li v-for="tool in currentExercise.tools" :key="tool.id" class="rounded-full border border-ink-200 bg-ink-50 px-2 py-0.5 text-[11px] text-ink-500 dark:border-ink-700 dark:bg-ink-900 dark:text-ink-400">
+              {{ tContent(tool.name, locale) }}
+            </li>
+          </ul>
+        </section>
+
         <div class="mt-6">
           <ClientOnly v-if="videoEnabled">
             <VideoPlayer ref="player" :key="currentExercise.id" :video="currentExercise.video!" :chapters="currentExercise.chapters" :exercise-slug="currentExercise.slug" />

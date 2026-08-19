@@ -12,6 +12,7 @@
     "en": "Join components with motion joints and produce a shop-ready technical drawing."
   },
   "difficulty": "intermediate",
+  "level": "intermediate-1",
   "tags": ["ensamblaje", "uniones", "planos"],
   "video": {
     "provider": "youtube",

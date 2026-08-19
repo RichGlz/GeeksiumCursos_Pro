@@ -106,9 +106,9 @@
   font-size: 0.875rem;
 }
 
-/* Video.js: contenedor 16:9 responsive */
-.vjs-geeksium {
+/* Plyr: contenedor 16:9 responsive y color integrado con el curso. */
+.plyr {
   width: 100% !important;
   height: 100% !important;
-  padding-top: 0 !important;
+  --plyr-color-main: var(--course-primary, var(--color-brand-600));
 }

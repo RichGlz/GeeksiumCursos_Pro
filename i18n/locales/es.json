@@ -78,7 +78,9 @@
     "pending": "Pendiente",
     "fullscreen": "Pantalla completa",
     "exitFullscreen": "Salir de pantalla completa",
-    "model3dError": "No se pudo cargar el modelo 3D"
+    "model3dError": "No se pudo cargar el modelo 3D",
+    "toolsUsed": "Herramientas utilizadas",
+    "challenge": "Reto"
   },
   "support": {
     "title": "¿Cómo puedo apoyar?",
@@ -92,10 +94,43 @@
     "intermediate": "Intermedio",
     "advanced": "Avanzado"
   },
+  "levels": {
+    "beginner-1": "Principiante 1",
+    "beginner-2": "Principiante 2",
+    "beginner-3": "Principiante 3",
+    "intermediate-1": "Intermedio 1",
+    "intermediate-2": "Intermedio 2",
+    "intermediate-3": "Intermedio 3",
+    "advanced-1": "Avanzado 1",
+    "advanced-2": "Avanzado 2",
+    "advanced-3": "Avanzado 3"
+  },
+  "badges": {
+    "title": "Insignias",
+    "empty": "Completa ejercicios para desbloquear insignias.",
+    "items": {
+      "first-exercise": "Primer ejercicio",
+      "10-exercises": "10 ejercicios",
+      "25-exercises": "25 ejercicios",
+      "50-exercises": "50 ejercicios",
+      "100-exercises": "100 ejercicios",
+      "level-complete": "Nivel completado",
+      "challenge-milestone": "10 retos"
+    }
+  },
+  "progressBackup": {
+    "title": "Copia de progreso",
+    "description": "Tu avance se guarda en este dispositivo. Descarga una copia para restaurarlo cuando quieras.",
+    "export": "Exportar progreso",
+    "import": "Importar progreso",
+    "confirm": "Esto reemplazará el progreso, favoritos y tema guardados en este dispositivo. ¿Deseas continuar?",
+    "success": "Progreso importado correctamente.",
+    "invalid": "El archivo no es una copia válida de Geeksium."
+  },
   "consent": {
     "message": "Usamos analítica anónima para mejorar los cursos. Puedes rechazarla y el sitio funcionará igual.",
-    "accept": "Aceptar",
-    "decline": "Rechazar",
+    "accept": "Aceptar analítica",
+    "decline": "Continuar sin analítica",
     "title": "Analítica"
   },
   "theme": {

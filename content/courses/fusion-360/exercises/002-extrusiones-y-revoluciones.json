@@ -1,62 +1,99 @@
 {
   "id": "fusion-360-002",
-  "slug": "extrusiones-y-revoluciones",
+  "slug": "ejercicio-002",
   "order": 2,
   "enabled": true,
+  "type": "exercise",
+  "level": "beginner-1",
+
   "title": {
-    "es": "Extrusiones y revoluciones",
-    "en": "Extrusions and revolves"
+    "es": "Ejercicio 2 — Principiante Nivel 1",
+    "en": "Exercise 2 — Beginner Level 1"
   },
+
   "summary": {
-    "es": "Convierte bocetos en sólidos con extrusión, corte y revolución, controlando el histórico paramétrico.",
-    "en": "Turn sketches into solids using extrude, cut and revolve while controlling the parametric timeline."
+    "es": "Ejercicio práctico de Fusion 360.",
+    "en": "A practical Fusion 360 exercise."
   },
+
   "difficulty": "beginner",
-  "tags": ["extrusión", "revolución", "sólidos"],
+
+  "tags": [
+    "Principiante",
+    "Nivel 1"
+  ],
+
+  "tools": [],
+
   "video": {
+    "enabled": true,
     "provider": "youtube",
     "url": "https://www.youtube.com/watch?v=TgcH1z92xj4",
-    "youtubeId": "TgcH1z92xj4",
-    "durationSeconds": 900
+    "youtubeId": "",
+    "poster": "",
+    "durationSeconds": 0
   },
-  "chapters": [
-    { "id": "c1", "timeSeconds": 0, "label": { "es": "Repaso del boceto", "en": "Sketch recap" } },
-    { "id": "c2", "timeSeconds": 130, "label": { "es": "Extrusión básica", "en": "Basic extrude" } },
-    { "id": "c3", "timeSeconds": 420, "label": { "es": "Corte y unión", "en": "Cut and join" } },
-    { "id": "c4", "timeSeconds": 660, "label": { "es": "Revolución", "en": "Revolve" } }
-  ],
+
+  "chapters": [],
+
   "authorNotes": {
-    "es": [
-      "Renombra cada operación del histórico: lo agradecerás en ejercicios largos.",
-      "Si una operación falla, revisa el boceto padre antes de rehacerla."
-    ],
-    "en": [
-      "Rename every timeline feature: long exercises get much easier.",
-      "If a feature fails, check the parent sketch before rebuilding it."
-    ]
+    "es": [],
+    "en": []
   },
+
+  "authorNotesFile": {},
+
   "resources": [
     {
       "id": "r1",
       "type": "pdf",
-      "title": { "es": "Plano acotado", "en": "Dimensioned drawing" },
-      "url": "/downloads/fusion-360/002-plano.pdf",
+      "title": {
+        "es": "Plano",
+        "en": "Drawing"
+      },
+      "url": "https://files.geeksium.com/fusion360/002/plano-002.pdf",
+      "previewImage": "https://files.geeksium.com/fusion360/002/plano-002.jpg",
       "download": true
     },
     {
       "id": "r2",
-      "type": "step",
-      "title": { "es": "Modelo de referencia (STEP)", "en": "Reference model (STEP)" },
-      "url": "/downloads/fusion-360/002-modelo.step",
+      "type": "jpg",
+      "title": {
+        "es": "Imagen",
+        "en": "Image"
+      },
+      "url": "https://files.geeksium.com/fusion360/002/plano-002.jpg",
+      "download": true
+    },
+    {
+      "id": "r3",
+      "type": "stl",
+      "title": {
+        "es": "Modelo STL",
+        "en": "STL model"
+      },
+      "url": "https://files.geeksium.com/fusion360/006/modelo-006.stl",
       "download": true
     }
   ],
-  "model3d": { "enabled": false },
+
+  "model3d": {
+    "enabled": true,
+    "url": "https://files.geeksium.com/fusion360/006/modelo-006.iges",
+    "format": "iges",
+    "autoRotate": true,
+    "rotation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    }
+  },
+
   "actions": {
-    "youtubeUrl": "https://www.youtube.com/watch?v=ILyRQjNvNVc",
     "shareEnabled": true,
     "favoriteEnabled": true
   },
-  "publishedAt": "2026-01-19",
-  "updatedAt": "2026-02-02"
+
+  "publishedAt": "",
+  "updatedAt": ""
 }

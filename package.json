@@ -28,19 +28,17 @@
     "markdown-it": "^14.1.0",
     "nuxt": "^4.5.2",
     "pinia": "^4.0.3",
+    "plyr": "^3.8.4",
     "sweetalert2": "^11.26.25",
     "tailwindcss": "^4.3.3",
     "three": "^0.185.1",
-    "video.js": "^8.24.0",
-    "videojs-youtube": "^3.0.1",
     "vue": "^3.5.0",
     "vue-router": "4.5.1"
   },
   "devDependencies": {
-    "@types/node": "^24.0.0",
     "@types/markdown-it": "^14.1.2",
+    "@types/node": "^24.0.0",
     "@types/three": "^0.185.0",
-    "@types/video.js": "^7.3.58",
     "typescript": "^5.9.0",
     "vue-tsc": "^3.1.0"
   }

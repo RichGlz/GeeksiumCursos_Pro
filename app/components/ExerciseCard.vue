@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Exercise } from '~/types/content'
 
-const props = defineProps<{ exercise: Exercise; index: number }>()
+const props = defineProps<{ exercise: Exercise }>()
 
 const { t, locale } = useI18n()
 const localePath = useLocalePath()
@@ -36,7 +36,7 @@ const duration = computed(() =>
         <svg v-if="completed" class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
           <path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
-        <template v-else>{{ index + 1 }}</template>
+        <template v-else>{{ exercise.order }}</template>
       </span>
 
       <span class="min-w-0 flex-1">
@@ -44,6 +44,8 @@ const duration = computed(() =>
         <span v-if="summary" class="mt-1 line-clamp-2 block text-sm muted-text">{{ summary }}</span>
         <span class="mt-2 flex flex-wrap items-center gap-3 text-xs muted-text">
           <span v-if="exercise.difficulty">{{ t(`difficulty.${exercise.difficulty}`) }}</span>
+          <span v-if="exercise.level">{{ t(`levels.${exercise.level}`) }}</span>
+          <span v-if="exercise.type === 'challenge'" class="font-semibold text-brand-600">{{ t('exercise.challenge') }}</span>
           <span v-if="duration">{{ duration }}</span>
           <span v-if="completed" class="course-link font-semibold">{{ t('exercise.completed') }}</span>
         </span>

@@ -80,6 +80,29 @@ function validateExercise(raw: Exercise, file: string, courseSlug: string): Exer
   if (!Number.isFinite(order)) {
     fail(file, 'falta la propiedad obligatoria "order" (número).')
   }
+  const levels = new Set([
+    'beginner-1', 'beginner-2', 'beginner-3',
+    'intermediate-1', 'intermediate-2', 'intermediate-3',
+    'advanced-1', 'advanced-2', 'advanced-3',
+  ])
+  if (raw.level !== undefined && !levels.has(raw.level)) {
+    fail(file, `el "level" (${raw.level}) no es uno de los nueve niveles soportados.`)
+  }
+  if (raw.type !== undefined && raw.type !== 'exercise' && raw.type !== 'challenge') {
+    fail(file, '"type" debe ser "exercise" o "challenge".')
+  }
+  if (raw.tools !== undefined) {
+    if (!Array.isArray(raw.tools)) fail(file, '"tools" debe ser un array.')
+    const ids = new Set<string>()
+    for (const tool of raw.tools) {
+      if (!tool || typeof tool !== 'object') fail(file, 'cada elemento de "tools" debe ser un objeto.')
+      requireString(tool.id, file, 'tools[].id')
+      requireString(tool.name?.es, file, 'tools[].name.es')
+      requireString(tool.name?.en, file, 'tools[].name.en')
+      if (ids.has(tool.id)) fail(file, `el id de herramienta "${tool.id}" está duplicado.`)
+      ids.add(tool.id)
+    }
+  }
   return { ...raw, order, courseSlug }
 }
 

@@ -57,6 +57,31 @@ ejercicio visitado, persistidos en `localStorage` mediante `composables/useLocal
 El acceso pasa siempre por `useExerciseProgress()`, de modo que sustituir el backend por Supabase
 más adelante no obliga a tocar los componentes. No hay login, pagos ni backend de usuarios en Fase 1.
 
+La vista del curso permite **exportar** un respaldo JSON versionado con progreso, favoritos y tema,
+y **restaurarlo** después de validar su estructura y confirmar el reemplazo. El archivo no incluye
+cookies, identificadores de Analytics ni datos personales. Las insignias V1 se derivan del progreso
+local (primer ejercicio, hitos 10/25/50/100, nivel completo y 10 retos), sin XP, ranking ni estado
+duplicado.
+
+### Vídeo con Plyr
+
+`VideoPlayer.client.vue` encapsula Plyr y solo se carga en páginas con un vídeo activo. Acepta el
+objeto `video` del JSON, reproduce YouTube o archivos directos, conserva capítulos, controles,
+velocidad, fullscreen y eventos de Analytics. `video.youtubeId` es un override opcional; si falta o
+está vacío, `app/utils/video.ts` deriva el ID desde URLs `watch`, `youtu.be`, `embed`, `shorts` y
+`youtube-nocookie`. `video.poster` acepta una URL propia, incluida R2.
+
+Con `video.enabled: false` no se inicializa Plyr ni se muestran capítulos, enlace a YouTube,
+eventos de vídeo o `VideoObject`; se muestra el poster o un fallback 16:9 localizado.
+
+### Campos de ejercicio V1
+
+- `tools`: lista independiente de los tags, con `id` estable y nombre `{ es, en }`.
+- `level`: uno de `beginner-1..3`, `intermediate-1..3` o `advanced-1..3`.
+- `type`: opcional; `challenge` usa el mismo motor y `undefined` equivale a `exercise`.
+- `order`: número, incluidos decimales como `3.5`; listado y anterior/siguiente se ordenan por ese
+  valor sin redondearlo.
+
 ### Analítica
 
 Google Analytics 4 se carga con **Nuxt Scripts** (`useScriptGoogleAnalytics`) en
@@ -83,6 +108,27 @@ Cada variable habilita su opción correspondiente. `ChocolateDonation.vue` desca
 o que no sean URLs HTTPS válidas; si ambas variables están vacías o no son válidas, no renderiza ningún
 botón y no deja una acción muerta en la interfaz.
 
+Se usan Stripe Payment Links directamente, sin SDK. Cada opción abre una pestaña nueva con
+`noopener,noreferrer` y emite una sola vez `donation_click` con proveedor, importe y moneda.
+
+### Recursos y Cloudflare R2
+
+Los JSON mantienen la URL completa y los recursos públicos nuevos se sirven desde
+`https://files.geeksium.com/`, por ejemplo `fusion360/001/plano-001.pdf`. El frontend no usa SDK,
+credenciales ni `fetch`/`HEAD` previo: `DownloadList.vue` usa enlaces `<a>` normales y emite un único
+`resource_download` por click con IDs, tipo y host, nunca la URL completa. El grid usa una columna
+en móvil y dos desde tablet, siempre con `min-width: 0`, `width: 100%` y `max-width: 100%`.
+
+El service worker solo tiene runtime cache para el origen del sitio y su precache excluye PDF, STL,
+ZIP y otros archivos grandes; `files.geeksium.com` no se precachea ni se añade a runtime cache.
+
+### Legacy redirects
+
+Cuando exista el mapeo real de URLs antiguas de Geeksium/WordPress, implementar redirecciones 301
+hacia `https://cursos.geeksium.com/courses/...` mediante **Cloudflare Redirect Rules** o **Bulk
+Redirects**. Si el hosting/origen ofrece redirecciones estáticas equivalentes, también puede usarse.
+No se debe crear un endpoint Nitro ni inventar rutas sin el mapeo confirmado.
+
 Las vistas de página usan una única estrategia: la medición automática de GA4. En **Enhanced
 Measurement** debe permanecer habilitada la opción de cambios de página basados en eventos del
 historial del navegador. No existe `router.afterEach` que envíe `page_view` manualmente; no se debe
@@ -108,6 +154,6 @@ evento manual `resource_download`, agrupado por `resource_id`; el evento automá
 
 ## Preparado para el futuro (no implementado en Fase 1)
 
-Autenticación, pagos, comentarios, perfiles y dashboard administrativo. Las capas de progreso,
+Autenticación, comentarios, perfiles remotos y dashboard administrativo. Las capas de progreso,
 favoritos y analítica están aisladas tras composables para poder conectarlas a Supabase sin
 reescribir componentes.

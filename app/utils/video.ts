@@ -37,12 +37,28 @@ export function youtubeWatchUrl(video: ExerciseVideo | undefined): string | unde
   return id ? `https://www.youtube.com/watch?v=${id}` : undefined
 }
 
-/** Configuración de fuente para Video.js. */
-export function videoJsSource(video: ExerciseVideo): { src: string; type: string } | undefined {
+/** Configuración de fuente para Plyr. */
+export interface PlyrVideoSource {
+  type: 'video'
+  title?: string
+  poster?: string
+  sources: Array<{
+    src: string
+    provider?: 'youtube'
+    type?: string
+  }>
+}
+
+/** Fuente encapsulada para Plyr; la pagina nunca conoce detalles del proveedor. */
+export function plyrVideoSource(video: ExerciseVideo): PlyrVideoSource | undefined {
   if (video.enabled === false) return undefined
   if (video.provider === 'youtube') {
-    const url = youtubeWatchUrl(video)
-    return url ? { src: url, type: 'video/youtube' } : undefined
+    const id = resolveYoutubeId(video)
+    return id
+      ? { type: 'video', poster: video.poster, sources: [{ src: id, provider: 'youtube' }] }
+      : undefined
   }
-  return video.url.trim() ? { src: video.url, type: 'video/mp4' } : undefined
+  return video.url.trim()
+    ? { type: 'video', poster: video.poster, sources: [{ src: video.url, type: 'video/mp4' }] }
+    : undefined
 }

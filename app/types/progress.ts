@@ -13,3 +13,13 @@ export interface FavoritesState {
 export type ThemePreference = 'system' | 'light' | 'dark'
 
 export type AnalyticsConsent = 'granted' | 'denied' | 'unknown'
+
+export interface ProgressBackup {
+  version: 1
+  exportedAt: string
+  progress: ProgressState
+  favorites: FavoritesState
+  preferences: {
+    theme: ThemePreference
+  }
+}

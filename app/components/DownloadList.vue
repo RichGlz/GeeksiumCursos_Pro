@@ -43,11 +43,11 @@ const onDownload = (resource: DownloadResource, courseId: string, exerciseId: st
           :download="resource.download ? '' : undefined"
           :target="resource.type === 'link' ? '_blank' : undefined"
           :rel="resource.type === 'link' ? 'noopener noreferrer' : undefined"
-          class="flex aspect-square min-h-0 w-full max-w-full flex-col overflow-hidden rounded-xl border border-ink-200 bg-white text-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-ink-800 dark:bg-ink-950"
+          class="flex h-full min-h-0 w-full max-w-full flex-col overflow-hidden rounded-xl border border-ink-200 bg-white text-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-ink-800 dark:bg-ink-950"
           :style="{ '--resource-accent': accent(resource) }"
           @click="onDownload(resource, courseId, exerciseId)"
         >
-          <NuxtImg v-if="resource.previewImage" :src="resource.previewImage" :alt="tContent(resource.title, locale)" width="320" height="180" class="aspect-video w-full object-cover" loading="lazy" />
+          <img v-if="resource.previewImage" :src="resource.previewImage" :alt="tContent(resource.title, locale)" width="320" height="180" class="aspect-video w-full max-w-full object-cover" loading="lazy">
           <span v-else class="grid flex-1 place-items-center bg-ink-50 text-4xl dark:bg-ink-900" :style="{ color: accent(resource) }" aria-hidden="true">
             <FontAwesomeIcon :icon="icon(resource)" />
           </span>
@@ -70,11 +70,11 @@ const onDownload = (resource: DownloadResource, courseId: string, exerciseId: st
 
 .download-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 0.75rem;
 }
 
-@container download-list (max-width: 18rem) {
-  .download-grid { grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 40rem) {
+  .download-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 </style>

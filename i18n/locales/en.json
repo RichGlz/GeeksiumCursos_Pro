@@ -78,7 +78,9 @@
     "pending": "Pending",
     "fullscreen": "Full screen",
     "exitFullscreen": "Exit full screen",
-    "model3dError": "The 3D model could not be loaded"
+    "model3dError": "The 3D model could not be loaded",
+    "toolsUsed": "Tools used",
+    "challenge": "Challenge"
   },
   "support": {
     "title": "How can I help?",
@@ -92,10 +94,43 @@
     "intermediate": "Intermediate",
     "advanced": "Advanced"
   },
+  "levels": {
+    "beginner-1": "Beginner 1",
+    "beginner-2": "Beginner 2",
+    "beginner-3": "Beginner 3",
+    "intermediate-1": "Intermediate 1",
+    "intermediate-2": "Intermediate 2",
+    "intermediate-3": "Intermediate 3",
+    "advanced-1": "Advanced 1",
+    "advanced-2": "Advanced 2",
+    "advanced-3": "Advanced 3"
+  },
+  "badges": {
+    "title": "Badges",
+    "empty": "Complete exercises to unlock badges.",
+    "items": {
+      "first-exercise": "First exercise",
+      "10-exercises": "10 exercises",
+      "25-exercises": "25 exercises",
+      "50-exercises": "50 exercises",
+      "100-exercises": "100 exercises",
+      "level-complete": "Level complete",
+      "challenge-milestone": "10 challenges"
+    }
+  },
+  "progressBackup": {
+    "title": "Progress backup",
+    "description": "Your progress is saved on this device. Download a copy so you can restore it whenever you need.",
+    "export": "Export progress",
+    "import": "Import progress",
+    "confirm": "This will replace the progress, favorites and theme saved on this device. Continue?",
+    "success": "Progress imported successfully.",
+    "invalid": "This file is not a valid Geeksium backup."
+  },
   "consent": {
     "message": "We use anonymous analytics to improve the courses. You can decline and the site keeps working.",
-    "accept": "Accept",
-    "decline": "Decline",
+    "accept": "Accept analytics",
+    "decline": "Continue without analytics",
     "title": "Analytics"
   },
   "theme": {

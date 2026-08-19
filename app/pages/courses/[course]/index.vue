@@ -89,6 +89,10 @@ const firstExercise = computed(() => currentCourse.value.exercises[0])
           <CourseProgressBar :percent="percent" :done="done" :total="currentCourse.exercises.length" />
         </div>
 
+        <ClientOnly>
+          <ProgressBackup />
+        </ClientOnly>
+
         <div v-if="currentCourse.author" class="surface-card p-5">
           <h2 class="mb-2 text-sm font-bold uppercase tracking-wide muted-text">
             {{ t('course.instructor') }}

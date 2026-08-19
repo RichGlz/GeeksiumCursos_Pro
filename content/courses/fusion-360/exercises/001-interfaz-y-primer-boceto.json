@@ -12,7 +12,12 @@
     "en": "A tour of the Fusion 360 interface and how to create your first fully constrained sketch."
   },
   "difficulty": "beginner",
+  "level": "beginner-1",
   "tags": ["Interfaz", "Boceto", "Restricciones"],
+  "tools": [
+    { "id": "line", "name": { "es": "Línea", "en": "Line" } },
+    { "id": "dimension", "name": { "es": "Cota", "en": "Dimension" } }
+  ],
   "video": {
     "provider": "youtube",
     "url": "https://www.youtube.com/watch?v=uQ86JRMi48s",
@@ -43,25 +48,25 @@
       "id": "r1",
       "type": "pdf",
       "title": { "es": "Plano", "en": "Drawing" },
-      "url": "https://www.mediafire.com/file/5qv22x2wf4w80dh/Ejercicio1.pdf/file",
+      "url": "https://files.geeksium.com/fusion360/001/plano-001.pdf",
       "download": true
     },
     {
       "id": "r2",
       "type": "png",
       "title": { "es": "Imagen", "en": "Image" },
-      "url": "https://www.mediafire.com/view/iswsd6lypywk8qa/Ejercicio1.png/file",
+      "url": "https://files.geeksium.com/fusion360/001/plano-001.png",
       "download": true
     },
     {
       "id": "r3",
       "type": "stl",
       "title": { "es": "STL", "en": "STL" },
-      "url": "https://www.mediafire.com/view/iswsd6lypywk8qa/Ejercicio1.png/file",
+      "url": "https://files.geeksium.com/fusion360/006/modelo-006.stl",
       "download": true
     }
   ],
-  "model3d": { "enabled": false },
+  "model3d": { "enabled": true },
   "actions": {
     "youtubeUrl": "https://www.youtube.com/watch?v=uQ86JRMi48s",
     "shareEnabled": true,

@@ -21,6 +21,8 @@ const toggle = () => {
     <p v-if="exercise.difficulty" class="mt-1 font-semibold text-ink-900 dark:text-white">
       {{ t(`difficulty.${exercise.difficulty}`) }}
     </p>
+    <p v-if="exercise.level" class="mt-1 text-sm muted-text">{{ t(`levels.${exercise.level}`) }}</p>
+    <p v-if="exercise.type === 'challenge'" class="mt-2 text-sm font-semibold course-link">{{ t('exercise.challenge') }}</p>
     <p class="mt-4 text-sm font-semibold" :class="completed ? 'course-link' : 'muted-text'">
       {{ completed ? t('exercise.completed') : t('exercise.pending') }}
     </p>
