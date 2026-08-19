@@ -68,7 +68,7 @@ onMounted(() => {
 
         <div class="mt-6">
           <ClientOnly v-if="videoEnabled">
-            <VideoPlayer ref="player" :key="currentExercise.id" :video="currentExercise.video!" :chapters="currentExercise.chapters" :exercise-slug="currentExercise.slug" />
+            <LazyVideoPlayer ref="player" :key="currentExercise.id" :video="currentExercise.video!" :chapters="currentExercise.chapters" :exercise-slug="currentExercise.slug" />
             <template #fallback><div class="aspect-video w-full animate-pulse rounded-2xl bg-ink-200 dark:bg-ink-800" /></template>
           </ClientOnly>
           <VideoUnavailable v-else-if="currentExercise.video" :poster="currentExercise.video.poster" />

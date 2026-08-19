@@ -17,5 +17,5 @@ export function formatPercent(value: number): string {
 
 /** Extensión visible para una tarjeta de descarga. */
 export function resourceExtension(type: ResourceType): string {
-  return type === 'link' || type === 'file' ? 'FILE' : type.toUpperCase()
+  return type.toUpperCase()
 }

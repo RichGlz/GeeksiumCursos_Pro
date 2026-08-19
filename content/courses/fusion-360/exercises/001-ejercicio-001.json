@@ -1,6 +1,6 @@
 {
   "id": "fusion-360-001",
-  "slug": "interfaz-y-primer-boceto",
+  "slug": "ejercicio-001",
   "order": 1,
   "enabled": true,
   "title": {
@@ -41,7 +41,7 @@
     ]
   },
   "authorNotesFile": {
-    "es": "001-interfaz-y-primer-boceto-notas.es.md"
+    "es": "001-ejercicio-001-notas.es.md"
   },
   "resources": [
     {
@@ -66,7 +66,7 @@
       "download": true
     }
   ],
-  "model3d": { "enabled": true },
+  "model3d": { "enabled": false },
   "actions": {
     "youtubeUrl": "https://www.youtube.com/watch?v=uQ86JRMi48s",
     "shareEnabled": true,

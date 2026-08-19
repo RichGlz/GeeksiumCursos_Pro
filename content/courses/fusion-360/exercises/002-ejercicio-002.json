@@ -41,8 +41,6 @@
     "en": []
   },
 
-  "authorNotesFile": {},
-
   "resources": [
     {
       "id": "r1",
@@ -79,11 +77,11 @@
 
   "model3d": {
     "enabled": true,
-    "url": "https://files.geeksium.com/fusion360/006/modelo-006.iges",
-    "format": "iges",
-    "autoRotate": true,
+    "url": "https://files.geeksium.com/fusion360/006/modelo-006.stl",
+    "format": "stl",
+    "autoRotate": false,
     "rotation": {
-      "x": 0,
+      "x": 180,
       "y": 0,
       "z": 0
     }

@@ -76,8 +76,11 @@ function validateExercise(raw: Exercise, file: string, courseSlug: string): Exer
   requireString(raw?.id, file, 'id')
   requireString(raw?.slug, file, 'slug')
   requireLocalized(raw?.title, file, 'title')
-  const order = Number(raw?.order)
-  if (!Number.isFinite(order)) {
+  if (!/^ejercicio-\d{3}(?:-\d+)?$/.test(raw.slug)) {
+    fail(file, '"slug" debe usar la convención "ejercicio-XXX" o "ejercicio-XXX-N".')
+  }
+  const order = raw?.order
+  if (typeof order !== 'number' || !Number.isFinite(order)) {
     fail(file, 'falta la propiedad obligatoria "order" (número).')
   }
   const levels = new Set([
@@ -101,6 +104,24 @@ function validateExercise(raw: Exercise, file: string, courseSlug: string): Exer
       requireString(tool.name?.en, file, 'tools[].name.en')
       if (ids.has(tool.id)) fail(file, `el id de herramienta "${tool.id}" está duplicado.`)
       ids.add(tool.id)
+    }
+  }
+  if (raw.model3d) {
+    const supportedFormats = new Set(['stl', 'glb', 'gltf'])
+    if (raw.model3d.url !== undefined) requireString(raw.model3d.url, file, 'model3d.url')
+    if (raw.model3d.enabled && !raw.model3d.url) {
+      fail(file, '"model3d.url" es obligatoria cuando "model3d.enabled" es true.')
+    }
+    if (raw.model3d.format !== undefined && !supportedFormats.has(raw.model3d.format)) {
+      fail(file, '"model3d.format" debe ser "stl", "glb" o "gltf".')
+    }
+    if (raw.model3d.rotation) {
+      for (const axis of ['x', 'y', 'z'] as const) {
+        const value = raw.model3d.rotation[axis]
+        if (value !== undefined && (typeof value !== 'number' || !Number.isFinite(value))) {
+          fail(file, `"model3d.rotation.${axis}" debe ser un número finito en grados.`)
+        }
+      }
     }
   }
   return { ...raw, order, courseSlug }

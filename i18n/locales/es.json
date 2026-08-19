@@ -58,7 +58,7 @@
     "steps": "Pasos",
     "tips": "Consejos",
     "downloads": "Descargas",
-    "download": "Descargar",
+    "download": "Descarga",
     "model3d": "Modelo 3D",
     "model3dHint": "Arrastra para rotar, rueda del ratón para acercar.",
     "watchOnYoutube": "Ver en YouTube",
@@ -78,7 +78,9 @@
     "pending": "Pendiente",
     "fullscreen": "Pantalla completa",
     "exitFullscreen": "Salir de pantalla completa",
-    "model3dError": "No se pudo cargar el modelo 3D",
+    "model3dError": "No se pudo cargar el modelo 3D. Comprueba el archivo e inténtalo de nuevo.",
+    "loadModel3d": "Cargar modelo 3D",
+    "loadingModel3d": "Cargando modelo 3D…",
     "toolsUsed": "Herramientas utilizadas",
     "challenge": "Reto"
   },
@@ -108,6 +110,10 @@
   "badges": {
     "title": "Insignias",
     "empty": "Completa ejercicios para desbloquear insignias.",
+    "unlockedTitle": "Insignia desbloqueada",
+    "unlocked": "Has conseguido: {badge}",
+    "firstToastTitle": "¡Primera insignia!",
+    "firstToastMessage": "Completaste tu primer ejercicio.",
     "items": {
       "first-exercise": "Primer ejercicio",
       "10-exercises": "10 ejercicios",

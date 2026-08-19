@@ -78,7 +78,9 @@
     "pending": "Pending",
     "fullscreen": "Full screen",
     "exitFullscreen": "Exit full screen",
-    "model3dError": "The 3D model could not be loaded",
+    "model3dError": "The 3D model could not be loaded. Check the file and try again.",
+    "loadModel3d": "Load 3D model",
+    "loadingModel3d": "Loading 3D model…",
     "toolsUsed": "Tools used",
     "challenge": "Challenge"
   },
@@ -108,6 +110,10 @@
   "badges": {
     "title": "Badges",
     "empty": "Complete exercises to unlock badges.",
+    "unlockedTitle": "Badge unlocked",
+    "unlocked": "You earned: {badge}",
+    "firstToastTitle": "Your first badge!",
+    "firstToastMessage": "You completed your first exercise.",
     "items": {
       "first-exercise": "First exercise",
       "10-exercises": "10 exercises",

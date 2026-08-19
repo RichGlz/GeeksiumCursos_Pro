@@ -106,6 +106,46 @@
   font-size: 0.875rem;
 }
 
+.swal2-popup.swal-support-popup {
+  border: 1px solid var(--color-ink-200);
+  background: #fff;
+  color: var(--color-ink-800);
+  box-shadow: var(--shadow-soft);
+}
+
+.swal-support-popup .swal-support-title,
+.swal-support-popup .swal-support-content {
+  color: var(--color-ink-900);
+}
+
+.swal-support-popup .swal-support-confirm {
+  border-radius: 0.5rem;
+  background: var(--swal-support-accent, var(--color-brand-600));
+  padding: 0.55rem 1rem;
+  color: #fff;
+  font-weight: 700;
+}
+
+.swal-support-popup .swal-support-close {
+  color: var(--color-ink-600);
+}
+
+.dark .swal2-popup.swal-support-popup {
+  border-color: var(--color-ink-700);
+  background: var(--color-ink-900);
+  color: var(--color-ink-200);
+}
+
+.dark .swal-support-popup .swal-support-title,
+.dark .swal-support-popup .swal-support-content {
+  color: var(--color-ink-100);
+}
+
+.dark .swal-support-popup .swal-support-secondary,
+.dark .swal-support-popup .swal-support-close {
+  color: var(--color-ink-300);
+}
+
 /* Plyr: contenedor 16:9 responsive y color integrado con el curso. */
 .plyr {
   width: 100% !important;

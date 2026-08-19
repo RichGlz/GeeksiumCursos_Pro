@@ -102,6 +102,11 @@ export interface Model3DConfig {
   url?: string
   format?: 'glb' | 'gltf' | 'stl'
   autoRotate?: boolean
+  rotation?: {
+    x?: number
+    y?: number
+    z?: number
+  }
 }
 
 export interface ExerciseActions {

@@ -6,6 +6,9 @@ import type { Model3DConfig } from '~/types/content'
 const props = defineProps<{ model: Model3DConfig; exerciseSlug: string }>()
 const viewer = ref<HTMLElement | null>(null)
 const container = ref<HTMLDivElement | null>(null)
+const requested = ref(false)
+const loading = ref(false)
+const loaded = ref(false)
 const failed = ref(false)
 const fullscreen = ref(false)
 const fullscreenSupported = ref(false)
@@ -35,7 +38,7 @@ function disposeObject(root: Object3D | null) {
   })
 }
 
-const inferredFormat = computed(() => {
+const inferredFormat = computed<'stl' | 'glb' | 'gltf'>(() => {
   if (props.model.format) return props.model.format
   const pathname = (props.model.url || '').split(/[?#]/)[0]?.toLowerCase() || ''
   if (pathname.endsWith('.stl')) return 'stl'
@@ -62,25 +65,28 @@ const toggleFullscreen = async () => {
     if (document.fullscreenElement === viewer.value) await document.exitFullscreen()
     else await viewer.value.requestFullscreen()
   } catch {
-    // El visor continúa usable embebido cuando el navegador rechaza fullscreen.
+    // El visor sigue disponible embebido si el navegador rechaza fullscreen.
   }
 }
 
-onMounted(async () => {
-  if (!props.model.enabled || !props.model.url) return
+const loadModel = async () => {
+  if (!props.model.enabled || !props.model.url || requested.value || disposed) return
+  requested.value = true
+  loading.value = true
+  failed.value = false
   await nextTick()
+
   if (!container.value) {
+    loading.value = false
     failed.value = true
     return
   }
-  fullscreenSupported.value = Boolean(document.fullscreenEnabled && viewer.value?.requestFullscreen)
-  document.addEventListener('fullscreenchange', onFullscreenChange)
-  window.addEventListener('resize', resize, { passive: true })
 
   try {
     const THREE = await import('three')
     const { OrbitControls: OrbitControlsClass } = await import('three/examples/jsm/controls/OrbitControls.js')
     if (disposed || !container.value) return
+
     const el = container.value
     scene = new THREE.Scene()
     camera = new THREE.PerspectiveCamera(45, el.clientWidth / el.clientHeight, 0.01, 10000)
@@ -93,6 +99,7 @@ onMounted(async () => {
     const key = new THREE.DirectionalLight(0xffffff, 2)
     key.position.set(4, 6, 5)
     scene.add(key)
+
     controls = new OrbitControlsClass(camera, renderer.domElement)
     controls.enableDamping = true
     controls.autoRotate = props.model.autoRotate === true
@@ -112,6 +119,15 @@ onMounted(async () => {
         disposeObject(object)
         return
       }
+
+      const rotation = props.model.rotation
+      object.rotation.set(
+        THREE.MathUtils.degToRad(rotation?.x ?? 0),
+        THREE.MathUtils.degToRad(rotation?.y ?? 0),
+        THREE.MathUtils.degToRad(rotation?.z ?? 0),
+      )
+      object.updateMatrixWorld(true)
+
       modelRoot = object
       scene.add(object)
       const box = new THREE.Box3().setFromObject(object)
@@ -126,18 +142,32 @@ onMounted(async () => {
       camera.updateProjectionMatrix()
       controls.target.set(0, 0, 0)
       controls.update()
+      loading.value = false
+      loaded.value = true
       analytics.trackModel3dInteraction(props.exerciseSlug, 'load')
     }
 
-    const failLoad = () => { if (!disposed) failed.value = true }
+    const failLoad = () => {
+      if (disposed) return
+      loading.value = false
+      failed.value = true
+    }
+
     if (inferredFormat.value === 'stl') {
       const { STLLoader } = await import('three/examples/jsm/loaders/STLLoader.js')
       if (disposed) return
-      new STLLoader().load(props.model.url, (geometry) => {
-        geometry.computeVertexNormals()
-        geometry.center()
-        attachModel(new THREE.Mesh(geometry, new THREE.MeshStandardMaterial({ color: 0x4f86f7, roughness: 0.65, metalness: 0.1 })))
-      }, undefined, failLoad)
+      new STLLoader().load(
+        props.model.url,
+        (geometry) => {
+          geometry.computeVertexNormals()
+          attachModel(new THREE.Mesh(
+            geometry,
+            new THREE.MeshStandardMaterial({ color: 0x4f86f7, roughness: 0.65, metalness: 0.1 }),
+          ))
+        },
+        undefined,
+        failLoad,
+      )
     } else {
       const { GLTFLoader } = await import('three/examples/jsm/loaders/GLTFLoader.js')
       if (disposed) return
@@ -152,8 +182,18 @@ onMounted(async () => {
     }
     render()
   } catch {
-    if (!disposed) failed.value = true
+    if (!disposed) {
+      loading.value = false
+      failed.value = true
+    }
   }
+}
+
+onMounted(() => {
+  if (!props.model.enabled || !props.model.url) return
+  fullscreenSupported.value = Boolean(document.fullscreenEnabled && viewer.value?.requestFullscreen)
+  document.addEventListener('fullscreenchange', onFullscreenChange)
+  window.addEventListener('resize', resize, { passive: true })
 })
 
 onBeforeUnmount(() => {
@@ -181,13 +221,22 @@ onBeforeUnmount(() => {
   <section v-if="model.enabled && model.url" ref="viewer" class="viewer surface-card relative overflow-hidden dark:bg-ink-950">
     <div class="flex items-center justify-between border-b border-ink-200 px-4 py-3 dark:border-ink-800">
       <h2 class="text-sm font-bold uppercase tracking-wide muted-text">{{ t('exercise.model3d') }}</h2>
-      <button v-if="fullscreenSupported && !failed" type="button" class="rounded-md p-1.5 text-ink-600 hover:bg-ink-100 focus-visible:outline dark:text-ink-300 dark:hover:bg-ink-800" :aria-label="fullscreen ? t('exercise.exitFullscreen') : t('exercise.fullscreen')" @click="toggleFullscreen">
+      <button v-if="fullscreenSupported && loaded && !failed" type="button" class="rounded-md p-1.5 text-ink-600 hover:bg-ink-100 focus-visible:outline dark:text-ink-300 dark:hover:bg-ink-800" :aria-label="fullscreen ? t('exercise.exitFullscreen') : t('exercise.fullscreen')" @click="toggleFullscreen">
         <span aria-hidden="true">{{ fullscreen ? '×' : '⛶' }}</span>
       </button>
     </div>
-    <div v-show="!failed" ref="container" class="viewer-canvas h-72 w-full bg-ink-50 dark:bg-ink-900" />
-    <p v-if="failed" class="p-6 text-center text-sm text-red-600 dark:text-red-400">{{ t('exercise.model3dError') }}</p>
-    <p v-else class="px-4 py-2 text-xs muted-text">{{ t('exercise.model3dHint') }}</p>
+
+    <div v-if="!requested" class="grid h-48 place-items-center bg-ink-50 p-4 dark:bg-ink-900">
+      <button type="button" class="course-button rounded-lg px-4 py-2 text-sm font-semibold text-white" @click="loadModel">
+        {{ t('exercise.loadModel3d') }}
+      </button>
+    </div>
+    <div v-else>
+      <div v-show="!failed" ref="container" class="viewer-canvas h-72 w-full bg-ink-50 dark:bg-ink-900" />
+      <p v-if="loading" class="p-4 text-center text-sm muted-text" role="status">{{ t('exercise.loadingModel3d') }}</p>
+      <p v-if="failed" class="p-6 text-center text-sm text-red-600 dark:text-red-400" role="alert">{{ t('exercise.model3dError') }}</p>
+      <p v-if="loaded" class="px-4 py-2 text-xs muted-text">{{ t('exercise.model3dHint') }}</p>
+    </div>
   </section>
 </template>
 

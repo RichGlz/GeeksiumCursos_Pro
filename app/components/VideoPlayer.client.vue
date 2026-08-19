@@ -34,19 +34,25 @@ onMounted(() => {
   const source = plyrVideoSource(props.video)
   if (!source) return
 
+  const supportsPlyrCaptions = props.video.provider === 'file'
+
   player = new Plyr(playerEl.value, {
     controls: [
       'play-large',
       'play',
       'progress',
       'current-time',
+      'duration',
       'mute',
       'volume',
-      'captions',
+      ...(supportsPlyrCaptions ? ['captions'] : []),
       'settings',
       'fullscreen',
     ],
-    settings: ['captions', 'speed'],
+    settings: supportsPlyrCaptions ? ['captions', 'speed'] : ['speed'],
+    captions: { active: false, language: 'auto', update: true },
+    invertTime: false,
+    toggleInvert: false,
     keyboard: { focused: true, global: false },
     tooltips: { controls: true, seek: true },
     ratio: '16:9',

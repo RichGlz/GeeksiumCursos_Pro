@@ -1,7 +1,12 @@
 import { defineStore } from 'pinia'
-import type { FavoritesState, ProgressState } from '~/types/progress'
+import type { BadgeNotificationState, FavoritesState, ProgressState } from '~/types/progress'
 
 const PROGRESS_VERSION = 1
+const LEGACY_FUSION_SLUGS: Record<string, string> = {
+  'interfaz-y-primer-boceto': 'ejercicio-001',
+  'extrusiones-y-revoluciones': 'ejercicio-002',
+  'ensamblaje-y-planos': 'ejercicio-003',
+}
 
 /**
  * Estado global de progreso y favoritos.
@@ -9,9 +14,10 @@ const PROGRESS_VERSION = 1
  * sin que los componentes tengan que cambiar (usan `useExerciseProgress`).
  */
 export const useProgressStore = defineStore('progress', {
-  state: (): { progress: ProgressState; favorites: FavoritesState; hydrated: boolean } => ({
+  state: (): { progress: ProgressState; favorites: FavoritesState; badgeNotifications: BadgeNotificationState; hydrated: boolean } => ({
     progress: { version: PROGRESS_VERSION, completedExercises: [], lastVisited: {} },
     favorites: { version: PROGRESS_VERSION, favorites: [] },
+    badgeNotifications: { version: PROGRESS_VERSION, notified: [] },
     hydrated: false,
   }),
 
@@ -19,6 +25,7 @@ export const useProgressStore = defineStore('progress', {
     isCompleted: (state) => (exerciseId: string) =>
       state.progress.completedExercises.includes(exerciseId),
     isFavorite: (state) => (exerciseId: string) => state.favorites.favorites.includes(exerciseId),
+    isBadgeNotified: (state) => (badgeId: string) => state.badgeNotifications.notified.includes(badgeId),
     completedCount: (state) => state.progress.completedExercises.length,
   },
 
@@ -32,6 +39,9 @@ export const useProgressStore = defineStore('progress', {
       this.favorites = migrateFavorites(
         storage.read<FavoritesState>('favorites', this.favorites),
       )
+      this.badgeNotifications = migrateBadgeNotifications(
+        storage.read<BadgeNotificationState>('badge-notifications', this.badgeNotifications),
+      )
       this.hydrated = true
     },
 
@@ -39,6 +49,7 @@ export const useProgressStore = defineStore('progress', {
       const storage = useLocalStorage()
       storage.write('progress', this.progress)
       storage.write('favorites', this.favorites)
+      storage.write('badge-notifications', this.badgeNotifications)
     },
 
     setCompleted(exerciseId: string, completed: boolean) {
@@ -77,6 +88,12 @@ export const useProgressStore = defineStore('progress', {
       this.persist()
     },
 
+    markBadgeNotified(badgeId: string) {
+      if (this.badgeNotifications.notified.includes(badgeId)) return
+      this.badgeNotifications.notified = [...this.badgeNotifications.notified, badgeId]
+      this.persist()
+    },
+
     resetCourse(exerciseIds: string[]) {
       const ids = new Set(exerciseIds)
       this.progress.completedExercises = this.progress.completedExercises.filter(
@@ -91,10 +108,15 @@ function migrateProgress(raw: ProgressState): ProgressState {
   if (!raw || typeof raw !== 'object' || !Array.isArray(raw.completedExercises)) {
     return { version: PROGRESS_VERSION, completedExercises: [], lastVisited: {} }
   }
+  const lastVisited = { ...(raw.lastVisited ?? {}) }
+  const fusionLastVisited = lastVisited['fusion-360']
+  if (fusionLastVisited && LEGACY_FUSION_SLUGS[fusionLastVisited]) {
+    lastVisited['fusion-360'] = LEGACY_FUSION_SLUGS[fusionLastVisited]
+  }
   return {
     version: PROGRESS_VERSION,
     completedExercises: raw.completedExercises.filter((id) => typeof id === 'string'),
-    lastVisited: raw.lastVisited ?? {},
+    lastVisited,
   }
 }
 
@@ -105,5 +127,15 @@ function migrateFavorites(raw: FavoritesState): FavoritesState {
   return {
     version: PROGRESS_VERSION,
     favorites: raw.favorites.filter((id) => typeof id === 'string'),
+  }
+}
+
+function migrateBadgeNotifications(raw: BadgeNotificationState): BadgeNotificationState {
+  if (!raw || typeof raw !== 'object' || !Array.isArray(raw.notified)) {
+    return { version: PROGRESS_VERSION, notified: [] }
+  }
+  return {
+    version: PROGRESS_VERSION,
+    notified: [...new Set(raw.notified.filter((id) => typeof id === 'string'))],
   }
 }

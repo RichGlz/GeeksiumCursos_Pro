@@ -82,6 +82,18 @@ eventos de vídeo o `VideoObject`; se muestra el poster o un fallback 16:9 local
 - `order`: número, incluidos decimales como `3.5`; listado y anterior/siguiente se ordenan por ese
   valor sin redondearlo.
 
+Los slugs publicados siguen `ejercicio-XXX` y admiten el caso decimal `ejercicio-003-5`. Los
+archivos usan la misma convención (`003-5-ejercicio-003-5.json`) sin convertir `order` a entero.
+
+### Visor 3D
+
+El visor acepta exclusivamente `stl`, `glb` y `gltf`. El archivo no se solicita al abrir la página:
+el usuario debe pulsar **Cargar modelo 3D**, momento en que se importan Three.js y el loader
+correspondiente. `model3d.rotation.{x,y,z}` permite rotación en grados y se convierte internamente
+a radianes; por ejemplo, `{ "x": 180, "y": 0, "z": 0 }` corrige un STL invertido. Fullscreen,
+OrbitControls, autorrotación configurable y errores visibles se mantienen. IGES directo queda fuera
+de alcance para V1.
+
 ### Analítica
 
 Google Analytics 4 se carga con **Nuxt Scripts** (`useScriptGoogleAnalytics`) en
@@ -121,13 +133,22 @@ en móvil y dos desde tablet, siempre con `min-width: 0`, `width: 100%` y `max-w
 
 El service worker solo tiene runtime cache para el origen del sitio y su precache excluye PDF, STL,
 ZIP y otros archivos grandes; `files.geeksium.com` no se precachea ni se añade a runtime cache.
+En Cloudflare se recomienda cache/CDN público para estos objetos con políticas adecuadas al tipo y
+versionado del archivo. El cliente no usa SDK ni credenciales R2. **Cache Reserve** queda fuera de
+alcance para esta V1.
 
 ### Legacy redirects
 
-Cuando exista el mapeo real de URLs antiguas de Geeksium/WordPress, implementar redirecciones 301
-hacia `https://cursos.geeksium.com/courses/...` mediante **Cloudflare Redirect Rules** o **Bulk
-Redirects**. Si el hosting/origen ofrece redirecciones estáticas equivalentes, también puede usarse.
-No se debe crear un endpoint Nitro ni inventar rutas sin el mapeo confirmado.
+Los mapeos actuales están en `public/_redirects` con estado 301 para despliegues compatibles:
+
+```text
+/courses/fusion-360/interfaz-y-primer-boceto -> /courses/fusion-360/ejercicio-001
+/courses/fusion-360/extrusiones-y-revoluciones -> /courses/fusion-360/ejercicio-002
+/courses/fusion-360/ensamblaje-y-planos -> /courses/fusion-360/ejercicio-003
+```
+
+Incluyen sus equivalentes bajo `/en`. Si el hosting no consume `_redirects`, importar el mismo
+mapeo en **Cloudflare Redirect Rules** o **Bulk Redirects**. No se usa ningún endpoint Nitro.
 
 Las vistas de página usan una única estrategia: la medición automática de GA4. En **Enhanced
 Measurement** debe permanecer habilitada la opción de cambios de página basados en eventos del
@@ -157,3 +178,113 @@ evento manual `resource_download`, agrupado por `resource_id`; el evento automá
 Autenticación, comentarios, perfiles remotos y dashboard administrativo. Las capas de progreso,
 favoritos y analítica están aisladas tras composables para poder conectarlas a Supabase sin
 reescribir componentes.
+
+```
+nuxt-app
+├─ app
+│  ├─ app.vue
+│  ├─ assets
+│  │  └─ css
+│  │     └─ main.css
+│  ├─ components
+│  │  ├─ AdSlot.vue
+│  │  ├─ AppFooter.vue
+│  │  ├─ AppHeader.vue
+│  │  ├─ AuthorNotesMarkdown.vue
+│  │  ├─ BadgeToast.client.vue
+│  │  ├─ ChocolateDonation.vue
+│  │  ├─ ConsentBanner.vue
+│  │  ├─ CourseCard.vue
+│  │  ├─ CourseProgressBar.vue
+│  │  ├─ DownloadList.vue
+│  │  ├─ ExerciseActions.vue
+│  │  ├─ ExerciseCard.vue
+│  │  ├─ ExerciseList.vue
+│  │  ├─ ExerciseNavigation.vue
+│  │  ├─ ExerciseStatus.vue
+│  │  ├─ LocaleSwitcher.vue
+│  │  ├─ Model3DViewer.client.vue
+│  │  ├─ ProgressBackup.vue
+│  │  ├─ SupportInfo.vue
+│  │  ├─ ThemeToggle.vue
+│  │  ├─ VideoChapters.vue
+│  │  ├─ VideoPlayer.client.vue
+│  │  └─ VideoUnavailable.vue
+│  ├─ composables
+│  │  ├─ useAnalytics.ts
+│  │  ├─ useAnalyticsConsent.ts
+│  │  ├─ useCourse.ts
+│  │  ├─ useExercise.ts
+│  │  ├─ useExerciseNavigation.ts
+│  │  ├─ useExerciseProgress.ts
+│  │  ├─ useLocalStorage.ts
+│  │  ├─ useMounted.ts
+│  │  ├─ useSchemaOrg.ts
+│  │  └─ useTheme.ts
+│  ├─ error.vue
+│  ├─ layouts
+│  │  └─ default.vue
+│  ├─ pages
+│  │  ├─ courses
+│  │  │  ├─ index.vue
+│  │  │  └─ [course]
+│  │  │     ├─ index.vue
+│  │  │     └─ [exercise].vue
+│  │  └─ index.vue
+│  ├─ plugins
+│  │  ├─ analytics.client.ts
+│  │  └─ theme.client.ts
+│  ├─ stores
+│  │  ├─ course.ts
+│  │  ├─ preferences.ts
+│  │  └─ progress.ts
+│  ├─ types
+│  │  ├─ content.ts
+│  │  └─ progress.ts
+│  └─ utils
+│     ├─ badges.ts
+│     ├─ content.ts
+│     ├─ dates.ts
+│     ├─ format.ts
+│     ├─ progress-backup.ts
+│     └─ video.ts
+├─ build
+│  └─ content-routes.ts
+├─ content
+│  └─ courses
+│     └─ fusion-360
+│        ├─ course.json
+│        └─ exercises
+│           ├─ 001-ejercicio-001-notas.es.md
+│           ├─ 001-ejercicio-001.json
+│           ├─ 002-ejercicio-002.json
+│           └─ 003-ejercicio-003.json
+├─ i18n
+│  └─ locales
+│     ├─ en.json
+│     └─ es.json
+├─ nuxt.config.ts
+├─ package-lock.json
+├─ package.json
+├─ public
+│  ├─ downloads
+│  │  └─ fusion-360
+│  │     ├─ 001-plano.pdf
+│  │     ├─ 002-modelo.step
+│  │     ├─ 002-plano.pdf
+│  │     └─ 003-componentes.zip
+│  ├─ favicon.svg
+│  ├─ icons
+│  │  ├─ icon-192.png
+│  │  ├─ icon-512-maskable.png
+│  │  └─ icon-512.png
+│  ├─ images
+│  │  └─ courses
+│  │     └─ fusion-360.svg
+│  ├─ models
+│  │  └─ demo-cube.glb
+│  └─ _redirects
+├─ README.md
+└─ tsconfig.json
+
+```

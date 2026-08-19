@@ -23,3 +23,8 @@ export interface ProgressBackup {
     theme: ThemePreference
   }
 }
+
+export interface BadgeNotificationState {
+  version: number
+  notified: string[]
+}
