@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Material, Object3D, PerspectiveCamera, Scene, Texture, WebGLRenderer } from 'three'
 import type { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import type { ViewportGizmo } from 'three-viewport-gizmo'
 import type { Model3DConfig } from '~/types/content'
 
 const props = defineProps<{ model: Model3DConfig; exerciseSlug: string }>()
@@ -19,10 +20,12 @@ let renderer: WebGLRenderer | null = null
 let scene: Scene | null = null
 let camera: PerspectiveCamera | null = null
 let controls: OrbitControls | null = null
+let gizmo: ViewportGizmo | null = null
 let modelRoot: Object3D | null = null
 let frame = 0
 let disposed = false
 let onInteract: (() => void) | null = null
+let onGizmoInteract: (() => void) | null = null
 
 function disposeObject(root: Object3D | null) {
   root?.traverse((object) => {
@@ -52,6 +55,7 @@ const resize = () => {
   camera.aspect = el.clientWidth / el.clientHeight
   camera.updateProjectionMatrix()
   renderer.setSize(el.clientWidth, el.clientHeight)
+  gizmo?.update()
 }
 
 const onFullscreenChange = () => {
@@ -83,8 +87,11 @@ const loadModel = async () => {
   }
 
   try {
-    const THREE = await import('three')
-    const { OrbitControls: OrbitControlsClass } = await import('three/examples/jsm/controls/OrbitControls.js')
+    const [THREE, { OrbitControls: OrbitControlsClass }, { ViewportGizmo: ViewportGizmoClass }] = await Promise.all([
+      import('three'),
+      import('three/examples/jsm/controls/OrbitControls.js'),
+      import('three-viewport-gizmo'),
+    ])
     if (disposed || !container.value) return
 
     const el = container.value
@@ -103,6 +110,38 @@ const loadModel = async () => {
     controls = new OrbitControlsClass(camera, renderer.domElement)
     controls.enableDamping = true
     controls.autoRotate = props.model.autoRotate === true
+
+    gizmo = new ViewportGizmoClass(camera, renderer, {
+      container: el,
+      type: 'cube',
+      size: 112,
+      placement: 'top-right',
+      offset: { top: 16, right: 16 },
+      animated: true,
+      speed: 1.25,
+      className: 'geeksium-view-gizmo',
+      background: { color: 0xf8fafc, opacity: 0.92 },
+      corners: { enabled: true, color: 0x94a3b8, opacity: 0.9 },
+      edges: { enabled: true, color: 0xcbd5e1, opacity: 0.9 },
+      right: { label: t('viewCube.right') },
+      left: { label: t('viewCube.left') },
+      top: { label: t('viewCube.top') },
+      bottom: { label: t('viewCube.bottom') },
+      front: { label: t('viewCube.front') },
+      back: { label: t('viewCube.back') },
+    })
+    gizmo.attachControls(controls)
+    const gizmoElement = el.querySelector<HTMLElement>('.geeksium-view-gizmo')
+    gizmoElement?.setAttribute('role', 'group')
+    gizmoElement?.setAttribute('aria-label', t('viewCube.label'))
+    gizmoElement?.setAttribute('title', t('viewCube.label'))
+
+    onGizmoInteract = () => {
+      if (!controls) return
+      controls.autoRotate = false
+      analytics.trackModel3dInteraction(props.exerciseSlug, 'orientation_gizmo')
+    }
+    gizmo.addEventListener('start', onGizmoInteract)
 
     let interacted = false
     onInteract = () => {
@@ -179,6 +218,7 @@ const loadModel = async () => {
       frame = requestAnimationFrame(render)
       controls.update()
       renderer.render(scene, camera)
+      gizmo?.render()
     }
     render()
   } catch {
@@ -205,6 +245,9 @@ onBeforeUnmount(() => {
     renderer.domElement.removeEventListener('pointerdown', onInteract)
     renderer.domElement.removeEventListener('wheel', onInteract)
   }
+  if (gizmo && onGizmoInteract) gizmo.removeEventListener('start', onGizmoInteract)
+  gizmo?.detachControls()
+  gizmo?.dispose()
   controls?.dispose()
   disposeObject(modelRoot)
   renderer?.dispose()
@@ -213,6 +256,7 @@ onBeforeUnmount(() => {
   scene = null
   camera = null
   controls = null
+  gizmo = null
   modelRoot = null
 })
 </script>
@@ -232,7 +276,7 @@ onBeforeUnmount(() => {
       </button>
     </div>
     <div v-else>
-      <div v-show="!failed" ref="container" class="viewer-canvas h-72 w-full bg-ink-50 dark:bg-ink-900" />
+      <div v-show="!failed" ref="container" class="viewer-canvas relative h-72 w-full bg-ink-50 dark:bg-ink-900" />
       <p v-if="loading" class="p-4 text-center text-sm muted-text" role="status">{{ t('exercise.loadingModel3d') }}</p>
       <p v-if="failed" class="p-6 text-center text-sm text-red-600 dark:text-red-400" role="alert">{{ t('exercise.model3dError') }}</p>
       <p v-if="loaded" class="px-4 py-2 text-xs muted-text">{{ t('exercise.model3dHint') }}</p>

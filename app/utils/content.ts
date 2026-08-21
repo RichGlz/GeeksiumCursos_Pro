@@ -7,6 +7,9 @@ import type {
   LocalizedText,
 } from '~/types/content'
 
+export const GLOBAL_BROWSER_THEME_COLOR = '#0f172a'
+const hexColor = /^#[0-9a-f]{6}$/i
+
 /**
  * Motor de contenido.
  *
@@ -64,9 +67,11 @@ function validateCourse(raw: Course, file: string, slugFromDir: string): Course 
     fail(file, `el "slug" (${slug}) no coincide con la carpeta (${slugFromDir}).`)
   }
   if (raw.theme) {
-    const hexColor = /^#[0-9a-f]{6}$/i
     if (!hexColor.test(raw.theme.primary) || !hexColor.test(raw.theme.secondary)) {
       fail(file, '"theme.primary" y "theme.secondary" deben ser colores hexadecimales #RRGGBB.')
+    }
+    if (raw.theme.browser !== undefined && !hexColor.test(raw.theme.browser)) {
+      fail(file, '"theme.browser" debe ser un color hexadecimal #RRGGBB.')
     }
   }
   return { ...raw, slug }
@@ -127,12 +132,6 @@ function validateExercise(raw: Exercise, file: string, courseSlug: string): Exer
   return { ...raw, order, courseSlug }
 }
 
-/** Respaldo de orden: prefijo numérico del nombre de archivo (001-, 002-, ...). */
-function orderFromFileName(fileName: string): number {
-  const match = /^(\d+)/.exec(fileName)
-  return match?.[1] ? Number(match[1]) : Number.MAX_SAFE_INTEGER
-}
-
 function buildRegistry(): CourseWithExercises[] {
   const byCourse = new Map<string, CourseWithExercises>()
 
@@ -144,8 +143,6 @@ function buildRegistry(): CourseWithExercises[] {
     byCourse.set(course.slug, { ...course, exercises: [] })
   }
 
-  const fallbackOrders = new Map<string, number>()
-
   for (const [path, raw] of Object.entries(exerciseModules)) {
     const courseSlug = courseSlugFromPath(path)
     const fileName = fileNameFromPath(path)
@@ -156,16 +153,12 @@ function buildRegistry(): CourseWithExercises[] {
     const exercise = validateExercise(raw, file, courseSlug)
     if (exercise.enabled === false) continue
 
-    fallbackOrders.set(exercise.id, orderFromFileName(fileName))
     course.exercises.push(exercise)
   }
 
   for (const course of byCourse.values()) {
     course.exercises.sort((a, b) => {
       if (a.order !== b.order) return a.order - b.order
-      const fa = fallbackOrders.get(a.id) ?? 0
-      const fb = fallbackOrders.get(b.id) ?? 0
-      if (fa !== fb) return fa - fb
       return a.slug.localeCompare(b.slug)
     })
   }
@@ -185,6 +178,12 @@ export function getCourse(slug: string): CourseWithExercises | undefined {
 
 export function getExercise(courseSlug: string, exerciseSlug: string): Exercise | undefined {
   return getCourse(courseSlug)?.exercises.find((exercise) => exercise.slug === exerciseSlug)
+}
+
+/** Color seguro para la barra del navegador: curso -> primario -> global. */
+export function courseBrowserThemeColor(course?: Course): string {
+  const color = course?.theme?.browser ?? course?.theme?.primary
+  return color && hexColor.test(color) ? color : GLOBAL_BROWSER_THEME_COLOR
 }
 
 /** Variables de tema limitadas al árbol visual de un curso. */

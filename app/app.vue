@@ -2,6 +2,12 @@
 const { t, locale } = useI18n()
 const head = useLocaleHead({ seo: true })
 const config = useRuntimeConfig()
+const route = useRoute()
+const activeCourse = computed(() => {
+  const slug = route.params.course
+  return typeof slug === 'string' ? getCourse(slug) : undefined
+})
+const browserThemeColor = computed(() => courseBrowserThemeColor(activeCourse.value))
 
 useHead(() => ({
   htmlAttrs: { lang: head.value.htmlAttrs?.lang ?? locale.value },
@@ -9,6 +15,12 @@ useHead(() => ({
   meta: head.value.meta,
   titleTemplate: (title?: string) =>
     title ? `${title} | ${t('site.name')}` : `${t('site.name')} — ${t('site.tagline')}`,
+}))
+
+useHead(() => ({
+  meta: [
+    { name: 'theme-color', content: browserThemeColor.value },
+  ],
 }))
 
 useSeoMeta({

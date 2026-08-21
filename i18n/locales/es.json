@@ -145,6 +145,19 @@
     "dark": "Oscuro",
     "system": "Sistema"
   },
+  "pwa": {
+    "addToHomeScreen": "Añadir a pantalla de inicio",
+    "iosInstructions": "En Safari, toca Compartir y luego Añadir a pantalla de inicio."
+  },
+  "viewCube": {
+    "label": "Cambiar orientación del modelo",
+    "front": "Fte",
+    "back": "Atr",
+    "right": "Der",
+    "left": "Izq",
+    "top": "Sup",
+    "bottom": "Inf"
+  },
   "locale": {
     "switch": "Cambiar idioma",
     "es": "Español",

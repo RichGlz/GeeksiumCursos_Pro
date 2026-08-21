@@ -38,9 +38,11 @@ export default defineNuxtConfig({
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'theme-color', content: '#0f172a' },
       ],
-      link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
+      link: [
+        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+        { rel: 'manifest', href: '/manifest.webmanifest' },
+      ],
     },
   },
 
@@ -97,10 +99,10 @@ export default defineNuxtConfig({
       background_color: '#ffffff',
       theme_color: '#0f172a',
       icons: [
-        { src: '/icons/icon-192.png', sizes: '192x192', type: 'image/png' },
-        { src: '/icons/icon-512.png', sizes: '512x512', type: 'image/png' },
+        { src: '/icons/pwa/geeksium-icon-v1-192.png', sizes: '192x192', type: 'image/png' },
+        { src: '/icons/pwa/geeksium-icon-v1-512.png', sizes: '512x512', type: 'image/png' },
         {
-          src: '/icons/icon-512-maskable.png',
+          src: '/icons/pwa/geeksium-icon-maskable-v1-512.png',
           sizes: '512x512',
           type: 'image/png',
           purpose: 'maskable',
@@ -130,6 +132,31 @@ export default defineNuxtConfig({
       crawlLinks: true,
       failOnError: true,
       routes: prerenderRoutes,
+    },
+  },
+
+  hooks: {
+    'build:manifest': (manifest) => {
+      const onDemand3dModules = [
+        '/three/build/three.module.js',
+        '/three/examples/jsm/controls/OrbitControls.js',
+        '/three/examples/jsm/loaders/GLTFLoader.js',
+        '/three/examples/jsm/loaders/STLLoader.js',
+        '/three-viewport-gizmo/',
+      ]
+      for (const [key, chunk] of Object.entries(manifest)) {
+        const source = `${key} ${chunk.src ?? ''}`
+        if (!onDemand3dModules.some((modulePath) => source.includes(modulePath))) continue
+        chunk.prefetch = false
+        chunk.preload = false
+      }
+    },
+    'pwa:beforeBuildServiceWorker': (options) => {
+      const entries = options.workbox.additionalManifestEntries
+      if (!entries) return
+      options.workbox.additionalManifestEntries = entries.filter((entry) =>
+        (typeof entry === 'string' ? entry : entry.url) !== options.manifestFilename,
+      )
     },
   },
 

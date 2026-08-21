@@ -38,6 +38,12 @@ export interface CourseAuthor {
   url?: string
 }
 
+export interface CourseTheme {
+  primary: string
+  secondary: string
+  browser?: string
+}
+
 export interface Course {
   id: string
   slug: string
@@ -48,10 +54,7 @@ export interface Course {
   cover?: string
   author?: CourseAuthor
   seo?: SeoMeta
-  theme?: {
-    primary: string
-    secondary: string
-  }
+  theme?: CourseTheme
 }
 
 export interface VideoChapter {

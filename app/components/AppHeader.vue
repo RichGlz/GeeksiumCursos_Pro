@@ -31,10 +31,18 @@ const links = computed(() => [
         :to="localePath('/')"
         class="flex items-center gap-2 text-lg font-bold tracking-tight text-ink-900 dark:text-white"
       >
-        <span
-          class="grid size-8 place-items-center rounded-lg bg-brand-600 text-sm font-black text-white"
+        <NuxtImg
+          src="/images/logo-geeksium.png"
+          width="32"
+          height="32"
+          format="webp"
+          quality="80"
+          loading="eager"
+          fetchpriority="high"
+          class="size-8 shrink-0 object-contain"
           aria-hidden="true"
-        >G</span>
+          alt=""
+        />
         <span>{{ t('site.name') }}</span>
       </NuxtLink>
 

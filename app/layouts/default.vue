@@ -17,5 +17,6 @@ const { t } = useI18n()
     <AppFooter />
     <ConsentBanner />
     <BadgeToast />
+    <AddToHomeScreen />
   </div>
 </template>

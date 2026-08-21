@@ -53,9 +53,14 @@
   ],
   "model3d": {
     "enabled": true,
-    "url": "/models/demo-cube.glb",
-    "format": "glb",
-    "autoRotate": true
+    "url": "https://files.geeksium.com/fusion360/006/modelo-006.stl",
+    "format": "stl",
+    "autoRotate": false,
+    "rotation": {
+      "x": 180,
+      "y": 0,
+      "z": 0
+    }
   },
   "actions": {
     "youtubeUrl": "https://www.youtube.com/watch?v=BwVGqvpFtIY",

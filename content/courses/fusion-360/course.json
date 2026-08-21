@@ -13,7 +13,8 @@
   "difficulty": "beginner",
   "theme": {
     "primary": "#d85b12",
-    "secondary": "#f28c28"
+    "secondary": "#f28c28",
+    "browser": "#d85b12"
   },
   "cover": "/images/courses/fusion-360.svg",
   "author": {

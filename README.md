@@ -74,6 +74,35 @@ está vacío, `app/utils/video.ts` deriva el ID desde URLs `watch`, `youtu.be`, 
 Con `video.enabled: false` no se inicializa Plyr ni se muestran capítulos, enlace a YouTube,
 eventos de vídeo o `VideoObject`; se muestra el poster o un fallback 16:9 localizado.
 
+### Convención de ejercicios y notas
+
+Los archivos físicos de ejercicio usan la convención definitiva `NNN-ejercicio.json`, por ejemplo
+`001-ejercicio.json` o `004-ejercicio.json`. El filename **no define la ruta pública**: el listado,
+la navegación y el prerender usan los campos `id`, `slug`, `order` y `enabled` del JSON. Por eso un
+archivo `004-ejercicio.json` con `"slug": "ejercicio-004"` publica
+`/courses/<curso>/ejercicio-004` y `/en/courses/<curso>/ejercicio-004`.
+
+Las notas Markdown vecinas usan `NNN-ejercicio-notas.<locale>.md`, por ejemplo
+`001-ejercicio-notas.es.md` y `001-ejercicio-notas.en.md`. `authorNotesFile` referencia el nombre
+completo; si el Markdown no existe o está vacío, la interfaz conserva el fallback al campo JSON
+`authorNotes`.
+
+### Tema del curso y navegador
+
+Cada `course.json` puede declarar un color del navegador dentro del tema:
+
+```json
+"theme": {
+  "primary": "#d85b12",
+  "secondary": "#f28c28",
+  "browser": "#d85b12"
+}
+```
+
+Solo se aceptan colores hexadecimales `#RRGGBB`. El `<meta name="theme-color">` se actualiza al
+navegar y aplica el fallback `theme.browser` → `theme.primary` → color global `#0f172a`. Fuera de
+una página de curso se usa siempre el color global.
+
 ### Campos de ejercicio V1
 
 - `tools`: lista independiente de los tags, con `id` estable y nombre `{ es, en }`.
@@ -82,17 +111,24 @@ eventos de vídeo o `VideoObject`; se muestra el poster o un fallback 16:9 local
 - `order`: número, incluidos decimales como `3.5`; listado y anterior/siguiente se ordenan por ese
   valor sin redondearlo.
 
-Los slugs publicados siguen `ejercicio-XXX` y admiten el caso decimal `ejercicio-003-5`. Los
-archivos usan la misma convención (`003-5-ejercicio-003-5.json`) sin convertir `order` a entero.
+Los slugs publicados siguen `ejercicio-XXX` y admiten el caso decimal `ejercicio-003-5`. El slug y
+`order` siguen siendo datos internos independientes del filename; `order` no se redondea.
 
 ### Visor 3D
 
 El visor acepta exclusivamente `stl`, `glb` y `gltf`. El archivo no se solicita al abrir la página:
-el usuario debe pulsar **Cargar modelo 3D**, momento en que se importan Three.js y el loader
-correspondiente. `model3d.rotation.{x,y,z}` permite rotación en grados y se convierte internamente
-a radianes; por ejemplo, `{ "x": 180, "y": 0, "z": 0 }` corrige un STL invertido. Fullscreen,
-OrbitControls, autorrotación configurable y errores visibles se mantienen. IGES directo queda fuera
-de alcance para V1.
+el usuario debe pulsar **Cargar modelo 3D**, momento en que se importan Three.js, OrbitControls,
+`three-viewport-gizmo` y el loader correspondiente. El gizmo comparte la cámara y OrbitControls del
+visor, ofrece caras, aristas y esquinas, y se mantiene en fullscreen. `model3d.rotation.{x,y,z}`
+permite rotación en grados y se convierte internamente a radianes; por ejemplo,
+`{ "x": 180, "y": 0, "z": 0 }` corrige un STL invertido. Zoom, pan, órbita, autorrotación
+configurable y errores visibles se mantienen. IGES directo queda fuera de alcance para V1.
+
+### Imágenes raster locales
+
+Las imágenes `.png`, `.jpg` y `.jpeg` renderizadas dentro de la app usan `NuxtImg` con salida WebP
+cuando corresponde; los originales permanecen como fuente. No pasan por esta optimización los SVG,
+iconos PWA, descargables ni URLs externas (incluido `files.geeksium.com`).
 
 ### Analítica
 
@@ -165,7 +201,12 @@ evento manual `resource_download`, agrupado por `resource_id`; el evento automá
 - **PWA**: `@vite-pwa/nuxt` (v1.x) funciona correctamente con Nuxt 4 y `nuxt generate`; genera
   `sw.js` + manifest sobre el sitio estático. No fue necesario el fallback a `vite-plugin-pwa`
   directo ni a un service worker manual. Las navegaciones usan `NetworkFirst` y los assets
-  con hash `CacheFirst`.
+  con hash `CacheFirst`. Los iconos de la versión actual viven en `public/icons/pwa/` como
+  `geeksium-icon-v1-192.png`, `geeksium-icon-v1-512.png` y
+  `geeksium-icon-maskable-v1-512.png`; también se conserva la fuente 1024 bajo
+  `geeksium-icon-v1-1024.png`. Un cambio futuro de branding debe crear los equivalentes `v2` y
+  actualizar las URLs del manifest, sin sobrescribir `v1`. `manifest.webmanifest` no forma parte
+  del patrón de precache y queda bajo la estrategia de red del origen para poder revalidarse.
 - **Fuentes**: `@nuxt/fonts` descarga y sirve Montserrat (400/500/600/700) desde el propio build,
   sin petición runtime a Google Fonts.
 - **404**: `error.vue` es la página global; además las páginas dinámicas de curso y ejercicio
@@ -178,113 +219,3 @@ evento manual `resource_download`, agrupado por `resource_id`; el evento automá
 Autenticación, comentarios, perfiles remotos y dashboard administrativo. Las capas de progreso,
 favoritos y analítica están aisladas tras composables para poder conectarlas a Supabase sin
 reescribir componentes.
-
-```
-nuxt-app
-├─ app
-│  ├─ app.vue
-│  ├─ assets
-│  │  └─ css
-│  │     └─ main.css
-│  ├─ components
-│  │  ├─ AdSlot.vue
-│  │  ├─ AppFooter.vue
-│  │  ├─ AppHeader.vue
-│  │  ├─ AuthorNotesMarkdown.vue
-│  │  ├─ BadgeToast.client.vue
-│  │  ├─ ChocolateDonation.vue
-│  │  ├─ ConsentBanner.vue
-│  │  ├─ CourseCard.vue
-│  │  ├─ CourseProgressBar.vue
-│  │  ├─ DownloadList.vue
-│  │  ├─ ExerciseActions.vue
-│  │  ├─ ExerciseCard.vue
-│  │  ├─ ExerciseList.vue
-│  │  ├─ ExerciseNavigation.vue
-│  │  ├─ ExerciseStatus.vue
-│  │  ├─ LocaleSwitcher.vue
-│  │  ├─ Model3DViewer.client.vue
-│  │  ├─ ProgressBackup.vue
-│  │  ├─ SupportInfo.vue
-│  │  ├─ ThemeToggle.vue
-│  │  ├─ VideoChapters.vue
-│  │  ├─ VideoPlayer.client.vue
-│  │  └─ VideoUnavailable.vue
-│  ├─ composables
-│  │  ├─ useAnalytics.ts
-│  │  ├─ useAnalyticsConsent.ts
-│  │  ├─ useCourse.ts
-│  │  ├─ useExercise.ts
-│  │  ├─ useExerciseNavigation.ts
-│  │  ├─ useExerciseProgress.ts
-│  │  ├─ useLocalStorage.ts
-│  │  ├─ useMounted.ts
-│  │  ├─ useSchemaOrg.ts
-│  │  └─ useTheme.ts
-│  ├─ error.vue
-│  ├─ layouts
-│  │  └─ default.vue
-│  ├─ pages
-│  │  ├─ courses
-│  │  │  ├─ index.vue
-│  │  │  └─ [course]
-│  │  │     ├─ index.vue
-│  │  │     └─ [exercise].vue
-│  │  └─ index.vue
-│  ├─ plugins
-│  │  ├─ analytics.client.ts
-│  │  └─ theme.client.ts
-│  ├─ stores
-│  │  ├─ course.ts
-│  │  ├─ preferences.ts
-│  │  └─ progress.ts
-│  ├─ types
-│  │  ├─ content.ts
-│  │  └─ progress.ts
-│  └─ utils
-│     ├─ badges.ts
-│     ├─ content.ts
-│     ├─ dates.ts
-│     ├─ format.ts
-│     ├─ progress-backup.ts
-│     └─ video.ts
-├─ build
-│  └─ content-routes.ts
-├─ content
-│  └─ courses
-│     └─ fusion-360
-│        ├─ course.json
-│        └─ exercises
-│           ├─ 001-ejercicio-001-notas.es.md
-│           ├─ 001-ejercicio-001.json
-│           ├─ 002-ejercicio-002.json
-│           └─ 003-ejercicio-003.json
-├─ i18n
-│  └─ locales
-│     ├─ en.json
-│     └─ es.json
-├─ nuxt.config.ts
-├─ package-lock.json
-├─ package.json
-├─ public
-│  ├─ downloads
-│  │  └─ fusion-360
-│  │     ├─ 001-plano.pdf
-│  │     ├─ 002-modelo.step
-│  │     ├─ 002-plano.pdf
-│  │     └─ 003-componentes.zip
-│  ├─ favicon.svg
-│  ├─ icons
-│  │  ├─ icon-192.png
-│  │  ├─ icon-512-maskable.png
-│  │  └─ icon-512.png
-│  ├─ images
-│  │  └─ courses
-│  │     └─ fusion-360.svg
-│  ├─ models
-│  │  └─ demo-cube.glb
-│  └─ _redirects
-├─ README.md
-└─ tsconfig.json
-
-```

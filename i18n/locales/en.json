@@ -145,6 +145,19 @@
     "dark": "Dark",
     "system": "System"
   },
+  "pwa": {
+    "addToHomeScreen": "Add to Home Screen",
+    "iosInstructions": "In Safari, tap Share, then Add to Home Screen."
+  },
+  "viewCube": {
+    "label": "Change model orientation",
+    "front": "Front",
+    "back": "Back",
+    "right": "Right",
+    "left": "Left",
+    "top": "Top",
+    "bottom": "Bottom"
+  },
   "locale": {
     "switch": "Switch language",
     "es": "Spanish",
