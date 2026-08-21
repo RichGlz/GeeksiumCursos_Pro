@@ -1,0 +1,68 @@
+{
+  "id": "fusion-360-005",
+  "slug": "ejercicio-005",
+  "order": 5,
+  "enabled": true,
+  "type": "exercise",
+  "difficulty": "beginner",
+  "level": "beginner-1",
+  "title": {
+    "es": "Curso práctico de Fusion 360 | Ejercicio #5",
+    "en": "Practical Fusion 360 Course | Exercise #5"
+  },
+  "summary": {
+    "es": "En este nuevo proyecto te ayudaremos a mejorar las habilidades que ya tienes. En este Ejercicio #5 se mostrará de manera práctica el uso de herramientas del programa Fusion 360. Te invito a sumarte y practicar el uso de las diferentes herramientas.",
+    "en": "In this new project, we will help you improve the skills you already have. In Exercise #5, you will see practical uses of Fusion 360 tools. Join in and practice using the different tools."
+  },
+  "tags": ["Principiante", "Nivel 1"],
+  "tools": [
+    { "id": "rectangle", "name": { "es": "Rectángulo", "en": "Rectangle" } },
+    { "id": "construction-line", "name": { "es": "Línea de construcción", "en": "Construction Line" } },
+    { "id": "sketch-dimension", "name": { "es": "Cota de boceto", "en": "Sketch Dimension" } },
+    { "id": "mirror", "name": { "es": "Simetría", "en": "Mirror" } },
+    { "id": "slot", "name": { "es": "Ranura", "en": "Slot" } },
+    { "id": "extrude", "name": { "es": "Extruir", "en": "Extrude" } },
+    { "id": "fillet-3d", "name": { "es": "Empalme", "en": "Fillet" } },
+    { "id": "circle", "name": { "es": "Círculo", "en": "Circle" } },
+    { "id": "appearance", "name": { "es": "Apariencia", "en": "Appearance" } }
+  ],
+  "video": {
+    "enabled": true,
+    "provider": "youtube",
+    "url": "https://youtu.be/Hqf7xnRy6b4",
+    "youtubeId": "Hqf7xnRy6b4"
+  },
+  "chapters": [
+    { "id": "c1", "timeSeconds": 0, "label": { "es": "Introducción", "en": "Introduction" } },
+    { "id": "c2", "timeSeconds": 34, "label": { "es": "Parte 1: Primer boceto", "en": "Part 1: First sketch" } },
+    { "id": "c3", "timeSeconds": 260, "label": { "es": "Parte 2: Primera extrusión", "en": "Part 2: First extrusion" } },
+    { "id": "c4", "timeSeconds": 321, "label": { "es": "Parte 3: Empalmes", "en": "Part 3: Fillets" } },
+    { "id": "c5", "timeSeconds": 366, "label": { "es": "Parte 4: Segundo boceto", "en": "Part 4: Second sketch" } },
+    { "id": "c6", "timeSeconds": 426, "label": { "es": "Parte 5: Segunda extrusión (corte)", "en": "Part 5: Second extrusion (cut)" } },
+    { "id": "c7", "timeSeconds": 449, "label": { "es": "Parte 6: Poner aspecto (color)", "en": "Part 6: Apply appearance (color)" } }
+  ],
+  "authorNotes": {
+    "es": [],
+    "en": []
+  },
+  "resources": [
+    {
+      "id": "r1",
+      "type": "pdf",
+      "title": { "es": "Plano", "en": "Drawing" },
+      "url": "https://files.geeksium.com/fusion360/005/plano-005.pdf",
+      "previewImage": "https://files.geeksium.com/fusion360/005/plano-005.jpg",
+      "download": true
+    },
+    {
+      "id": "r2",
+      "type": "jpg",
+      "title": { "es": "Imagen del plano", "en": "Drawing image" },
+      "url": "https://files.geeksium.com/fusion360/005/plano-005.jpg",
+      "download": true
+    }
+  ],
+  "model3d": {
+    "enabled": false
+  }
+}

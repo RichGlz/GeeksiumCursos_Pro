@@ -1,0 +1,54 @@
+{
+  "id": "fusion-360-007",
+  "slug": "ejercicio-007",
+  "order": 7,
+  "enabled": true,
+  "type": "exercise",
+  "difficulty": "beginner",
+  "level": "beginner-1",
+  "title": {
+    "es": "Curso práctico de Fusion 360 | Ejercicio #7",
+    "en": "Practical Fusion 360 Course | Exercise #7"
+  },
+  "summary": {
+    "es": "En este nuevo proyecto te ayudaremos a mejorar las habilidades que ya tienes. En este Ejercicio #7 se mostrará de manera práctica el uso de herramientas del programa Fusion 360. Te invito a sumarte y practicar el uso de las diferentes herramientas.",
+    "en": "In this new project, we will help you improve the skills you already have. In Exercise #7, you will see practical uses of Fusion 360 tools. Join in and practice using the different tools."
+  },
+  "tags": ["Principiante", "Nivel 1"],
+  "tools": [
+    { "id": "circle", "name": { "es": "Círculo", "en": "Circle" } },
+    { "id": "construction-line", "name": { "es": "Línea de construcción", "en": "Construction Line" } },
+    { "id": "tangent", "name": { "es": "Tangente", "en": "Tangent" } },
+    { "id": "arc", "name": { "es": "Arco", "en": "Arc" } },
+    { "id": "trim", "name": { "es": "Recortar", "en": "Trim" } },
+    { "id": "offset", "name": { "es": "Desfase", "en": "Offset" } },
+    { "id": "mirror", "name": { "es": "Simetría", "en": "Mirror" } },
+    { "id": "extrude", "name": { "es": "Extruir", "en": "Extrude" } },
+    { "id": "appearance", "name": { "es": "Apariencia", "en": "Appearance" } }
+  ],
+  "video": {
+    "enabled": true,
+    "provider": "youtube",
+    "url": "https://youtu.be/_rTvyphDpmU",
+    "youtubeId": "_rTvyphDpmU"
+  },
+  "chapters": [
+    { "id": "c1", "timeSeconds": 0, "label": { "es": "Introducción", "en": "Introduction" } },
+    { "id": "c2", "timeSeconds": 14, "label": { "es": "Intro", "en": "Intro" } },
+    { "id": "c3", "timeSeconds": 25, "label": { "es": "Inicio de práctica", "en": "Start of practice" } },
+    { "id": "c4", "timeSeconds": 79, "label": { "es": "Inicio de Boceto", "en": "Starting the sketch" } },
+    { "id": "c5", "timeSeconds": 98, "label": { "es": "Círculos centrales", "en": "Central circles" } },
+    { "id": "c6", "timeSeconds": 182, "label": { "es": "Círculos laterales", "en": "Side circles" } },
+    { "id": "c7", "timeSeconds": 472, "label": { "es": "Simetrías", "en": "Mirrors" } },
+    { "id": "c8", "timeSeconds": 552, "label": { "es": "Extrusiones", "en": "Extrusions" } },
+    { "id": "c9", "timeSeconds": 620, "label": { "es": "Poner aspecto o color", "en": "Apply appearance or color" } }
+  ],
+  "authorNotes": {
+    "es": [],
+    "en": []
+  },
+  "resources": [],
+  "model3d": {
+    "enabled": false
+  }
+}

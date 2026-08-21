@@ -1,0 +1,75 @@
+{
+  "id": "fusion-360-006",
+  "slug": "ejercicio-006",
+  "order": 6,
+  "enabled": true,
+  "type": "exercise",
+  "difficulty": "beginner",
+  "level": "beginner-1",
+  "title": {
+    "es": "Curso práctico de Fusion 360 | Ejercicio #6",
+    "en": "Practical Fusion 360 Course | Exercise #6"
+  },
+  "summary": {
+    "es": "En este nuevo proyecto te ayudaremos a mejorar las habilidades que ya tienes. En este Ejercicio #6 se mostrará de manera práctica el uso de herramientas del programa Fusion 360. Te invito a sumarte y practicar el uso de las diferentes herramientas.",
+    "en": "In this new project, we will help you improve the skills you already have. In Exercise #6, you will see practical uses of Fusion 360 tools. Join in and practice using the different tools."
+  },
+  "tags": ["Principiante", "Nivel 1"],
+  "tools": [
+    { "id": "line", "name": { "es": "Línea", "en": "Line" } },
+    { "id": "horizontal-vertical", "name": { "es": "Horizontal/Vertical", "en": "Horizontal/Vertical" } },
+    { "id": "coincident", "name": { "es": "Coincidente", "en": "Coincident" } },
+    { "id": "equal", "name": { "es": "Igual", "en": "Equal" } },
+    { "id": "collinear", "name": { "es": "Colineal", "en": "Collinear" } },
+    { "id": "sketch-dimension", "name": { "es": "Cota de boceto", "en": "Sketch Dimension" } },
+    { "id": "extrude", "name": { "es": "Extruir", "en": "Extrude" } },
+    { "id": "appearance", "name": { "es": "Apariencia", "en": "Appearance" } }
+  ],
+  "video": {
+    "enabled": true,
+    "provider": "youtube",
+    "url": "https://youtu.be/rSkKHsmzSIQ",
+    "youtubeId": "rSkKHsmzSIQ"
+  },
+  "chapters": [],
+  "authorNotes": {
+    "es": [],
+    "en": []
+  },
+  "resources": [
+    {
+      "id": "r1",
+      "type": "pdf",
+      "title": { "es": "Plano", "en": "Drawing" },
+      "url": "https://files.geeksium.com/fusion360/006/plano-006.pdf",
+      "previewImage": "https://files.geeksium.com/fusion360/006/plano-006.jpg",
+      "download": true
+    },
+    {
+      "id": "r2",
+      "type": "jpg",
+      "title": { "es": "Imagen del plano", "en": "Drawing image" },
+      "url": "https://files.geeksium.com/fusion360/006/plano-006.jpg",
+      "download": true
+    },
+    {
+      "id": "r3",
+      "type": "stl",
+      "title": { "es": "Modelo STL", "en": "STL model" },
+      "url": "https://files.geeksium.com/fusion360/006/modelo-006.stl",
+      "download": true
+    },
+    {
+      "id": "r4",
+      "type": "file",
+      "title": { "es": "Modelo IGES", "en": "IGES model" },
+      "url": "https://files.geeksium.com/fusion360/006/modelo-006.iges",
+      "download": true
+    }
+  ],
+  "model3d": {
+    "enabled": true,
+    "url": "https://files.geeksium.com/fusion360/006/modelo-006.stl",
+    "format": "stl"
+  }
+}

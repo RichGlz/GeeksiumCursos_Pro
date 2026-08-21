@@ -4,51 +4,54 @@
   "order": 2,
   "enabled": true,
   "type": "exercise",
-  "level": "beginner-1",
-
-  "title": {
-    "es": "Ejercicio 2 — Principiante Nivel 1",
-    "en": "Exercise 2 — Beginner Level 1"
-  },
-
-  "summary": {
-    "es": "Ejercicio práctico de Fusion 360.",
-    "en": "A practical Fusion 360 exercise."
-  },
-
   "difficulty": "beginner",
-
-  "tags": [
-    "Principiante",
-    "Nivel 1"
+  "level": "beginner-1",
+  "title": {
+    "es": "Curso práctico de Fusion 360 | Ejercicio #2",
+    "en": "Practical Fusion 360 Course | Exercise #2"
+  },
+  "summary": {
+    "es": "En este nuevo proyecto te ayudaremos a mejorar las habilidades que ya tienes. En este Ejercicio #2 se mostrará de manera práctica el uso de herramientas del programa Fusion 360. Te invito a sumarte y practicar el uso de las diferentes herramientas.",
+    "en": "In this new project, we will help you improve the skills you already have. In Exercise #2, you will see practical uses of Fusion 360 tools. Join in and practice using the different tools."
+  },
+  "tags": ["Principiante", "Nivel 1"],
+  "tools": [
+    { "id": "rectangle", "name": { "es": "Rectángulo", "en": "Rectangle" } },
+    { "id": "fillet-2d", "name": { "es": "Empalme 2D", "en": "2D Fillet" } },
+    { "id": "circle", "name": { "es": "Círculo", "en": "Circle" } },
+    { "id": "sketch-dimension", "name": { "es": "Cota de boceto", "en": "Sketch Dimension" } },
+    { "id": "line", "name": { "es": "Línea", "en": "Line" } },
+    { "id": "trim", "name": { "es": "Recortar", "en": "Trim" } },
+    { "id": "extrude", "name": { "es": "Extruir", "en": "Extrude" } },
+    { "id": "fillet-3d", "name": { "es": "Empalme 3D", "en": "3D Fillet" } },
+    { "id": "appearance", "name": { "es": "Apariencia", "en": "Appearance" } }
   ],
-
-  "tools": [],
-
   "video": {
     "enabled": true,
     "provider": "youtube",
-    "url": "https://www.youtube.com/watch?v=TgcH1z92xj4",
-    "youtubeId": "",
-    "poster": "",
-    "durationSeconds": 0
+    "url": "https://youtu.be/TgcH1z92xj4",
+    "youtubeId": "TgcH1z92xj4"
   },
-
-  "chapters": [],
-
+  "chapters": [
+    { "id": "c1", "timeSeconds": 0, "label": { "es": "Introducción", "en": "Introduction" } },
+    { "id": "c2", "timeSeconds": 15, "label": { "es": "Herramientas del ejercicio", "en": "Exercise tools" } },
+    { "id": "c3", "timeSeconds": 60, "label": { "es": "Inicio del ejercicio", "en": "Starting the exercise" } },
+    { "id": "c4", "timeSeconds": 96, "label": { "es": "Primer boceto", "en": "First sketch" } },
+    { "id": "c5", "timeSeconds": 327, "label": { "es": "Primera extrusión", "en": "First extrusion" } },
+    { "id": "c6", "timeSeconds": 410, "label": { "es": "Segundo boceto", "en": "Second sketch" } },
+    { "id": "c7", "timeSeconds": 651, "label": { "es": "Segunda extrusión", "en": "Second extrusion" } },
+    { "id": "c8", "timeSeconds": 721, "label": { "es": "Empalme en 3D", "en": "3D fillet" } },
+    { "id": "c9", "timeSeconds": 752, "label": { "es": "Poner aspecto o color", "en": "Apply appearance or color" } }
+  ],
   "authorNotes": {
     "es": [],
     "en": []
   },
-
   "resources": [
     {
       "id": "r1",
       "type": "pdf",
-      "title": {
-        "es": "Plano",
-        "en": "Drawing"
-      },
+      "title": { "es": "Plano", "en": "Drawing" },
       "url": "https://files.geeksium.com/fusion360/002/plano-002.pdf",
       "previewImage": "https://files.geeksium.com/fusion360/002/plano-002.jpg",
       "download": true
@@ -56,42 +59,12 @@
     {
       "id": "r2",
       "type": "jpg",
-      "title": {
-        "es": "Imagen",
-        "en": "Image"
-      },
+      "title": { "es": "Imagen del plano", "en": "Drawing image" },
       "url": "https://files.geeksium.com/fusion360/002/plano-002.jpg",
-      "download": true
-    },
-    {
-      "id": "r3",
-      "type": "stl",
-      "title": {
-        "es": "Modelo STL",
-        "en": "STL model"
-      },
-      "url": "https://files.geeksium.com/fusion360/006/modelo-006.stl",
       "download": true
     }
   ],
-
   "model3d": {
-    "enabled": true,
-    "url": "https://files.geeksium.com/fusion360/006/modelo-006.stl",
-    "format": "stl",
-    "autoRotate": false,
-    "rotation": {
-      "x": 180,
-      "y": 0,
-      "z": 0
-    }
-  },
-
-  "actions": {
-    "shareEnabled": true,
-    "favoriteEnabled": true
-  },
-
-  "publishedAt": "",
-  "updatedAt": ""
+    "enabled": false
+  }
 }

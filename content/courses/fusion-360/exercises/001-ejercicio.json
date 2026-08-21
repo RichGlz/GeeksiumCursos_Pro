@@ -3,45 +3,45 @@
   "slug": "ejercicio-001",
   "order": 1,
   "enabled": true,
-  "title": {
-    "es": "Interfaz y primer boceto",
-    "en": "Interface and your first sketch"
-  },
-  "summary": {
-    "es": "Recorrido por la interfaz de Fusion 360 y creación de tu primer boceto totalmente restringido.",
-    "en": "A tour of the Fusion 360 interface and how to create your first fully constrained sketch."
-  },
+  "type": "exercise",
   "difficulty": "beginner",
   "level": "beginner-1",
-  "tags": ["Interfaz", "Boceto", "Restricciones"],
+  "title": {
+    "es": "Curso práctico de Fusion 360 | Ejercicio #1",
+    "en": "Practical Fusion 360 Course | Exercise #1"
+  },
+  "summary": {
+    "es": "En este nuevo proyecto te ayudaremos a mejorar las habilidades que ya tienes. En este Ejercicio #1 se mostrará de manera práctica el uso de herramientas del programa Fusion 360. Te invito a sumarte y practicar el uso de las diferentes herramientas.",
+    "en": "In this new project, we will help you improve the skills you already have. In Exercise #1, you will see practical uses of Fusion 360 tools. Join in and practice using the different tools."
+  },
+  "tags": ["Principiante", "Nivel 1"],
   "tools": [
+    { "id": "circle", "name": { "es": "Círculo", "en": "Circle" } },
+    { "id": "sketch-dimension", "name": { "es": "Cota de boceto", "en": "Sketch Dimension" } },
+    { "id": "circular-pattern", "name": { "es": "Patrón circular", "en": "Circular Pattern" } },
     { "id": "line", "name": { "es": "Línea", "en": "Line" } },
-    { "id": "dimension", "name": { "es": "Cota", "en": "Dimension" } }
+    { "id": "trim", "name": { "es": "Recortar", "en": "Trim" } },
+    { "id": "extrude", "name": { "es": "Extruir", "en": "Extrude" } },
+    { "id": "appearance", "name": { "es": "Apariencia", "en": "Appearance" } }
   ],
   "video": {
+    "enabled": true,
     "provider": "youtube",
-    "url": "https://www.youtube.com/watch?v=uQ86JRMi48s",
-    "youtubeId": "uQ86JRMi48s",
-    "durationSeconds": 720
+    "url": "https://youtu.be/uQ86JRMi48s",
+    "youtubeId": "uQ86JRMi48s"
   },
   "chapters": [
     { "id": "c1", "timeSeconds": 0, "label": { "es": "Introducción", "en": "Introduction" } },
-    { "id": "c2", "timeSeconds": 95, "label": { "es": "Barra de herramientas", "en": "Toolbar" } },
-    { "id": "c3", "timeSeconds": 240, "label": { "es": "Crear el boceto", "en": "Creating the sketch" } },
-    { "id": "c4", "timeSeconds": 480, "label": { "es": "Restricciones y cotas", "en": "Constraints and dimensions" } }
+    { "id": "c2", "timeSeconds": 70, "label": { "es": "Paso 1 - Círculo grande", "en": "Step 1 - Large circle" } },
+    { "id": "c3", "timeSeconds": 88, "label": { "es": "Paso 2 - Círculo mediano", "en": "Step 2 - Medium circle" } },
+    { "id": "c4", "timeSeconds": 158, "label": { "es": "Paso 3 - Círculos pequeños", "en": "Step 3 - Small circles" } },
+    { "id": "c5", "timeSeconds": 262, "label": { "es": "Paso 4 - Líneas paralelas horizontales", "en": "Step 4 - Horizontal parallel lines" } },
+    { "id": "c6", "timeSeconds": 350, "label": { "es": "Paso 5 - Extruir", "en": "Step 5 - Extrude" } },
+    { "id": "c7", "timeSeconds": 378, "label": { "es": "Paso 6 - Apariencia o color", "en": "Step 6 - Appearance or color" } }
   ],
   "authorNotes": {
-    "es": [
-      "Trabaja siempre con el boceto completamente restringido antes de extruir.",
-      "Usa la tecla D para acotar rápidamente."
-    ],
-    "en": [
-      "Always fully constrain the sketch before extruding.",
-      "Press D to dimension quickly."
-    ]
-  },
-  "authorNotesFile": {
-    "es": "001-ejercicio-notas.es.md"
+    "es": [],
+    "en": []
   },
   "resources": [
     {
@@ -49,39 +49,18 @@
       "type": "pdf",
       "title": { "es": "Plano", "en": "Drawing" },
       "url": "https://files.geeksium.com/fusion360/001/plano-001.pdf",
+      "previewImage": "https://files.geeksium.com/fusion360/001/plano-001.png",
       "download": true
     },
     {
       "id": "r2",
       "type": "png",
-      "title": { "es": "Imagen", "en": "Image" },
+      "title": { "es": "Imagen del plano", "en": "Drawing image" },
       "url": "https://files.geeksium.com/fusion360/001/plano-001.png",
-      "download": true
-    },
-    {
-      "id": "r3",
-      "type": "stl",
-      "title": { "es": "STL", "en": "STL" },
-      "url": "https://files.geeksium.com/fusion360/006/modelo-006.stl",
       "download": true
     }
   ],
   "model3d": {
-    "enabled": true,
-    "url": "https://files.geeksium.com/fusion360/006/modelo-006.stl",
-    "format": "stl",
-    "autoRotate": true,
-    "rotation": {
-      "x": 180,
-      "y": 0,
-      "z": 0
-    }
-  },
-  "actions": {
-    "youtubeUrl": "https://www.youtube.com/watch?v=uQ86JRMi48s",
-    "shareEnabled": true,
-    "favoriteEnabled": true
-  },
-  "publishedAt": "2026-01-12",
-  "updatedAt": "2026-02-02"
+    "enabled": false
+  }
 }

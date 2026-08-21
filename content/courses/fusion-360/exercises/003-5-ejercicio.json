@@ -1,0 +1,61 @@
+{
+  "id": "fusion-360-003-5",
+  "slug": "ejercicio-003-5",
+  "order": 3.5,
+  "enabled": true,
+  "type": "exercise",
+  "difficulty": "beginner",
+  "level": "beginner-1",
+  "title": {
+    "es": "Curso práctico de Fusion 360 | Ejercicio #3.5",
+    "en": "Practical Fusion 360 Course | Exercise #3.5"
+  },
+  "summary": {
+    "es": "En este nuevo proyecto te ayudaremos a mejorar las habilidades que ya tienes. En este Ejercicio #3.5 se mostrará de manera práctica el uso de herramientas del programa Fusion 360. Te invito a sumarte y practicar el uso de las diferentes herramientas.",
+    "en": "In this new project, we will help you improve the skills you already have. In Exercise #3.5, you will see practical uses of Fusion 360 tools. Join in and practice using the different tools."
+  },
+  "tags": ["Principiante", "Nivel 1"],
+  "tools": [
+    { "id": "rectangle", "name": { "es": "Rectángulo", "en": "Rectangle" } },
+    { "id": "circle", "name": { "es": "Círculo", "en": "Circle" } },
+    { "id": "trim", "name": { "es": "Recortar", "en": "Trim" } },
+    { "id": "extrude", "name": { "es": "Extruir", "en": "Extrude" } },
+    { "id": "appearance", "name": { "es": "Apariencia", "en": "Appearance" } }
+  ],
+  "video": {
+    "enabled": true,
+    "provider": "youtube",
+    "url": "https://youtu.be/A66NKNwScGw",
+    "youtubeId": "A66NKNwScGw"
+  },
+  "chapters": [
+    { "id": "c1", "timeSeconds": 0, "label": { "es": "Introducción", "en": "Introduction" } },
+    { "id": "c2", "timeSeconds": 51, "label": { "es": "Parte 1 - Creación de boceto", "en": "Part 1 - Creating the sketch" } },
+    { "id": "c3", "timeSeconds": 129, "label": { "es": "Parte 2 - Extruir pieza", "en": "Part 2 - Extruding the part" } },
+    { "id": "c4", "timeSeconds": 173, "label": { "es": "Parte 3 - Apariencia/Aspecto", "en": "Part 3 - Appearance" } }
+  ],
+  "authorNotes": {
+    "es": [],
+    "en": []
+  },
+  "resources": [
+    {
+      "id": "r1",
+      "type": "pdf",
+      "title": { "es": "Plano", "en": "Drawing" },
+      "url": "https://files.geeksium.com/fusion360/003/plano-003-5.pdf",
+      "previewImage": "https://files.geeksium.com/fusion360/003/plano-003-5.jpg",
+      "download": true
+    },
+    {
+      "id": "r2",
+      "type": "jpg",
+      "title": { "es": "Imagen del plano", "en": "Drawing image" },
+      "url": "https://files.geeksium.com/fusion360/003/plano-003-5.jpg",
+      "download": true
+    }
+  ],
+  "model3d": {
+    "enabled": false
+  }
+}

@@ -3,70 +3,59 @@
   "slug": "ejercicio-003",
   "order": 3,
   "enabled": true,
+  "type": "exercise",
+  "difficulty": "beginner",
+  "level": "beginner-1",
   "title": {
-    "es": "Ensamblaje y planos técnicos",
-    "en": "Assembly and technical drawings"
+    "es": "Curso práctico de Fusion 360 | Ejercicio #3",
+    "en": "Practical Fusion 360 Course | Exercise #3"
   },
   "summary": {
-    "es": "Une componentes con uniones móviles y genera un plano técnico listo para taller.",
-    "en": "Join components with motion joints and produce a shop-ready technical drawing."
+    "es": "En este nuevo proyecto te ayudaremos a mejorar las habilidades que ya tienes. En este Ejercicio #3 se mostrará de manera práctica el uso de herramientas del programa Fusion 360. Te invito a sumarte y practicar el uso de las diferentes herramientas.",
+    "en": "In this new project, we will help you improve the skills you already have. In Exercise #3, you will see practical uses of Fusion 360 tools. Join in and practice using the different tools."
   },
-  "difficulty": "intermediate",
-  "level": "intermediate-1",
-  "tags": ["ensamblaje", "uniones", "planos"],
+  "tags": ["Principiante", "Nivel 1"],
+  "tools": [
+    { "id": "rectangle", "name": { "es": "Rectángulo", "en": "Rectangle" } },
+    { "id": "circle", "name": { "es": "Círculo", "en": "Circle" } },
+    { "id": "trim", "name": { "es": "Recortar", "en": "Trim" } },
+    { "id": "extrude", "name": { "es": "Extruir", "en": "Extrude" } },
+    { "id": "appearance", "name": { "es": "Apariencia", "en": "Appearance" } }
+  ],
   "video": {
+    "enabled": true,
     "provider": "youtube",
-    "url": "https://www.youtube.com/watch?v=DDMB_lTSG5o",
-    "youtubeId": "DDMB_lTSG5o",
-    "durationSeconds": 1080
+    "url": "https://youtu.be/DDMB_lTSG5o",
+    "youtubeId": "DDMB_lTSG5o"
   },
   "chapters": [
-    { "id": "c1", "timeSeconds": 0, "label": { "es": "Componentes", "en": "Components" } },
-    { "id": "c2", "timeSeconds": 210, "label": { "es": "Uniones", "en": "Joints" } },
-    { "id": "c3", "timeSeconds": 540, "label": { "es": "Vista explosionada", "en": "Exploded view" } },
-    { "id": "c4", "timeSeconds": 820, "label": { "es": "Plano técnico", "en": "Technical drawing" } }
+    { "id": "c1", "timeSeconds": 0, "label": { "es": "Introducción", "en": "Introduction" } },
+    { "id": "c2", "timeSeconds": 77, "label": { "es": "Parte 1 - Creación de rectángulos", "en": "Part 1 - Creating rectangles" } },
+    { "id": "c3", "timeSeconds": 233, "label": { "es": "Parte 2 - Creación de círculos", "en": "Part 2 - Creating circles" } },
+    { "id": "c4", "timeSeconds": 391, "label": { "es": "Parte 3 - Poner aspecto o color", "en": "Part 3 - Apply appearance or color" } }
   ],
   "authorNotes": {
-    "es": [
-      "Crea componentes antes de modelar, no después.",
-      "Fija el componente base para que el ensamblaje no se mueva entero."
-    ],
-    "en": [
-      "Create components before modeling, not afterwards.",
-      "Ground the base component so the whole assembly doesn't drift."
-    ]
+    "es": [],
+    "en": []
   },
   "resources": [
     {
       "id": "r1",
-      "type": "zip",
-      "title": { "es": "Componentes de partida", "en": "Starter components" },
-      "url": "/downloads/fusion-360/003-componentes.zip",
+      "type": "pdf",
+      "title": { "es": "Plano", "en": "Drawing" },
+      "url": "https://files.geeksium.com/fusion360/003/plano-003.pdf",
+      "previewImage": "https://files.geeksium.com/fusion360/003/plano-003.jpg",
       "download": true
     },
     {
       "id": "r2",
-      "type": "link",
-      "title": { "es": "Guía oficial de uniones", "en": "Official joints guide" },
-      "url": "https://help.autodesk.com/view/fusion360/ENU/"
+      "type": "jpg",
+      "title": { "es": "Imagen del plano", "en": "Drawing image" },
+      "url": "https://files.geeksium.com/fusion360/003/plano-003.jpg",
+      "download": true
     }
   ],
   "model3d": {
-    "enabled": true,
-    "url": "https://files.geeksium.com/fusion360/006/modelo-006.stl",
-    "format": "stl",
-    "autoRotate": false,
-    "rotation": {
-      "x": 180,
-      "y": 0,
-      "z": 0
-    }
-  },
-  "actions": {
-    "youtubeUrl": "https://www.youtube.com/watch?v=BwVGqvpFtIY",
-    "shareEnabled": true,
-    "favoriteEnabled": true
-  },
-  "publishedAt": "2026-01-26",
-  "updatedAt": "2026-02-02"
+    "enabled": false
+  }
 }
