@@ -3,7 +3,6 @@ export default defineNuxtPlugin((nuxtApp) => {
   const config = useRuntimeConfig()
   const measurementId = String(config.public.gaMeasurementId || '')
   const preferences = usePreferencesStore()
-  preferences.hydrate()
 
   const instance = measurementId
     ? useScriptGoogleAnalytics({
@@ -41,10 +40,13 @@ export default defineNuxtPlugin((nuxtApp) => {
     instance.proxy.gtag('event', event, params)
   }
 
-  if (preferences.analyticsConsent === 'granted') {
-    updateConsent(true)
-    loadAnalytics()
-  } else updateConsent(false)
+  nuxtApp.hook('app:mounted', () => {
+    preferences.hydrate()
+    if (preferences.analyticsConsent === 'granted') {
+      updateConsent(true)
+      loadAnalytics()
+    } else updateConsent(false)
+  })
 
   nuxtApp.provide('geeksiumAnalytics', {
     measurementId,

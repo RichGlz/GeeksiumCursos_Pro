@@ -4,14 +4,28 @@ import type { Exercise } from '~/types/content'
 const props = defineProps<{ exercise: Exercise }>()
 const { t } = useI18n()
 const { isCompleted, toggleCompleted } = useExerciseProgress()
+const { celebrateExercise } = useCelebration()
 const analytics = useAnalytics()
 const mounted = useMounted()
 const completed = computed(() => mounted.value && isCompleted(props.exercise.id))
+const course = getCourse(props.exercise.courseSlug)
 
-const toggle = () => {
+const toggle = (event: MouseEvent) => {
+  const wasCompleted = isCompleted(props.exercise.id)
   const next = toggleCompleted(props.exercise.id)
-  if (next) analytics.trackExerciseComplete(props.exercise.courseSlug, props.exercise.slug)
-  else analytics.trackExerciseUncomplete(props.exercise.courseSlug, props.exercise.slug)
+  if (next) {
+    analytics.trackExerciseComplete(props.exercise.courseSlug, props.exercise.slug)
+    if (!wasCompleted) {
+      void celebrateExercise({
+        event,
+        target: event.currentTarget instanceof HTMLElement ? event.currentTarget : null,
+        primary: course?.theme?.primary,
+        secondary: course?.theme?.secondary,
+      })
+    }
+  } else {
+    analytics.trackExerciseUncomplete(props.exercise.courseSlug, props.exercise.slug)
+  }
 }
 </script>
 
