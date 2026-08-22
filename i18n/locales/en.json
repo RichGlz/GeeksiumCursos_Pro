@@ -89,7 +89,7 @@
     "message": "Ads help cover Geeksium's maintenance costs. If you find the content useful, allowing them helps keep the courses available.",
     "adBlocker": "If you use an ad blocker, you can add this site to your allowlist."
   },
-  "donation": { "title": "Buy a chocolate", "usd1": "$1 USD", "usd2": "$2 USD" },
+  "donation": { "title": "Buy a chocolate", "usd1": "1 USD", "usd2": "2 USD" },
   "ads": { "placeholder": "Advertisement" },
   "difficulty": {
     "beginner": "Beginner",

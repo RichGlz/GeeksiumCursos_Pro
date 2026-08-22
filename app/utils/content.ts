@@ -74,6 +74,14 @@ function validateCourse(raw: Course, file: string, slugFromDir: string): Course 
       fail(file, '"theme.browser" debe ser un color hexadecimal #RRGGBB.')
     }
   }
+  if (raw.viewer3d !== undefined) {
+    if (!raw.viewer3d || typeof raw.viewer3d !== 'object' || Array.isArray(raw.viewer3d)) {
+      fail(file, '"viewer3d" debe ser un objeto.')
+    }
+    if (raw.viewer3d.viewCube !== undefined && typeof raw.viewer3d.viewCube !== 'boolean') {
+      fail(file, '"viewer3d.viewCube" debe ser booleano.')
+    }
+  }
   return { ...raw, slug }
 }
 
@@ -81,6 +89,7 @@ function validateExercise(raw: Exercise, file: string, courseSlug: string): Exer
   requireString(raw?.id, file, 'id')
   requireString(raw?.slug, file, 'slug')
   requireLocalized(raw?.title, file, 'title')
+  if (raw.shortTitle !== undefined) requireLocalized(raw.shortTitle, file, 'shortTitle')
   if (!/^ejercicio-\d{3}(?:-\d+)?$/.test(raw.slug)) {
     fail(file, '"slug" debe usar la convención "ejercicio-XXX" o "ejercicio-XXX-N".')
   }

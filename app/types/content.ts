@@ -44,6 +44,10 @@ export interface CourseTheme {
   browser?: string
 }
 
+export interface Viewer3DSettings {
+  viewCube?: boolean
+}
+
 export interface Course {
   id: string
   slug: string
@@ -55,6 +59,7 @@ export interface Course {
   author?: CourseAuthor
   seo?: SeoMeta
   theme?: CourseTheme
+  viewer3d?: Viewer3DSettings
 }
 
 export interface VideoChapter {
@@ -134,6 +139,7 @@ export interface Exercise {
   enabled?: boolean
   courseSlug: string
   title: LocalizedText
+  shortTitle?: LocalizedText
   summary?: LocalizedText
   difficulty?: Difficulty
   level?: CourseLevel

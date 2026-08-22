@@ -4,7 +4,11 @@ import type { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js
 import type { ViewportGizmo } from 'three-viewport-gizmo'
 import type { Model3DConfig } from '~/types/content'
 
-const props = defineProps<{ model: Model3DConfig; exerciseSlug: string }>()
+const props = defineProps<{
+  model: Model3DConfig
+  exerciseSlug: string
+  viewCubeEnabled?: boolean
+}>()
 const viewer = ref<HTMLElement | null>(null)
 const container = ref<HTMLDivElement | null>(null)
 const requested = ref(false)
@@ -87,10 +91,9 @@ const loadModel = async () => {
   }
 
   try {
-    const [THREE, { OrbitControls: OrbitControlsClass }, { ViewportGizmo: ViewportGizmoClass }] = await Promise.all([
+    const [THREE, { OrbitControls: OrbitControlsClass }] = await Promise.all([
       import('three'),
       import('three/examples/jsm/controls/OrbitControls.js'),
-      import('three-viewport-gizmo'),
     ])
     if (disposed || !container.value) return
 
@@ -111,37 +114,41 @@ const loadModel = async () => {
     controls.enableDamping = true
     controls.autoRotate = props.model.autoRotate === true
 
-    gizmo = new ViewportGizmoClass(camera, renderer, {
-      container: el,
-      type: 'cube',
-      size: 112,
-      placement: 'top-right',
-      offset: { top: 16, right: 16 },
-      animated: true,
-      speed: 1.25,
-      className: 'geeksium-view-gizmo',
-      background: { color: 0xf8fafc, opacity: 0.92 },
-      corners: { enabled: true, color: 0x94a3b8, opacity: 0.9 },
-      edges: { enabled: true, color: 0xcbd5e1, opacity: 0.9 },
-      right: { label: t('viewCube.right') },
-      left: { label: t('viewCube.left') },
-      top: { label: t('viewCube.top') },
-      bottom: { label: t('viewCube.bottom') },
-      front: { label: t('viewCube.front') },
-      back: { label: t('viewCube.back') },
-    })
-    gizmo.attachControls(controls)
-    const gizmoElement = el.querySelector<HTMLElement>('.geeksium-view-gizmo')
-    gizmoElement?.setAttribute('role', 'group')
-    gizmoElement?.setAttribute('aria-label', t('viewCube.label'))
-    gizmoElement?.setAttribute('title', t('viewCube.label'))
+    if (props.viewCubeEnabled !== false) {
+      const { ViewportGizmo: ViewportGizmoClass } = await import('three-viewport-gizmo')
+      if (disposed || !renderer || !camera || !controls) return
+      gizmo = new ViewportGizmoClass(camera, renderer, {
+        container: el,
+        type: 'cube',
+        size: 112,
+        placement: 'top-right',
+        offset: { top: 16, right: 16 },
+        animated: true,
+        speed: 1.25,
+        className: 'geeksium-view-gizmo',
+        background: { color: 0xf8fafc, opacity: 0.92 },
+        corners: { enabled: true, color: 0x94a3b8, opacity: 0.9 },
+        edges: { enabled: true, color: 0xcbd5e1, opacity: 0.9 },
+        right: { label: t('viewCube.right') },
+        left: { label: t('viewCube.left') },
+        top: { label: t('viewCube.top') },
+        bottom: { label: t('viewCube.bottom') },
+        front: { label: t('viewCube.front') },
+        back: { label: t('viewCube.back') },
+      })
+      gizmo.attachControls(controls)
+      const gizmoElement = el.querySelector<HTMLElement>('.geeksium-view-gizmo')
+      gizmoElement?.setAttribute('role', 'group')
+      gizmoElement?.setAttribute('aria-label', t('viewCube.label'))
+      gizmoElement?.setAttribute('title', t('viewCube.label'))
 
-    onGizmoInteract = () => {
-      if (!controls) return
-      controls.autoRotate = false
-      analytics.trackModel3dInteraction(props.exerciseSlug, 'orientation_gizmo')
+      onGizmoInteract = () => {
+        if (!controls) return
+        controls.autoRotate = false
+        analytics.trackModel3dInteraction(props.exerciseSlug, 'orientation_gizmo')
+      }
+      gizmo.addEventListener('start', onGizmoInteract)
     }
-    gizmo.addEventListener('start', onGizmoInteract)
 
     let interacted = false
     onInteract = () => {

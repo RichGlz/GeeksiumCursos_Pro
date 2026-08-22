@@ -106,6 +106,8 @@ una página de curso se usa siempre el color global.
 ### Campos de ejercicio V1
 
 - `tools`: lista independiente de los tags, con `id` estable y nombre `{ es, en }`.
+- `shortTitle`: título localizado opcional para anterior/siguiente; si falta, la navegación usa
+  `title` como fallback sin modificar el encabezado principal del ejercicio.
 - `level`: uno de `beginner-1..3`, `intermediate-1..3` o `advanced-1..3`.
 - `type`: opcional; `challenge` usa el mismo motor y `undefined` equivale a `exercise`.
 - `order`: número, incluidos decimales como `3.5`; listado y anterior/siguiente se ordenan por ese
@@ -116,9 +118,21 @@ Los slugs publicados siguen `ejercicio-XXX` y admiten el caso decimal `ejercicio
 
 ### Visor 3D
 
+Cada curso puede controlar su ViewCube sin repetir configuración por ejercicio:
+
+```json
+"viewer3d": {
+  "viewCube": true
+}
+```
+
+`viewer3d.viewCube` es opcional y su fallback es `true`. Con `false`, OrbitControls y fullscreen
+siguen disponibles, pero `three-viewport-gizmo` no se importa ni se crea al cargar el modelo.
+
 El visor acepta exclusivamente `stl`, `glb` y `gltf`. El archivo no se solicita al abrir la página:
-el usuario debe pulsar **Cargar modelo 3D**, momento en que se importan Three.js, OrbitControls,
-`three-viewport-gizmo` y el loader correspondiente. El gizmo comparte la cámara y OrbitControls del
+el usuario debe pulsar **Cargar modelo 3D**, momento en que se importan Three.js, OrbitControls y
+el loader correspondiente; `three-viewport-gizmo` sólo se importa si está habilitado. El gizmo
+comparte la cámara y OrbitControls del
 visor, ofrece caras, aristas y esquinas, y se mantiene en fullscreen. `model3d.rotation.{x,y,z}`
 permite rotación en grados y se convierte internamente a radianes; por ejemplo,
 `{ "x": 180, "y": 0, "z": 0 }` corrige un STL invertido. Zoom, pan, órbita, autorrotación
@@ -158,6 +172,9 @@ botón y no deja una acción muerta en la interfaz.
 
 Se usan Stripe Payment Links directamente, sin SDK. Cada opción abre una pestaña nueva con
 `noopener,noreferrer` y emite una sola vez `donation_click` con proveedor, importe y moneda.
+El modal usa una superficie azul marino con overlay y la imagen opcional
+`/images/modals/donationGcModal.png`; si el archivo aún no existe, el color y gradiente conservan
+el contraste sin impedir el build.
 
 ### Recursos y Cloudflare R2
 

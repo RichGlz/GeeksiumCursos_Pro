@@ -146,6 +146,107 @@
   color: var(--color-ink-300);
 }
 
+.swal2-popup.geeksium-donation-popup {
+  width: min(92vw, 38rem);
+  border: 1px solid rgb(96 165 250 / 35%);
+  border-radius: 1.25rem;
+  background-color: #030c1e;
+  background-image:
+    linear-gradient(rgb(3 12 30 / 84%), rgb(3 12 30 / 84%)),
+    url('/images/modals/donationGcModal.png');
+  background-position: center;
+  background-size: cover;
+  color: #f8fafc;
+  box-shadow: 0 24px 70px rgb(2 6 23 / 55%);
+  padding: 1.5rem;
+}
+
+.geeksium-donation-popup .geeksium-donation-icon {
+  width: 5rem;
+  height: 5rem;
+  margin: 0.25rem auto 0.75rem;
+  border: 0;
+  color: #60a5fa;
+}
+
+.geeksium-donation-popup .geeksium-donation-icon .swal2-icon-content {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+}
+
+.geeksium-donation-popup .geeksium-donation-icon svg {
+  width: 4.5rem;
+  height: 4.5rem;
+}
+
+.geeksium-donation-popup .geeksium-donation-title {
+  color: #f8fafc;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  line-height: 1.15;
+}
+
+.geeksium-donation-popup .geeksium-donation-actions {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
+  margin: 1.5rem 0 0;
+  gap: 0.75rem;
+}
+
+.geeksium-donation-popup .geeksium-donation-option,
+.geeksium-donation-popup .geeksium-donation-close {
+  min-width: 0;
+  min-height: 2.75rem;
+  border-radius: 0.65rem;
+  padding: 0.7rem 1rem;
+  color: #fff;
+  font-weight: 700;
+  transition: background-color 150ms ease, transform 150ms ease;
+}
+
+.geeksium-donation-popup .geeksium-donation-option {
+  background: #15803d;
+}
+
+.geeksium-donation-popup .geeksium-donation-option:hover {
+  background: #16a34a;
+  transform: translateY(-1px);
+}
+
+.geeksium-donation-popup .geeksium-donation-confirm { grid-column: 1; }
+.geeksium-donation-popup .geeksium-donation-deny { grid-column: 2; }
+.geeksium-donation-popup .geeksium-donation-actions-single .geeksium-donation-confirm,
+.geeksium-donation-popup .geeksium-donation-close { grid-column: 1 / -1; }
+
+.geeksium-donation-popup .geeksium-donation-close {
+  background: #475569;
+}
+
+.geeksium-donation-popup .geeksium-donation-close:hover {
+  background: #64748b;
+}
+
+.geeksium-donation-popup .geeksium-donation-option:focus-visible,
+.geeksium-donation-popup .geeksium-donation-close:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 2px;
+}
+
+.dark .swal2-popup.geeksium-donation-popup {
+  border-color: rgb(96 165 250 / 45%);
+  background-color: #020817;
+}
+
+@media (max-width: 22rem) {
+  .swal2-popup.geeksium-donation-popup { padding-inline: 1rem; }
+  .geeksium-donation-popup .geeksium-donation-actions { grid-template-columns: minmax(0, 1fr); }
+  .geeksium-donation-popup .geeksium-donation-confirm,
+  .geeksium-donation-popup .geeksium-donation-deny,
+  .geeksium-donation-popup .geeksium-donation-close { grid-column: 1; }
+}
+
 /* Plyr: contenedor 16:9 responsive y color integrado con el curso. */
 .plyr {
   width: 100% !important;

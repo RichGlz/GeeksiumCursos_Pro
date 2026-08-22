@@ -89,7 +89,7 @@
     "message": "Los anuncios ayudan a cubrir el mantenimiento de Geeksium. Si el contenido te resulta útil, permitirlos ayuda a mantener los cursos disponibles.",
     "adBlocker": "Si utilizas un bloqueador de anuncios, puedes agregar este sitio a tu lista de permitidos."
   },
-  "donation": { "title": "Invitar un chocolate", "usd1": "$1 USD", "usd2": "$2 USD" },
+  "donation": { "title": "Invitar un chocolate", "usd1": "1 USD", "usd2": "2 USD" },
   "ads": { "placeholder": "Espacio publicitario" },
   "difficulty": {
     "beginner": "Principiante",

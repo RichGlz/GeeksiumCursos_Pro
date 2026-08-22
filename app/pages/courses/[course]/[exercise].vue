@@ -87,7 +87,7 @@ onMounted(() => {
         <AdSlot />
         <VideoChapters v-if="videoEnabled && currentExercise.chapters?.length" :chapters="currentExercise.chapters" :exercise-slug="currentExercise.slug" @seek="onSeek" />
         <a v-if="youtubeUrl" :href="youtubeUrl" target="_blank" rel="noopener noreferrer" class="course-link surface-card px-4 py-3 text-center text-sm font-semibold hover:bg-ink-50 dark:hover:bg-ink-800/60" @click="onYoutube">{{ t('exercise.watchOnYoutube') }}</a>
-        <ClientOnly><Model3DViewer v-if="currentExercise.model3d?.enabled" :model="currentExercise.model3d" :exercise-slug="currentExercise.slug" /></ClientOnly>
+        <ClientOnly><Model3DViewer v-if="currentExercise.model3d?.enabled" :model="currentExercise.model3d" :exercise-slug="currentExercise.slug" :view-cube-enabled="currentCourse.viewer3d?.viewCube !== false" /></ClientOnly>
         <AdSlot />
         <DownloadList v-if="currentExercise.resources?.length" :resources="currentExercise.resources" :course-id="currentCourse.id" :exercise-id="currentExercise.id" />
         <NuxtLink :to="localePath(`/courses/${currentCourse.slug}`)" class="course-link surface-card px-4 py-3 text-center text-sm font-semibold hover:bg-ink-50 dark:hover:bg-ink-800/60">{{ t('exercise.backToCourse') }}</NuxtLink>
