@@ -31,6 +31,12 @@ const openDonation = async () => {
     confirmButtonText: t(`donation.usd${first.amount}`),
     denyButtonText: second ? t(`donation.usd${second.amount}`) : undefined,
     cancelButtonText: t('common.close'),
+    buttonsStyling: false,
+    customClass: {
+      confirmButton: 'swal-donation-confirm',
+      denyButton: 'swal-donation-deny',
+      cancelButton: 'swal-donation-cancel',
+    },
   })
   const selected = result.isConfirmed ? first : result.isDenied ? second : undefined
   if (!selected) return

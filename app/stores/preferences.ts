@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia'
-import type { AnalyticsConsent, ThemePreference } from '~/types/progress'
+import type { AnalyticsConsent, StoredAnalyticsConsent, ThemePreference } from '~/types/progress'
+
+export const CONSENT_VERSION = 1
 
 /** Preferencias de usuario: tema y consentimiento de analítica. */
 export const usePreferencesStore = defineStore('preferences', {
@@ -9,7 +11,7 @@ export const usePreferencesStore = defineStore('preferences', {
     hydrated: boolean
   } => ({
     theme: 'system',
-    analyticsConsent: 'unknown',
+    analyticsConsent: 'unset',
     hydrated: false,
   }),
 
@@ -19,8 +21,17 @@ export const usePreferencesStore = defineStore('preferences', {
       const storage = useLocalStorage()
       const theme = storage.read<ThemePreference>('theme', 'system')
       this.theme = ['system', 'light', 'dark'].includes(theme) ? theme : 'system'
-      const consent = storage.read<AnalyticsConsent>('analytics-consent', 'unknown')
-      this.analyticsConsent = ['granted', 'denied'].includes(consent) ? consent : 'unknown'
+      const saved = storage.read<unknown>('analytics-consent', null)
+      if (
+        saved
+        && typeof saved === 'object'
+        && (saved as StoredAnalyticsConsent).version === CONSENT_VERSION
+        && ['granted', 'denied'].includes((saved as StoredAnalyticsConsent).analytics)
+      ) {
+        this.analyticsConsent = (saved as StoredAnalyticsConsent).analytics
+      } else {
+        this.analyticsConsent = 'unset'
+      }
       this.hydrated = true
     },
 
@@ -31,7 +42,15 @@ export const usePreferencesStore = defineStore('preferences', {
 
     setAnalyticsConsent(consent: AnalyticsConsent) {
       this.analyticsConsent = consent
-      useLocalStorage().write('analytics-consent', consent)
+      const storage = useLocalStorage()
+      if (consent === 'unset') {
+        storage.remove('analytics-consent')
+        return
+      }
+      storage.write<StoredAnalyticsConsent>('analytics-consent', {
+        analytics: consent,
+        version: CONSENT_VERSION,
+      })
     },
   },
 })

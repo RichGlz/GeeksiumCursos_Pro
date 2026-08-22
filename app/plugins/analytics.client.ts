@@ -20,20 +20,24 @@ export default defineNuxtPlugin((nuxtApp) => {
     : null
 
   let enabled = false
+  let consentGranted = preferences.analyticsConsent === 'granted'
   const consentState = (granted: boolean) => ({
     analytics_storage: granted ? 'granted' as const : 'denied' as const,
     ad_storage: 'denied' as const,
     ad_user_data: 'denied' as const,
     ad_personalization: 'denied' as const,
   })
-  const updateConsent = (granted: boolean) => instance?.consent?.update(consentState(granted))
+  const updateConsent = (granted: boolean) => {
+    consentGranted = granted
+    instance?.consent?.update(consentState(granted))
+  }
   const loadAnalytics = () => {
     if (!instance || enabled) return
     enabled = true
     void instance.load().catch(() => { enabled = false })
   }
   const track = (event: string, params: Record<string, unknown> = {}) => {
-    if (!enabled || !instance) return
+    if (!enabled || !consentGranted || !instance) return
     instance.proxy.gtag('event', event, params)
   }
 
@@ -44,7 +48,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   nuxtApp.provide('geeksiumAnalytics', {
     measurementId,
-    isEnabled: () => enabled && Boolean(measurementId),
+    isEnabled: () => enabled && consentGranted && Boolean(measurementId),
     updateConsent,
     track,
     loadAnalytics,

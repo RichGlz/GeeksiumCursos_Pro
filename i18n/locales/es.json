@@ -134,7 +134,10 @@
     "invalid": "El archivo no es una copia válida de Geeksium."
   },
   "consent": {
-    "message": "Usamos analítica anónima para mejorar los cursos. Puedes rechazarla y el sitio funcionará igual.",
+    "lead": "Usamos analítica para",
+    "middle": " entender cómo se utilizan los cursos y ",
+    "improve": "mejorar el contenido",
+    "end": ". Puedes rechazarla y el sitio funcionará igual.",
     "accept": "Aceptar analítica",
     "decline": "Continuar sin analítica",
     "title": "Analítica"
@@ -173,6 +176,7 @@
   "footer": {
     "courses": "Cursos",
     "rights": "Todos los derechos reservados.",
-    "analyticsSettings": "Preferencias de analítica"
+    "analyticsSettings": "Preferencias de analítica",
+    "suggestions": "Envía sugerencias"
   }
 }

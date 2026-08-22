@@ -1,9 +1,19 @@
 <script setup lang="ts">
 const { t } = useI18n()
+const route = useRoute()
+const activeCourse = computed(() => {
+  const slug = route.params.course
+  return typeof slug === 'string' ? getCourse(slug) : undefined
+})
+const activeCourseTheme = computed(() => activeCourse.value ? courseThemeStyle(activeCourse.value) : {})
 </script>
 
 <template>
-  <div class="flex min-h-dvh flex-col">
+  <div
+    class="flex min-h-dvh flex-col"
+    :class="{ 'course-theme': activeCourse }"
+    :style="activeCourseTheme"
+  >
     <a
       href="#main"
       class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-brand-600 focus:px-4 focus:py-2 focus:text-white"

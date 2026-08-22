@@ -83,14 +83,41 @@
 
 /* Tema acotado a páginas de curso; los tokens brand siguen siendo el fallback. */
 .course-theme {
-  --course-primary: var(--color-brand-600);
-  --course-secondary: var(--color-brand-400);
+  --course-md-inline-bg: var(--course-md-inline-bg-light);
+  --course-md-inline-text: var(--course-md-inline-text-light);
+  --course-md-block-bg: var(--course-md-block-bg-light);
+  --course-md-block-text: var(--course-md-block-text-light);
+  --course-md-quote-border: var(--course-md-quote-border-light);
+  --course-md-link: var(--course-md-link-light);
+  --course-level-bg: var(--course-level-bg-light);
+  --course-level-text: var(--course-level-text-light);
+  --course-tools-bg: var(--course-tools-bg-light);
+  --course-tools-text: var(--course-tools-text-light);
+  --course-solid-bg: var(--course-solid-bg-light);
+  --course-subtle-text: var(--course-subtle-text-light);
+}
+
+.dark .course-theme {
+  --course-md-inline-bg: var(--course-md-inline-bg-dark);
+  --course-md-inline-text: var(--course-md-inline-text-dark);
+  --course-md-block-bg: var(--course-md-block-bg-dark);
+  --course-md-block-text: var(--course-md-block-text-dark);
+  --course-md-quote-border: var(--course-md-quote-border-dark);
+  --course-md-link: var(--course-md-link-dark);
+  --course-level-bg: var(--course-level-bg-dark);
+  --course-level-text: var(--course-level-text-dark);
+  --course-tools-bg: var(--course-tools-bg-dark);
+  --course-tools-text: var(--course-tools-text-dark);
+  --course-solid-bg: var(--course-solid-bg-dark);
+  --course-subtle-text: var(--course-subtle-text-dark);
 }
 
 .course-link { color: var(--course-primary); }
 .course-link:hover { color: var(--course-secondary); }
-.course-button { background-color: var(--course-primary); }
-.course-button:hover { background-color: var(--course-secondary); }
+.course-button { background-color: var(--course-solid-bg, var(--color-brand-600)); }
+.course-button:hover { background-color: color-mix(in srgb, var(--course-solid-bg, var(--color-brand-600)) 82%, black); }
+.course-button:active { background-color: color-mix(in srgb, var(--course-solid-bg, var(--color-brand-600)) 72%, black); }
+.course-subtle { color: var(--course-subtle-text, var(--color-brand-600)); }
 .course-progress { background-color: var(--course-primary); }
 .course-border:hover { border-color: var(--course-primary); }
 .course-selected { background-color: var(--course-primary); color: white; }
@@ -98,6 +125,14 @@
   border-color: color-mix(in srgb, var(--course-primary) 42%, transparent);
   background-color: color-mix(in srgb, var(--course-primary) 10%, transparent);
   color: var(--course-primary);
+}
+.course-level-badge {
+  background-color: var(--course-level-bg);
+  color: var(--course-level-text);
+}
+.course-tool-badge {
+  background-color: var(--course-tools-bg);
+  color: var(--course-tools-text);
 }
 
 .swal-support-secondary {
@@ -126,6 +161,10 @@
   font-weight: 700;
 }
 
+.swal-support-popup .swal-support-confirm:hover {
+  background: color-mix(in srgb, var(--swal-support-accent, var(--color-brand-600)) 82%, black);
+}
+
 .swal-support-popup .swal-support-close {
   color: var(--color-ink-600);
 }
@@ -146,9 +185,42 @@
   color: var(--color-ink-300);
 }
 
+.swal-donation-confirm,
+.swal-donation-deny,
+.swal-donation-cancel {
+  margin: 0.25rem;
+  border-radius: 0.5rem;
+  padding: 0.55rem 1rem;
+  color: #fff;
+  font-weight: 700;
+}
+
+.swal-donation-confirm,
+.swal-donation-deny { background: #16a34a; }
+.swal-donation-confirm:hover,
+.swal-donation-deny:hover { background: #15803d; }
+.swal-donation-cancel { background: #64748b; }
+.swal-donation-cancel:hover { background: #475569; }
+
 /* Plyr: contenedor 16:9 responsive y color integrado con el curso. */
 .plyr {
   width: 100% !important;
   height: 100% !important;
   --plyr-color-main: var(--course-primary, var(--color-brand-600));
+}
+
+.course-theme .plyr__control--overlaid {
+  background: var(--course-video-play, var(--course-primary));
+}
+
+.course-theme .plyr__control--overlaid:hover {
+  background: color-mix(in srgb, var(--course-video-play, var(--course-primary)) 82%, black);
+}
+
+.course-theme .plyr__progress input[type='range'] {
+  --plyr-range-fill-background: var(--course-video-progress, var(--course-primary));
+}
+
+.course-theme .plyr__volume input[type='range'] {
+  --plyr-range-fill-background: var(--course-video-volume, var(--course-primary));
 }

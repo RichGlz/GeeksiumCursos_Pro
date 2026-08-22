@@ -14,7 +14,26 @@
   "theme": {
     "primary": "#d85b12",
     "secondary": "#f28c28",
-    "browser": "#d85b12"
+    "browser": "#d85b12",
+    "markdown": {
+      "blockquote": {
+        "border": { "light": "#f28c28", "dark": "#f28c28" }
+      },
+      "link": { "light": "#d85b12", "dark": "#f28c28" }
+    },
+    "video": {
+      "playButton": "#d85b12",
+      "progress": "#d85b12",
+      "volume": "#d85b12"
+    },
+    "buttons": {
+      "solid": {
+        "background": { "light": "#d85b12", "dark": "#d85b12" }
+      },
+      "subtle": {
+        "text": { "light": "#d85b12", "dark": "#f28c28" }
+      }
+    }
   },
   "cover": "/images/courses/fusion-360.svg",
   "author": {
