@@ -4,7 +4,6 @@ import type { BadgeId } from '~/utils/badges'
 const { t } = useI18n()
 const store = useProgressStore()
 const courses = useCourses()
-const { celebrateBadge, cleanup: cleanupCelebration } = useCelebration()
 const active = ref<BadgeId>()
 const queue: BadgeId[] = []
 const queued = new Set<BadgeId>()
@@ -26,7 +25,6 @@ const showNext = () => {
   queued.delete(next)
   active.value = next
   store.markBadgeNotified(next)
-  void celebrateBadge()
   timer = setTimeout(() => {
     active.value = undefined
     nextTick(showNext)
@@ -60,7 +58,6 @@ watch(
 onMounted(() => store.hydrate())
 onBeforeUnmount(() => {
   if (timer) clearTimeout(timer)
-  cleanupCelebration()
 })
 </script>
 

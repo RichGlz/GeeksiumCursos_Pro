@@ -30,14 +30,6 @@ export default defineNuxtConfig({
 
   vite: {
     plugins: [tailwindcss()],
-    resolve: {
-      alias: [
-        {
-          find: /^@tsparticles\/plugin-emitters$/,
-          replacement: fileURLToPath(new URL('./build/tsparticles-emitters-compat.ts', import.meta.url)),
-        },
-      ],
-    },
   },
 
   app: {

@@ -19,8 +19,7 @@ const toggle = (event: MouseEvent) => {
       void celebrateExercise({
         event,
         target: event.currentTarget instanceof HTMLElement ? event.currentTarget : null,
-        primary: course?.theme?.primary,
-        secondary: course?.theme?.secondary,
+        colors: courseConfettiColors(course),
       })
     }
   } else {

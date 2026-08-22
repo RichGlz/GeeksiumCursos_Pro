@@ -46,6 +46,7 @@ export interface ThemeModeColors {
 export interface CourseTheme {
   primary: string
   secondary: string
+  confettiColors?: string[]
   browser?: string
   markdown?: {
     inlineCode?: {

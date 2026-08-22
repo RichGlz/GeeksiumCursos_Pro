@@ -8,6 +8,7 @@ import type {
 } from '~/types/content'
 
 export const GLOBAL_BROWSER_THEME_COLOR = '#0f172a'
+export const GLOBAL_CONFETTI_COLORS = ['#2563eb']
 const hexColor = /^#[0-9a-f]{6}$/i
 
 /**
@@ -83,6 +84,17 @@ function validateCourse(raw: Course, file: string, slugFromDir: string): Course 
       fail(file, '"theme.primary" y "theme.secondary" deben ser colores hexadecimales #RRGGBB.')
     }
     const theme = raw.theme
+    if (theme.confettiColors !== undefined) {
+      if (!Array.isArray(theme.confettiColors)) {
+        fail(file, '"theme.confettiColors" debe ser un array.')
+      }
+      if (theme.confettiColors.length < 1 || theme.confettiColors.length > 5) {
+        fail(file, '"theme.confettiColors" debe contener entre 1 y 5 colores.')
+      }
+      if (theme.confettiColors.some(color => typeof color !== 'string' || !hexColor.test(color))) {
+        fail(file, 'cada color de "theme.confettiColors" debe ser un string hexadecimal #RRGGBB.')
+      }
+    }
     const optionalObjects: Array<[unknown, string]> = [
       [theme.markdown, 'theme.markdown'],
       [theme.markdown?.inlineCode, 'theme.markdown.inlineCode'],
@@ -260,6 +272,19 @@ export function getExercise(courseSlug: string, exerciseSlug: string): Exercise 
 export function courseBrowserThemeColor(course?: Course): string {
   const color = course?.theme?.browser ?? course?.theme?.primary
   return color && hexColor.test(color) ? color : GLOBAL_BROWSER_THEME_COLOR
+}
+
+/** Paleta de celebración: configuración explícita -> colores base del curso -> marca. */
+export function courseConfettiColors(course?: Course): string[] {
+  const explicit = course?.theme?.confettiColors
+  if (explicit?.length && explicit.length <= 5 && explicit.every(color => hexColor.test(color))) {
+    return [...explicit]
+  }
+
+  const fallback = [course?.theme?.primary, course?.theme?.secondary]
+    .filter((color): color is string => typeof color === 'string' && hexColor.test(color))
+  const unique = [...new Set(fallback)]
+  return unique.length ? unique : [...GLOBAL_CONFETTI_COLORS]
 }
 
 /** Variables de tema limitadas al árbol visual de un curso. */

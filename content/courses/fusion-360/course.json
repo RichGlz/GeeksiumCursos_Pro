@@ -17,6 +17,10 @@
   "theme": {
     "primary": "#d85b12",
     "secondary": "#f28c28",
+    "confettiColors": [
+      "#d85b12",
+      "#f28c28"
+    ],
     "browser": "#d85b12",
     "markdown": {
       "blockquote": {
