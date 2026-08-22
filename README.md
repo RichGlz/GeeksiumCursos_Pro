@@ -99,6 +99,32 @@ Cada `course.json` puede declarar un color del navegador dentro del tema:
 }
 ```
 
+Los campos específicos son opcionales y se organizan semánticamente dentro del mismo `theme`:
+
+```json
+{
+  "markdown": {
+    "inlineCode": { "background": { "light": "#RRGGBB", "dark": "#RRGGBB" }, "text": { "light": "#RRGGBB", "dark": "#RRGGBB" } },
+    "codeBlock": { "background": { "light": "#RRGGBB", "dark": "#RRGGBB" }, "text": { "light": "#RRGGBB", "dark": "#RRGGBB" } },
+    "blockquote": { "border": { "light": "#RRGGBB", "dark": "#RRGGBB" } },
+    "link": { "light": "#RRGGBB", "dark": "#RRGGBB" }
+  },
+  "badges": { "level": { "background": { "light": "#RRGGBB", "dark": "#RRGGBB" }, "text": { "light": "#RRGGBB", "dark": "#RRGGBB" } } },
+  "tools": { "background": { "light": "#RRGGBB", "dark": "#RRGGBB" }, "text": { "light": "#RRGGBB", "dark": "#RRGGBB" } },
+  "video": { "playButton": "#RRGGBB", "progress": "#RRGGBB", "volume": "#RRGGBB" },
+  "buttons": {
+    "solid": { "background": { "light": "#RRGGBB", "dark": "#RRGGBB" } },
+    "subtle": { "text": { "light": "#RRGGBB", "dark": "#RRGGBB" } }
+  }
+}
+```
+
+La capa de contenido resuelve una sola vez los fallbacks hacia `primary`, `secondary` o los
+neutros actuales y los expone como CSS custom properties en la ruta del curso. Los botones
+`solid` derivan hover/active automáticamente con CSS; `subtle` conserva fondos neutros. Fuera de
+`/courses/:course/...` siguen vigentes los colores globales Geeksium. El modal de donación es una
+excepción deliberada: sus opciones de 1/2 USD permanecen verdes y `Cerrar` gris.
+
 Solo se aceptan colores hexadecimales `#RRGGBB`. El `<meta name="theme-color">` se actualiza al
 navegar y aplica el fallback `theme.browser` → `theme.primary` → color global `#0f172a`. Fuera de
 una página de curso se usa siempre el color global.
@@ -137,6 +163,29 @@ visor, ofrece caras, aristas y esquinas, y se mantiene en fullscreen. `model3d.r
 permite rotación en grados y se convierte internamente a radianes; por ejemplo,
 `{ "x": 180, "y": 0, "z": 0 }` corrige un STL invertido. Zoom, pan, órbita, autorrotación
 configurable y errores visibles se mantienen. IGES directo queda fuera de alcance para V1.
+
+Parámetros completos de un model3D dentro del json.
+
+Cuando hay un archivo 3D:
+```json
+"model3d": {
+  "enabled": true,
+  "url": "https://files.geeksium.com/fusion360/006/modelo-006.stl",
+  "format": "stl",
+  "rotation": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+  }
+}
+```
+
+Cuando *NO* hay un archivo 3D:
+```json
+"model3d": {
+  "enabled": false
+}
+```
 
 ### Imágenes raster locales
 
@@ -236,3 +285,5 @@ evento manual `resource_download`, agrupado por `resource_id`; el evento automá
 Autenticación, comentarios, perfiles remotos y dashboard administrativo. Las capas de progreso,
 favoritos y analítica están aisladas tras composables para poder conectarlas a Supabase sin
 reescribir componentes.
+
+Quiero que en el cuando estoy en el sitio "[https://cursos.geeksium.com/courses/fusion-360](https://cursos.geeksium.com/courses/fusion-360)", veo que sólo me aparecen las insignias completadas, pero quiero que me aparezcan también las insignias

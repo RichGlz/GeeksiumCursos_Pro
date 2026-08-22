@@ -7,7 +7,7 @@ const showInfo = async () => {
   analytics.trackSupportInfoOpen()
   const { default: Swal } = await import('sweetalert2')
   const accent = trigger.value
-    ? getComputedStyle(trigger.value).getPropertyValue('--course-primary').trim()
+    ? getComputedStyle(trigger.value).getPropertyValue('--course-solid-bg').trim()
     : ''
   await Swal.fire({
     toast: true,
@@ -35,7 +35,7 @@ const showInfo = async () => {
 </script>
 
 <template>
-  <button ref="trigger" type="button" class="surface-card w-full px-4 py-3 text-left text-sm font-semibold text-brand-600 hover:bg-ink-50 dark:hover:bg-ink-800/60" @click="showInfo">
+  <button ref="trigger" type="button" class="course-subtle surface-card w-full px-4 py-3 text-left text-sm font-semibold hover:bg-ink-50 dark:hover:bg-ink-800/60" @click="showInfo">
     {{ t('support.title') }}
   </button>
 </template>

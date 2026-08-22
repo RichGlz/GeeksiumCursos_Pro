@@ -26,18 +26,20 @@ const onDecline = () => {
     :aria-label="t('consent.title')"
   >
     <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
-      <p class="text-sm muted-text">{{ t('consent.message') }}</p>
+      <p class="text-sm muted-text">
+        <strong class="font-bold">{{ t('consent.lead') }}</strong>{{ t('consent.middle') }}<strong class="font-bold">{{ t('consent.improve') }}</strong>{{ t('consent.end') }}
+      </p>
       <div class="flex shrink-0 gap-2 sm:ml-auto">
         <button
           type="button"
-          class="rounded-lg px-3 py-2 text-sm font-medium text-ink-600 hover:bg-ink-100 dark:text-ink-300 dark:hover:bg-ink-800"
+          class="course-subtle rounded-lg px-3 py-2 text-sm font-medium hover:bg-ink-100 dark:hover:bg-ink-800"
           @click="onDecline"
         >
           {{ t('consent.decline') }}
         </button>
         <button
           type="button"
-          class="rounded-lg bg-brand-600 px-3 py-2 text-sm font-semibold text-white hover:bg-brand-700"
+          class="course-button rounded-lg px-3 py-2 text-sm font-semibold text-white"
           @click="onAccept"
         >
           {{ t('consent.accept') }}

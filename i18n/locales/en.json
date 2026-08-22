@@ -134,7 +134,10 @@
     "invalid": "This file is not a valid Geeksium backup."
   },
   "consent": {
-    "message": "We use anonymous analytics to improve the courses. You can decline and the site keeps working.",
+    "lead": "We use analytics to",
+    "middle": " understand how the courses are used and ",
+    "improve": "improve the content",
+    "end": ". You can decline and the site will work the same.",
     "accept": "Accept analytics",
     "decline": "Continue without analytics",
     "title": "Analytics"
@@ -173,6 +176,7 @@
   "footer": {
     "courses": "Courses",
     "rights": "All rights reserved.",
-    "analyticsSettings": "Analytics preferences"
+    "analyticsSettings": "Analytics preferences",
+    "suggestions": "Send suggestions"
   }
 }

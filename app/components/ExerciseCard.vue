@@ -42,9 +42,9 @@ const duration = computed(() =>
       <span class="min-w-0 flex-1">
         <span class="block font-semibold text-ink-900 dark:text-white">{{ title }}</span>
         <span v-if="summary" class="mt-1 line-clamp-2 block text-sm muted-text">{{ summary }}</span>
-        <span class="mt-2 flex flex-wrap items-center gap-3 text-xs muted-text">
-          <span v-if="exercise.difficulty">{{ t(`difficulty.${exercise.difficulty}`) }}</span>
-          <span v-if="exercise.level">{{ t(`levels.${exercise.level}`) }}</span>
+        <span class="mt-2 flex flex-wrap items-center gap-2 text-xs muted-text">
+          <span v-if="exercise.difficulty" class="course-level-badge rounded-full px-2 py-1 font-semibold">{{ t(`difficulty.${exercise.difficulty}`) }}</span>
+          <span v-if="exercise.level" class="course-level-badge rounded-full px-2 py-1 font-semibold">{{ t(`levels.${exercise.level}`) }}</span>
           <span v-if="exercise.type === 'challenge'" class="font-semibold text-brand-600">{{ t('exercise.challenge') }}</span>
           <span v-if="duration">{{ duration }}</span>
           <span v-if="completed" class="course-link font-semibold">{{ t('exercise.completed') }}</span>

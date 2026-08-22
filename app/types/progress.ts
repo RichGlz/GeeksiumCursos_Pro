@@ -12,7 +12,12 @@ export interface FavoritesState {
 
 export type ThemePreference = 'system' | 'light' | 'dark'
 
-export type AnalyticsConsent = 'granted' | 'denied' | 'unknown'
+export type AnalyticsConsent = 'granted' | 'denied' | 'unset'
+
+export interface StoredAnalyticsConsent {
+  analytics: Exclude<AnalyticsConsent, 'unset'>
+  version: number
+}
 
 export interface ProgressBackup {
   version: 1

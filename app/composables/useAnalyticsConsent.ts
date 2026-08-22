@@ -10,7 +10,7 @@ export function useAnalyticsConsent() {
   const { updateConsent, loadAnalytics } = useAnalyticsRuntime()
 
   const consent = computed<AnalyticsConsent>(() => preferences.analyticsConsent)
-  const decided = computed(() => consent.value !== 'unknown')
+  const decided = computed(() => consent.value !== 'unset')
   const accepted = computed(() => consent.value === 'granted')
 
   const accept = () => {
@@ -25,7 +25,7 @@ export function useAnalyticsConsent() {
   }
 
   const reset = () => {
-    preferences.setAnalyticsConsent('unknown')
+    preferences.setAnalyticsConsent('unset')
     updateConsent(false)
   }
 

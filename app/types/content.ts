@@ -38,10 +38,52 @@ export interface CourseAuthor {
   url?: string
 }
 
+export interface ThemeModeColors {
+  light?: string
+  dark?: string
+}
+
 export interface CourseTheme {
   primary: string
   secondary: string
   browser?: string
+  markdown?: {
+    inlineCode?: {
+      background?: ThemeModeColors
+      text?: ThemeModeColors
+    }
+    codeBlock?: {
+      background?: ThemeModeColors
+      text?: ThemeModeColors
+    }
+    blockquote?: {
+      border?: ThemeModeColors
+    }
+    link?: ThemeModeColors
+  }
+  badges?: {
+    level?: {
+      background?: ThemeModeColors
+      text?: ThemeModeColors
+    }
+  }
+  tools?: {
+    background?: ThemeModeColors
+    text?: ThemeModeColors
+  }
+  video?: {
+    playButton?: string
+    progress?: string
+    volume?: string
+  }
+  buttons?: {
+    solid?: {
+      background?: ThemeModeColors
+    }
+    subtle?: {
+      text?: ThemeModeColors
+    }
+  }
 }
 
 export interface Viewer3DSettings {

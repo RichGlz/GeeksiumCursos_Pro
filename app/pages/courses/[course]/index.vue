@@ -51,7 +51,7 @@ const firstExercise = computed(() => currentCourse.value.exercises[0])
 </script>
 
 <template>
-  <div class="course-theme mx-auto max-w-6xl px-4 py-10" :style="courseThemeStyle(currentCourse)">
+  <div class="mx-auto max-w-6xl px-4 py-10">
     <nav class="mb-6 text-sm muted-text" aria-label="breadcrumb">
       <NuxtLink :to="localePath('/courses')" class="course-link">{{ t('courses.title') }}</NuxtLink>
       <span aria-hidden="true"> / </span>

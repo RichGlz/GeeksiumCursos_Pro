@@ -58,6 +58,18 @@ function requireLocalized(value: unknown, file: string, prop: string): Localized
   return value as LocalizedText
 }
 
+function validateOptionalHex(value: unknown, file: string, prop: string): void {
+  if (value !== undefined && (typeof value !== 'string' || !hexColor.test(value))) {
+    fail(file, `"${prop}" debe ser un color hexadecimal #RRGGBB.`)
+  }
+}
+
+function validateOptionalObject(value: unknown, file: string, prop: string): void {
+  if (value !== undefined && (!value || typeof value !== 'object' || Array.isArray(value))) {
+    fail(file, `"${prop}" debe ser un objeto.`)
+  }
+}
+
 function validateCourse(raw: Course, file: string, slugFromDir: string): Course {
   requireString(raw?.id, file, 'id')
   requireLocalized(raw?.title, file, 'title')
@@ -70,9 +82,64 @@ function validateCourse(raw: Course, file: string, slugFromDir: string): Course 
     if (!hexColor.test(raw.theme.primary) || !hexColor.test(raw.theme.secondary)) {
       fail(file, '"theme.primary" y "theme.secondary" deben ser colores hexadecimales #RRGGBB.')
     }
-    if (raw.theme.browser !== undefined && !hexColor.test(raw.theme.browser)) {
-      fail(file, '"theme.browser" debe ser un color hexadecimal #RRGGBB.')
-    }
+    const theme = raw.theme
+    const optionalObjects: Array<[unknown, string]> = [
+      [theme.markdown, 'theme.markdown'],
+      [theme.markdown?.inlineCode, 'theme.markdown.inlineCode'],
+      [theme.markdown?.inlineCode?.background, 'theme.markdown.inlineCode.background'],
+      [theme.markdown?.inlineCode?.text, 'theme.markdown.inlineCode.text'],
+      [theme.markdown?.codeBlock, 'theme.markdown.codeBlock'],
+      [theme.markdown?.codeBlock?.background, 'theme.markdown.codeBlock.background'],
+      [theme.markdown?.codeBlock?.text, 'theme.markdown.codeBlock.text'],
+      [theme.markdown?.blockquote, 'theme.markdown.blockquote'],
+      [theme.markdown?.blockquote?.border, 'theme.markdown.blockquote.border'],
+      [theme.markdown?.link, 'theme.markdown.link'],
+      [theme.badges, 'theme.badges'],
+      [theme.badges?.level, 'theme.badges.level'],
+      [theme.badges?.level?.background, 'theme.badges.level.background'],
+      [theme.badges?.level?.text, 'theme.badges.level.text'],
+      [theme.tools, 'theme.tools'],
+      [theme.tools?.background, 'theme.tools.background'],
+      [theme.tools?.text, 'theme.tools.text'],
+      [theme.video, 'theme.video'],
+      [theme.buttons, 'theme.buttons'],
+      [theme.buttons?.solid, 'theme.buttons.solid'],
+      [theme.buttons?.solid?.background, 'theme.buttons.solid.background'],
+      [theme.buttons?.subtle, 'theme.buttons.subtle'],
+      [theme.buttons?.subtle?.text, 'theme.buttons.subtle.text'],
+    ]
+    for (const [value, prop] of optionalObjects) validateOptionalObject(value, file, prop)
+    const optionalColors: Array<[unknown, string]> = [
+      [theme.browser, 'theme.browser'],
+      [theme.markdown?.inlineCode?.background?.light, 'theme.markdown.inlineCode.background.light'],
+      [theme.markdown?.inlineCode?.background?.dark, 'theme.markdown.inlineCode.background.dark'],
+      [theme.markdown?.inlineCode?.text?.light, 'theme.markdown.inlineCode.text.light'],
+      [theme.markdown?.inlineCode?.text?.dark, 'theme.markdown.inlineCode.text.dark'],
+      [theme.markdown?.codeBlock?.background?.light, 'theme.markdown.codeBlock.background.light'],
+      [theme.markdown?.codeBlock?.background?.dark, 'theme.markdown.codeBlock.background.dark'],
+      [theme.markdown?.codeBlock?.text?.light, 'theme.markdown.codeBlock.text.light'],
+      [theme.markdown?.codeBlock?.text?.dark, 'theme.markdown.codeBlock.text.dark'],
+      [theme.markdown?.blockquote?.border?.light, 'theme.markdown.blockquote.border.light'],
+      [theme.markdown?.blockquote?.border?.dark, 'theme.markdown.blockquote.border.dark'],
+      [theme.markdown?.link?.light, 'theme.markdown.link.light'],
+      [theme.markdown?.link?.dark, 'theme.markdown.link.dark'],
+      [theme.badges?.level?.background?.light, 'theme.badges.level.background.light'],
+      [theme.badges?.level?.background?.dark, 'theme.badges.level.background.dark'],
+      [theme.badges?.level?.text?.light, 'theme.badges.level.text.light'],
+      [theme.badges?.level?.text?.dark, 'theme.badges.level.text.dark'],
+      [theme.tools?.background?.light, 'theme.tools.background.light'],
+      [theme.tools?.background?.dark, 'theme.tools.background.dark'],
+      [theme.tools?.text?.light, 'theme.tools.text.light'],
+      [theme.tools?.text?.dark, 'theme.tools.text.dark'],
+      [theme.video?.playButton, 'theme.video.playButton'],
+      [theme.video?.progress, 'theme.video.progress'],
+      [theme.video?.volume, 'theme.video.volume'],
+      [theme.buttons?.solid?.background?.light, 'theme.buttons.solid.background.light'],
+      [theme.buttons?.solid?.background?.dark, 'theme.buttons.solid.background.dark'],
+      [theme.buttons?.subtle?.text?.light, 'theme.buttons.subtle.text.light'],
+      [theme.buttons?.subtle?.text?.dark, 'theme.buttons.subtle.text.dark'],
+    ]
+    for (const [value, prop] of optionalColors) validateOptionalHex(value, file, prop)
   }
   if (raw.viewer3d !== undefined) {
     if (!raw.viewer3d || typeof raw.viewer3d !== 'object' || Array.isArray(raw.viewer3d)) {
@@ -197,10 +264,39 @@ export function courseBrowserThemeColor(course?: Course): string {
 
 /** Variables de tema limitadas al árbol visual de un curso. */
 export function courseThemeStyle(course: Course): Record<string, string> {
-  if (!course.theme) return {}
+  const theme = course.theme
+  const primary = theme?.primary ?? 'var(--color-brand-600)'
+  const secondary = theme?.secondary ?? 'var(--color-brand-400)'
   return {
-    '--course-primary': course.theme.primary,
-    '--course-secondary': course.theme.secondary,
+    '--course-primary': primary,
+    '--course-secondary': secondary,
+    '--course-md-inline-bg-light': theme?.markdown?.inlineCode?.background?.light ?? `color-mix(in srgb, ${primary} 10%, white)`,
+    '--course-md-inline-bg-dark': theme?.markdown?.inlineCode?.background?.dark ?? `color-mix(in srgb, ${primary} 20%, var(--color-ink-900))`,
+    '--course-md-inline-text-light': theme?.markdown?.inlineCode?.text?.light ?? `color-mix(in srgb, ${primary} 62%, black)`,
+    '--course-md-inline-text-dark': theme?.markdown?.inlineCode?.text?.dark ?? 'var(--color-ink-100)',
+    '--course-md-block-bg-light': theme?.markdown?.codeBlock?.background?.light ?? `color-mix(in srgb, ${primary} 42%, #080b10)`,
+    '--course-md-block-bg-dark': theme?.markdown?.codeBlock?.background?.dark ?? `color-mix(in srgb, ${primary} 42%, #080b10)`,
+    '--course-md-block-text-light': theme?.markdown?.codeBlock?.text?.light ?? '#cccccc',
+    '--course-md-block-text-dark': theme?.markdown?.codeBlock?.text?.dark ?? '#cccccc',
+    '--course-md-quote-border-light': theme?.markdown?.blockquote?.border?.light ?? primary,
+    '--course-md-quote-border-dark': theme?.markdown?.blockquote?.border?.dark ?? primary,
+    '--course-md-link-light': theme?.markdown?.link?.light ?? primary,
+    '--course-md-link-dark': theme?.markdown?.link?.dark ?? primary,
+    '--course-level-bg-light': theme?.badges?.level?.background?.light ?? `color-mix(in srgb, ${primary} 10%, transparent)`,
+    '--course-level-bg-dark': theme?.badges?.level?.background?.dark ?? `color-mix(in srgb, ${primary} 16%, transparent)`,
+    '--course-level-text-light': theme?.badges?.level?.text?.light ?? primary,
+    '--course-level-text-dark': theme?.badges?.level?.text?.dark ?? primary,
+    '--course-tools-bg-light': theme?.tools?.background?.light ?? 'var(--color-ink-50)',
+    '--course-tools-bg-dark': theme?.tools?.background?.dark ?? 'var(--color-ink-900)',
+    '--course-tools-text-light': theme?.tools?.text?.light ?? 'var(--color-ink-500)',
+    '--course-tools-text-dark': theme?.tools?.text?.dark ?? 'var(--color-ink-400)',
+    '--course-video-play': theme?.video?.playButton ?? primary,
+    '--course-video-progress': theme?.video?.progress ?? primary,
+    '--course-video-volume': theme?.video?.volume ?? primary,
+    '--course-solid-bg-light': theme?.buttons?.solid?.background?.light ?? primary,
+    '--course-solid-bg-dark': theme?.buttons?.solid?.background?.dark ?? primary,
+    '--course-subtle-text-light': theme?.buttons?.subtle?.text?.light ?? primary,
+    '--course-subtle-text-dark': theme?.buttons?.subtle?.text?.dark ?? primary,
   }
 }
 
