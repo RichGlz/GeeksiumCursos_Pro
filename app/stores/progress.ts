@@ -81,9 +81,16 @@ export const useProgressStore = defineStore('progress', {
       this.persist()
     },
 
-    replaceLocalState(progress: ProgressState, favorites: FavoritesState) {
+    replaceLocalState(
+      progress: ProgressState,
+      favorites: FavoritesState,
+      historicalBadgeIds: string[] = [],
+    ) {
       this.progress = migrateProgress(progress)
       this.favorites = migrateFavorites(favorites)
+      this.badgeNotifications.notified = [
+        ...new Set([...this.badgeNotifications.notified, ...historicalBadgeIds]),
+      ]
       this.hydrated = true
       this.persist()
     },

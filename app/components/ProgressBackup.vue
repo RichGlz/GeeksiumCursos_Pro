@@ -33,7 +33,8 @@ const importProgress = async (event: Event) => {
     const backup = parseProgressBackup(JSON.parse(await file.text()))
     if (!backup) throw new Error('invalid-backup')
     if (!window.confirm(t('progressBackup.confirm'))) return
-    store.replaceLocalState(backup.progress, backup.favorites)
+    const historicalBadges = earnedBadgeIds(backup.progress.completedExercises, courses)
+    store.replaceLocalState(backup.progress, backup.favorites, historicalBadges)
     setTheme(backup.preferences.theme)
     isError.value = false
     message.value = t('progressBackup.success')
